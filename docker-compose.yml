@@ -10,7 +10,6 @@ services:
     container_name: thermopol_django
     # Определяем внешние тома (volume) и места, где они будут подключены внутри контейнера
     volumes:
-      - ./myapp:/thermopol/docker/django/myapp
       - thermopol_static:/thermopol/static
       - thermopol_media:/thermopol/media
     # Открываем порт 8050 внутри
@@ -24,10 +23,10 @@ services:
       # - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
       
     # Собираем статику, делаем миграции и запускаем WSGI
-    command: sh -c "python ./docker/django/manage.py collectstatic --no-input &&
-      python ./docker/django/manage.py makemigrations &&
-      python ./docker/django/manage.py migrate &&
-      gunicorn thermopol.wsgi -b 0.0.0.0:8050 --chdir /thermopol/docker/django"
+    command: sh -c "python manage.py collectstatic --no-input &&
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      gunicorn thermopol.wsgi -b 0.0.0.0:8050 "
 
   
 
