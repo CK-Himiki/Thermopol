@@ -17,11 +17,11 @@ services:
       - "8050"
     environment:
       - ALLOWED_HOSTS=thermopol.lad-academy.ru
+      - CORS_ALLOWED_ORIGINS=https://thermopol.lad-academy.ru,http://thermopol.lad-academy.ru
+      - CSRF_TRUSTED_ORIGINS=https://thermopol.lad-academy.ru,http://thermopol.lad-academy.ru
       # - DEBUG=${DEBUG}
       # - SECRET_KEY=${SECRET_KEY}
-      
-      # - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
-      # - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
+
       
     # Собираем статику, делаем миграции и запускаем WSGI
     command: sh -c "python manage.py collectstatic --no-input &&
