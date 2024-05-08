@@ -17,8 +17,8 @@ services:
       - "8050"
     environment:
       - ALLOWED_HOSTS=thermopol.lad-academy.ru
-      - CORS_ALLOWED_ORIGINS=https://thermopol.lad-academy.ru:3003,http://thermopol.lad-academy.ru:3003
-      - CSRF_TRUSTED_ORIGINS=https://thermopol.lad-academy.ru:3003,http://thermopol.lad-academy.ru:3003
+      - CORS_ALLOWED_ORIGINS=https://thermopol.lad-academy.ru,http://thermopol.lad-academy.ru:3003
+      - CSRF_TRUSTED_ORIGINS=https://thermopol.lad-academy.ru,http://thermopol.lad-academy.ru:3003
       # - DEBUG=${DEBUG}
       # - SECRET_KEY=${SECRET_KEY}
 
