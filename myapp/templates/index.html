@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Thermopol</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'mycss/main.css' %}">
+</head>
+<body>
+  <nav class="navbar navbar-default box nav" style="height: auto">
+    <div class="container-fluid">
+		<div class="navbar-header">
+			<div class="row">
+				<div class="col-6 col-sm-12">
+					<button type="button" class="navbar-toggle nav-btn" data-toggle="collapse" data-target="#nvb-menu" onclick="ovrlShow()">
+						<p>
+							<span class="icon-bar" style="background-color: black; float: right ;"></span>
+							<span class="icon-bar" style="background-color: black;	float: right ;"></span>
+							<span class="icon-bar" style="background-color: black;	float: right ;"></span>
+							
+								
+						</p>
+					</button>
+				</div>
+				<div >
+					<p >Thermopol</p>
+				</div>
+			</div>
+		</div>
+		<div class="collapse navbar-collapse col-6 col-sm-12" id="nvb-menu">
+			<ul class="nav navbar-nav" style="height: 86px!important;" >
+				<li><a href="#">О проекте</a></li>
+				<li><a href="#">Особенности</a></li>
+				<li><a href="#">Преимущества</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<div class="row" style="background-color: transparent;">
+	<div class="col-6 box" style="background-color: red;">B</div>
+	<div class="gy-xxl-0"> </div>
+	<div class="col-6 box" style="background-color: aqua;">A</div>
+</div>
+
+<div class="row" style="background-color: transparent;">
+	<div class="col-6 box" style="background-color: red;">B</div>
+	<div class="row col-6 box" style="background-color: aqua;">
+		<div class="row" style="background-color: transparent;">
+			<div class="col-6 box" style="background-color: rgb(225, 250, 255);">B</div>
+			<div class="col-6 box" style="background-color: rgb(177, 255, 255);">A</div>
+			<div class="col-6 box" style="background-color: rgb(225, 250, 255);">B</div>
+			<div class="col-6 box" style="background-color: rgb(177, 255, 255);">A</div>
+		</div>
+	
+	</div>
+</div>
+<!---раскрывающтеся-->
+<div class="row box">
+	sds
+</div>
+
+<div class="row" style="background-color: transparent;">
+	<div class="col-6 box" style="background-color: red;">B</div>
+	<div class="row col-6 box" style="background-color: aqua;">
+		<div class="row" style="background-color: transparent;">
+			<!---раскрывающтеся-->
+		</div>
+	</div>
+</div>
+
+<div class="row" style="background-color: transparent;">
+	<div class="col-6 box" style="background-color: red;">B</div>
+	<div class="col-6 box" style="background-color: aqua;">A</div>
+</div>
+<div class="overlay"> </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src ="{% static 'myscr/index.js' %}"></script>
+</body>
+</html>

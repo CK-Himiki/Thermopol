@@ -5,9 +5,4 @@ from django.http import HttpResponse
 
 
 def home(request):
-
-    context = {
-        "title": "Главная страница",
-    }
-
-    return render(request, "base.html", context)
+    return render(request, "index.html", None)
