@@ -1,0 +1,662 @@
+{% extends "base_site.html" %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'append.css' %}">
+    <div class="form-group">
+        <label for="substance_class">Класс соединения:</label>
+        <input type="text" id="substance_class" name="substance_class">
+    </div>
+
+    <div class="form-group">
+        <label for="substance_type">Тип соединения:</label>
+        <input type="text" id="substance_type" name="substance_type">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Название:</label>
+        <input type="text" id="name" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="formula">Формула:</label>
+        <input type="text" id="formula" name="formula">
+    </div>
+
+    <div class="form-group">
+        <label for="source">Источник:</label>
+        <input type="text" id="source" name="source">
+    </div>
+
+    <div class="form-group">
+        <label for="literatura">Литература:</label>
+        <select id="literatura" name="literatura" multiple>
+
+        </select>
+
+        <button class="add-source-button" onclick="addSource()">Добавить источник</button>
+
+        <div class="source-fields">
+            <input type="text" id="description" placeholder="Описание">
+            <input type="text" id="url" placeholder="URL">
+            <input type="text" id="doi" placeholder="DOI">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="cas">CAS:</label>
+        <input type="text" id="cas" name="cas">
+    </div>
+
+<script>
+        const literatura = document.getElementById('literatura');
+        const phases = document.getElementById('phases');
+
+
+
+        let literatureList = []; // Глобальная переменная для хранения списка литературы
+
+        function addSource() {
+            const descriptionInput = document.getElementById('description');
+            const urlInput = document.getElementById('url');
+            const doiInput = document.getElementById('doi');
+
+            const description = descriptionInput.value.trim();
+            const url = urlInput.value.trim();
+            const doi = doiInput.value.trim();
+
+            if (description) {
+                const literatureItem = {
+                    description: description,
+                    url: url,
+                    doi: doi
+                };
+
+                literatureList.push(literatureItem);
+
+                const option = document.createElement('option');
+                option.value = description;
+                option.textContent = description;
+                literatura.add(option);
+
+                descriptionInput.value = '';
+                urlInput.value = '';
+                doiInput.value = '';
+            }
+        }
+        literatura.addEventListener('dblclick', function(event) {
+            const selectedOption = event.target;
+            const selectedIndex = Array.prototype.indexOf.call(literatura.children, selectedOption);
+            const selectedLiterature = literatureList[selectedIndex];
+
+            if (selectedLiterature) {
+                document.getElementById('description').value = selectedLiterature.description;
+                document.getElementById('url').value = selectedLiterature.url;
+                document.getElementById('doi').value = selectedLiterature.doi;
+            }
+        });
+
+
+    // Call the displayStateData function to set up the event listener
+    displayStateData();
+
+    </script>
+
+
+
+
+<div class="form-group">
+    <label for="properties">Состояния:</label>
+    <select id="properties" name="properties" multiple>
+
+    </select>
+
+    <button class="add-property-button" onclick="addProperty()">Добавить свойство</button>
+
+    <div class="property-fields">
+        <input type="text" id="state" placeholder="State">
+        <input type="text" id="agregate_state" placeholder="Aggregate State">
+        <input type="number" id="number_phase" placeholder="Number Phase">
+        <input type="number" id="degree_of_crystallinity" placeholder="Degree of Crystallinity">
+        <input type="number" id="enthalpy_of_combustion" placeholder="Enthalpy of Combustion">
+        <input type="number" id="enthalpy_of_combustion_err" placeholder="Enthalpy of Combustion Error">
+        <input type="number" id="enthalpy_of_formation" placeholder="Enthalpy of Formation">
+        <input type="number" id="enthalpy_of_formation_err" placeholder="Enthalpy of Formation Error">
+        <input type="number" id="entropy_of_formation" placeholder="Entropy of Formation">
+        <input type="number" id="entropy_of_formation_err" placeholder="Entropy of Formation Error">
+        <input type="number" id="gibbs_energy_of_formation" placeholder="Gibbs Energy of Formation">
+        <input type="number" id="gibbs_energy_of_formation_err" placeholder="Gibbs Energy of Formation Error">
+        <input type="number" id="lnK" placeholder="lnK">
+        <input type="number" id="residual_entropy_at_0_k" placeholder="Residual Entropy at 0 K">
+        <input type="number" id="residual_entropy_at_0_k_err" placeholder="Residual Entropy at 0 K Error">
+        <input type="number" id="configurational_entropy" placeholder="Configurational Entropy">
+        <input type="number" id="configurational_entropy_err" placeholder="Configurational Entropy Error">
+        <input type="number" id="difference_of_zero" placeholder="Difference of Zero">
+        <input type="number" id="difference_of_zero_err" placeholder="Difference of Zero Error">
+        <input type="text" id="T" placeholder="T (ArrayField)">
+        <input type="text" id="Cp" placeholder="Cp (ArrayField)">
+        <input type="text" id="HT_H0" placeholder="HT_H0 (ArrayField)">
+        <input type="text" id="ST" placeholder="ST (ArrayField)">
+        <input type="text" id="GT" placeholder="GT (ArrayField)">
+    </div>
+</div>
+
+<script>
+    let propertiesList = [];
+
+function addProperty() {
+    const stateInput = document.getElementById('state');
+    const agregateStateInput = document.getElementById('agregate_state');
+    const numberPhaseInput = document.getElementById('number_phase');
+    const degreeOfCrystallinityInput = document.getElementById('degree_of_crystallinity');
+    const enthalpyOfCombustionInput = document.getElementById('enthalpy_of_combustion');
+    const enthalpyOfCombustionErrInput = document.getElementById('enthalpy_of_combustion_err');
+    const enthalpyOfFormationInput = document.getElementById('enthalpy_of_formation');
+    const enthalpyOfFormationErrInput = document.getElementById('enthalpy_of_formation_err');
+    const entropyOfFormationInput = document.getElementById('entropy_of_formation');
+    const entropyOfFormationErrInput = document.getElementById('entropy_of_formation_err');
+    const gibbsEnergyOfFormationInput = document.getElementById('gibbs_energy_of_formation');
+    const gibbsEnergyOfFormationErrInput = document.getElementById('gibbs_energy_of_formation_err');
+    const lnKInput = document.getElementById('lnK');
+    const residualEntropyAt0KInput = document.getElementById('residual_entropy_at_0_k');
+    const residualEntropyAt0KErrInput = document.getElementById('residual_entropy_at_0_k_err');
+    const configurationalEntropyInput = document.getElementById('configurational_entropy');
+    const configurationalEntropyErrInput = document.getElementById('configurational_entropy_err');
+    const differenceOfZeroInput = document.getElementById('difference_of_zero');
+    const differenceOfZeroErrInput = document.getElementById('difference_of_zero_err');
+    const TInput = document.getElementById('T');
+    const CpInput = document.getElementById('Cp');
+    const HTH0Input = document.getElementById('HT_H0');
+    const STInput = document.getElementById('ST');
+    const GTInput = document.getElementById('GT');
+
+    const state = stateInput.value.trim();
+    const agregateState = agregateStateInput.value.trim();
+    const numberPhase = numberPhaseInput.value.trim();
+    const degreeOfCrystallinity = degreeOfCrystallinityInput.value.trim();
+    const enthalpyOfCombustion = enthalpyOfCombustionInput.value.trim();
+    const enthalpyOfCombustionErr = enthalpyOfCombustionErrInput.value.trim();
+    const enthalpyOfFormation = enthalpyOfFormationInput.value.trim();
+    const enthalpyOfFormationErr = enthalpyOfFormationErrInput.value.trim();
+    const entropyOfFormation = entropyOfFormationInput.value.trim();
+    const entropyOfFormationErr = entropyOfFormationErrInput.value.trim();
+    const gibbsEnergyOfFormation = gibbsEnergyOfFormationInput.value.trim();
+    const gibbsEnergyOfFormationErr = gibbsEnergyOfFormationErrInput.value.trim();
+    const lnK = lnKInput.value.trim();
+    const residualEntropyAt0K = residualEntropyAt0KInput.value.trim();
+    const residualEntropyAt0KErr = residualEntropyAt0KErrInput.value.trim();
+    const configurationalEntropy = configurationalEntropyInput.value.trim();
+    const configurationalEntropyErr = configurationalEntropyErrInput.value.trim();
+    const differenceOfZero = differenceOfZeroInput.value.trim();
+    const differenceOfZeroErr = differenceOfZeroErrInput.value.trim();
+    const T = TInput.value.trim();
+    const Cp = CpInput.value.trim();
+    const HTH0 = HTH0Input.value.trim();
+    const ST = STInput.value.trim();
+    const GT = GTInput.value.trim();
+
+    if (state) {
+        const property = {
+            state: state,
+            agregateState: agregateState,
+            numberPhase: numberPhase,
+            degreeOfCrystallinity: degreeOfCrystallinity,
+            enthalpyOfCombustion: enthalpyOfCombustion,
+            enthalpyOfCombustionErr: enthalpyOfCombustionErr,
+            enthalpyOfFormation: enthalpyOfFormation,
+            enthalpyOfFormationErr: enthalpyOfFormationErr,
+            entropyOfFormation: entropyOfFormation,
+            entropyOfFormationErr: entropyOfFormationErr,
+            gibbsEnergyOfFormation: gibbsEnergyOfFormation,
+            gibbsEnergyOfFormationErr: gibbsEnergyOfFormationErr,
+            lnK: lnK,
+            residualEntropyAt0K: residualEntropyAt0K,
+            residualEntropyAt0KErr: residualEntropyAt0KErr,
+            configurationalEntropy: configurationalEntropy,
+            configurationalEntropyErr: configurationalEntropyErr,
+            differenceOfZero: differenceOfZero,
+            differenceOfZeroErr: differenceOfZeroErr,
+            T: T,
+            Cp: Cp,
+            HTH0: HTH0,
+            ST: ST,
+            GT: GT
+        };
+
+        propertiesList.push(property);
+
+        const option = document.createElement('option');
+        option.value = state;
+        option.textContent = state;
+        document.getElementById('properties').add(option);
+
+        stateInput.value = '';
+        agregateStateInput.value = '';
+        numberPhaseInput.value = '';
+        degreeOfCrystallinityInput.value = '';
+        enthalpyOfCombustionInput.value = '';
+        enthalpyOfCombustionErrInput.value = '';
+        enthalpyOfFormationInput.value = '';
+        enthalpyOfFormationErrInput.value = '';
+        entropyOfFormationInput.value = '';
+        entropyOfFormationErrInput.value = '';
+        gibbsEnergyOfFormationInput.value = '';
+        gibbsEnergyOfFormationErrInput.value = '';
+        lnKInput.value = '';
+        residualEntropyAt0KInput.value = '';
+        residualEntropyAt0KErrInput.value = '';
+        configurationalEntropyInput.value = '';
+        configurationalEntropyErrInput.value = '';
+        differenceOfZeroInput.value = '';
+        differenceOfZeroErrInput.value = '';
+        TInput.value = '';
+        CpInput.value = '';
+        HTH0Input.value = '';
+        STInput.value = '';
+        GTInput.value = '';
+    }
+}
+
+function fillPropertyFields(state, agregateState, numberPhase, degreeOfCrystallinity, enthalpyOfCombustion, enthalpyOfCombustionErr, enthalpyOfFormation, enthalpyOfFormationErr, entropyOfFormation, entropyOfFormationErr, gibbsEnergyOfFormation, gibbsEnergyOfFormationErr, lnK, residualEntropyAt0K, residualEntropyAt0KErr, configurationalEntropy, configurationalEntropyErr, differenceOfZero, differenceOfZeroErr, T, Cp, HTH0, ST, GT) {
+    const stateInput = document.getElementById('state');
+    const agregateStateInput = document.getElementById('agregate_state');
+    const numberPhaseInput = document.getElementById('number_phase');
+    const degreeOfCrystallinityInput = document.getElementById('degree_of_crystallinity');
+    const enthalpyOfCombustionInput = document.getElementById('enthalpy_of_combustion');
+    const enthalpyOfCombustionErrInput = document.getElementById('enthalpy_of_combustion_err');
+    const enthalpyOfFormationInput = document.getElementById('enthalpy_of_formation');
+    const enthalpyOfFormationErrInput = document.getElementById('enthalpy_of_formation_err');
+    const entropyOfFormationInput = document.getElementById('entropy_of_formation');
+    const entropyOfFormationErrInput = document.getElementById('entropy_of_formation_err');
+    const gibbsEnergyOfFormationInput = document.getElementById('gibbs_energy_of_formation');
+    const gibbsEnergyOfFormationErrInput = document.getElementById('gibbs_energy_of_formation_err');
+    const lnKInput = document.getElementById('lnK');
+    const residualEntropyAt0KInput = document.getElementById('residual_entropy_at_0_k');
+    const residualEntropyAt0KErrInput = document.getElementById('residual_entropy_at_0_k_err');
+    const configurationalEntropyInput = document.getElementById('configurational_entropy');
+    const configurationalEntropyErrInput = document.getElementById('configurational_entropy_err');
+    const differenceOfZeroInput = document.getElementById('difference_of_zero');
+    const differenceOfZeroErrInput = document.getElementById('difference_of_zero_err');
+    const TInput = document.getElementById('T');
+    const CpInput = document.getElementById('Cp');
+    const HTH0Input = document.getElementById('HT_H0');
+    const STInput = document.getElementById('ST');
+    const GTInput = document.getElementById('GT');
+
+    stateInput.value = state;
+    agregateStateInput.value = agregateState;
+    numberPhaseInput.value = numberPhase;
+    degreeOfCrystallinityInput.value = degreeOfCrystallinity;
+    enthalpyOfCombustionInput.value = enthalpyOfCombustion;
+    enthalpyOfCombustionErrInput.value = enthalpyOfCombustionErr;
+    enthalpyOfFormationInput.value = enthalpyOfFormation;
+    enthalpyOfFormationErrInput.value = enthalpyOfFormationErr;
+    entropyOfFormationInput.value = entropyOfFormation;
+    entropyOfFormationErrInput.value = entropyOfFormationErr;
+    gibbsEnergyOfFormationInput.value = gibbsEnergyOfFormation;
+    gibbsEnergyOfFormationErrInput.value = gibbsEnergyOfFormationErr;
+    lnKInput.value = lnK;
+    residualEntropyAt0KInput.value = residualEntropyAt0K;
+    residualEntropyAt0KErrInput.value = residualEntropyAt0KErr;
+    configurationalEntropyInput.value = configurationalEntropy;
+    configurationalEntropyErrInput.value = configurationalEntropyErr;
+    differenceOfZeroInput.value = differenceOfZero;
+    differenceOfZeroErrInput.value = differenceOfZeroErr;
+    TInput.value = T;
+    CpInput.value = Cp;
+    HTH0Input.value = HTH0;
+    STInput.value = ST;
+    GTInput.value = GT;
+}
+
+const propertiesListbox = document.getElementById('properties');
+propertiesListbox.addEventListener('dblclick', () => {
+    const selectedIndex = propertiesListbox.selectedIndex;
+    if (selectedIndex !== -1) {
+        const selectedProperty = propertiesList[selectedIndex];
+        fillPropertyFields(
+            selectedProperty.state,
+            selectedProperty.agregateState,
+            selectedProperty.numberPhase,
+            selectedProperty.degreeOfCrystallinity,
+            selectedProperty.enthalpyOfCombustion,
+            selectedProperty.enthalpyOfCombustionErr,
+            selectedProperty.enthalpyOfFormation,
+            selectedProperty.enthalpyOfFormationErr,
+            selectedProperty.entropyOfFormation,
+            selectedProperty.entropyOfFormationErr,
+            selectedProperty.gibbsEnergyOfFormation,
+            selectedProperty.gibbsEnergyOfFormationErr,
+            selectedProperty.lnK,
+            selectedProperty.residualEntropyAt0K,
+            selectedProperty.residualEntropyAt0KErr,
+            selectedProperty.configurationalEntropy,
+            selectedProperty.configurationalEntropyErr,
+            selectedProperty.differenceOfZero,
+            selectedProperty.differenceOfZeroErr,
+            selectedProperty.T,
+            selectedProperty.Cp,
+            selectedProperty.HTH0,
+            selectedProperty.ST,
+            selectedProperty.GT
+        );
+    }
+});
+
+
+
+
+</script>
+    <div class="form-group">
+    <label for="phase-transitions">Фазовые переходы:</label>
+    <select id="phase-transitions" name="phase-transitions" multiple>
+
+    </select>
+
+    <button class="add-phase-transition-button" onclick="addPhaseTransition()">Добавить фазовый переход</button>
+
+    <div class="phase-transition-fields">
+        <input type="text" id="source_phase" placeholder="Исходная фаза">
+        <input type="text" id="target_phase" placeholder="Конечная фаза">
+        <input type="number" id="source_phase_number" placeholder="Номер исходной фазы">
+        <input type="number" id="target_phase_number" placeholder="Номер конечной фазы">
+        <input type="number" id="temperature" placeholder="Температура">
+        <input type="number" id="temperature_err" placeholder="Ошибка температуры">
+        <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода">
+        <input type="number" id="enthalpy_transition_err" placeholder="Ошибка энтальпии перехода">
+        <input type="number" id="entropy_transition" placeholder="Энтропия перехода">
+        <input type="number" id="entropy_transition_err" placeholder="Ошибка энтропии перехода">
+        <input type="number" id="jump_heat_capacity" placeholder="Скок теплоемкости">
+        <input type="number" id="start_temperature" placeholder="Начальная температура">
+        <input type="number" id="end_temperature" placeholder="Конечная температура">
+    </div>
+</div>
+
+  <title>Сводная таблица</title>
+
+
+  <div class="form-group">
+    <label for="phase-transition-table">Таблица фазового перехода:</label>
+    <table id="phase-transition-table">
+      <thead>
+        <tr>
+          <th>T</th>
+          <th>Cp</th>
+          <th>H</th>
+          <th>S</th>
+          <th>G</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button id="add-row">Добавить строку</button>
+  </div>
+
+  <script>
+    const table = document.getElementById('phase-transition-table');
+    const tbody = table.getElementsByTagName('tbody')[0];
+    const addRowButton = document.getElementById('add-row');
+
+    function addRow() {
+      const row = document.createElement('tr');
+
+      for (let i = 0; i < 5; i++) {
+        const cell = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = '';
+        cell.appendChild(input);
+        row.appendChild(cell);
+      }
+
+      tbody.appendChild(row);
+    }
+
+    addRowButton.addEventListener('click', addRow);
+
+    tbody.addEventListener('click', (event) => {
+      if (event.target.tagName === 'INPUT') {
+        event.target.readOnly = false;
+        event.target.focus();
+      }
+    });
+
+    tbody.addEventListener('input', (event) => {
+      if (event.target.tagName === 'INPUT') {
+        event.target.readOnly = false;
+        event.target.focus();
+      }
+    });
+
+    document.addEventListener('paste', function(event) {
+      if (event.target.tagName === 'INPUT' && event.target.closest('table') === table) {
+        event.preventDefault();
+
+        const clipboardData = event.clipboardData || window.clipboardData;
+        const pastedData = clipboardData.getData('Text');
+
+        const rows = pastedData.trim().split('\n');
+        const startRow = 0;
+        const startCol = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+          const cells = rows[i].split('\t');
+
+          // Добавляем новые строки, если необходимо
+          while (tbody.rows.length <= startRow + i) {
+            addRow();
+          }
+
+          for (let j = 0; j < cells.length; j++) {
+            const cell = tbody.rows[startRow + i].cells[startCol + j].firstChild;
+            cell.value = cells[j];
+          }
+        }
+      }
+    });
+  </script>
+
+
+
+
+
+
+
+<script>
+    // Глобальные переменные для хранения данных
+let phaseTransitionsList = [];
+let selectedTransitionIndex = -1;
+
+// Функция для добавления нового фазового перехода
+function addPhaseTransition() {
+  const sourcePhaseInput = document.getElementById('source_phase');
+  const targetPhaseInput = document.getElementById('target_phase');
+  const sourcePhaseNumberInput = document.getElementById('source_phase_number');
+  const targetPhaseNumberInput = document.getElementById('target_phase_number');
+  const temperatureInput = document.getElementById('temperature');
+  const temperatureErrInput = document.getElementById('temperature_err');
+  const enthalpyTransitionInput = document.getElementById('enthalpy_transition');
+  const enthalpyTransitionErrInput = document.getElementById('enthalpy_transition_err');
+  const entropyTransitionInput = document.getElementById('entropy_transition');
+  const entropyTransitionErrInput = document.getElementById('entropy_transition_err');
+  const jumpHeatCapacityInput = document.getElementById('jump_heat_capacity');
+  const startTemperatureInput = document.getElementById('start_temperature');
+  const endTemperatureInput = document.getElementById('end_temperature');
+
+  const phaseTransition = {
+    sourcePhase: sourcePhaseInput.value,
+    targetPhase: targetPhaseInput.value,
+    sourcePhaseNumber: parseInt(sourcePhaseNumberInput.value),
+    targetPhaseNumber: parseInt(targetPhaseNumberInput.value),
+    temperature: parseFloat(temperatureInput.value),
+    temperatureErr: parseFloat(temperatureErrInput.value),
+    enthalpyTransition: parseFloat(enthalpyTransitionInput.value),
+    enthalpyTransitionErr: parseFloat(enthalpyTransitionErrInput.value),
+    entropyTransition: parseFloat(entropyTransitionInput.value),
+    entropyTransitionErr: parseFloat(entropyTransitionErrInput.value),
+    jumpHeatCapacity: parseFloat(jumpHeatCapacityInput.value),
+    startTemperature: parseFloat(startTemperatureInput.value),
+    endTemperature: parseFloat(endTemperatureInput.value),
+    phaseTransitionTable: [] // Добавляем новое поле для таблицы фазовых переходов
+  };
+
+const table = document.getElementById('phase-transition-table');
+  const rows = table.getElementsByTagName('tr');
+  for (let i = 1; i < rows.length; i++) { // Начинаем с 1, пропуская заголовок
+    const cells = rows[i].getElementsByTagName('td');
+    const rowData = [];
+    for (let j = 0; j < cells.length; j++) {
+      rowData.push(cells[j].firstChild.value);
+    }
+    phaseTransition.phaseTransitionTable.push(rowData);
+  }
+
+  phaseTransitionsList.push(phaseTransition);
+
+  // Добавление нового элемента в listbox
+  const option = document.createElement('option');
+  option.value = phaseTransitionsList.length - 1;
+  option.textContent = `${phaseTransition.sourcePhase} -> ${phaseTransition.targetPhase}`;
+  document.getElementById('phase-transitions').add(option);
+
+  // Очистка полей ввода
+  sourcePhaseInput.value = '';
+  targetPhaseInput.value = '';
+  sourcePhaseNumberInput.value = '';
+  targetPhaseNumberInput.value = '';
+  temperatureInput.value = '';
+  temperatureErrInput.value = '';
+  enthalpyTransitionInput.value = '';
+  enthalpyTransitionErrInput.value = '';
+  entropyTransitionInput.value = '';
+  entropyTransitionErrInput.value = '';
+  jumpHeatCapacityInput.value = '';
+  startTemperatureInput.value = '';
+  endTemperatureInput.value = '';
+
+    const tbody = table.getElementsByTagName('tbody')[0];
+
+    // Очистка существующих строк таблицы
+  while (tbody.firstChild) {
+    tbody.removeChild(tbody.firstChild);
+  }
+}
+function fillPhaseTransitionTable(index) {
+  const selectedPhaseTransition = phaseTransitionsList[index];
+  const table = document.getElementById('phase-transition-table');
+  const tbody = table.getElementsByTagName('tbody')[0];
+
+  // Очистка существующих строк таблицы
+  while (tbody.firstChild) {
+    tbody.removeChild(tbody.firstChild);
+  }
+
+  // Заполнение таблицы данными выбранного фазового перехода
+  for (let i = 0; i < selectedPhaseTransition.phaseTransitionTable.length; i++) {
+    const row = document.createElement('tr');
+    for (let j = 0; j < selectedPhaseTransition.phaseTransitionTable[i].length; j++) {
+      const cell = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = selectedPhaseTransition.phaseTransitionTable[i][j];
+      cell.appendChild(input);
+      row.appendChild(cell);
+    }
+    tbody.appendChild(row);
+  }
+}
+
+// Обработчик события выбора фазового перехода в listbox
+const phaseTransitionsListbox = document.getElementById('phase-transitions');
+phaseTransitionsListbox.addEventListener('change', () => {
+  const selectedIndex = phaseTransitionsListbox.selectedIndex;
+  if (selectedIndex !== -1) {
+    const selectedTransition = phaseTransitionsList[selectedIndex];
+    fillPhaseTransitionFields(
+      selectedTransition.sourcePhase,
+      selectedTransition.targetPhase,
+      selectedTransition.sourcePhaseNumber,
+      selectedTransition.targetPhaseNumber,
+      selectedTransition.temperature,
+      selectedTransition.temperatureErr,
+      selectedTransition.enthalpyTransition,
+      selectedTransition.enthalpyTransitionErr,
+      selectedTransition.entropyTransition,
+      selectedTransition.entropyTransitionErr,
+      selectedTransition.jumpHeatCapacity,
+      selectedTransition.startTemperature,
+      selectedTransition.endTemperature
+    );
+    populatePhaseTransitionTable(selectedTransition.phaseTransitionTable);
+  }
+});
+
+function fillPhaseTransitionFields(
+  sourcePhase,
+  targetPhase,
+  sourcePhaseNumber,
+  targetPhaseNumber,
+  temperature,
+  temperatureErr,
+  enthalpyTransition,
+  enthalpyTransitionErr,
+  entropyTransition,
+  entropyTransitionErr,
+  jumpHeatCapacity,
+  startTemperature,
+  endTemperature
+) {
+  // Заполнение полей формы данными выбранного перехода
+  document.getElementById('source_phase').value = sourcePhase;
+  document.getElementById('target_phase').value = targetPhase;
+  document.getElementById('source_phase_number').value = sourcePhaseNumber;
+  document.getElementById('target_phase_number').value = targetPhaseNumber;
+  document.getElementById('temperature').value = temperature;
+  document.getElementById('temperature_err').value = temperatureErr;
+  document.getElementById('enthalpy_transition').value = enthalpyTransition;
+  document.getElementById('enthalpy_transition_err').value = enthalpyTransitionErr;
+  document.getElementById('entropy_transition').value = entropyTransition;
+  document.getElementById('entropy_transition_err').value = entropyTransitionErr;
+  document.getElementById('jump_heat_capacity').value = jumpHeatCapacity;
+  document.getElementById('start_temperature').value = startTemperature;
+  document.getElementById('end_temperature').value = endTemperature;
+}
+
+function populatePhaseTransitionTable(phaseTransitionTable) {
+  const table = document.getElementById('phase-transition-table');
+  const tbody = table.getElementsByTagName('tbody')[0];
+  tbody.innerHTML = '';
+
+  for (const row of phaseTransitionTable) {
+    const tr = document.createElement('tr');
+    for (const cell of row) {
+      const td = document.createElement('td');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = cell;
+      td.appendChild(input);
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+}
+
+</script>
+<div class="form-group">
+
+  </div>
+  <div class="form-group">
+    <button id="powerLawButton">Расчет степенной зависимости</button>
+    <input type="text" id="powerLawExponent" placeholder="Показатель степени">
+    <input type="text" id="powerLawCoefficient" placeholder="Коэффициент">
+  </div>
+  <script>
+
+  </script>
+    <button id="submitButton">Отправить</button>
+
+
+
+{% endblock %}

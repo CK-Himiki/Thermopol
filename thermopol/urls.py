@@ -40,4 +40,5 @@ urlpatterns = [
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
+    path("append", views.append, name="append"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

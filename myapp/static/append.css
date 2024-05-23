@@ -1,0 +1,118 @@
+ table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        td input, select {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .selected {
+            background-color: #e6e6e6;
+        }
+
+        #submitButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            background-color: #3e8e41;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #literatura, #phases, #properties {
+            height: 100px;
+            width: 200px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .add-source-button, .add-phase-button, .add-property-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .add-source-button:hover, .add-phase-button:hover, .add-property-button:hover {
+            background-color: #3e8e41;
+        }
+
+        .source-fields, .phase-fields, .property-fields {
+            display: inline-block;
+            margin-left: 10px;
+            width: 300px;
+        }
+
+        .source-fields input, .phase-fields input, .property-fields input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+
+        #phase-transitions {
+            height: 100px;
+            width: 200px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .add-phase-transition-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .add-phase-transition-button:hover {
+            background-color: #3e8e41;
+        }
+
+        .phase-transition-fields {
+            display: inline-block;
+            margin-left: 10px;
+            width: 500px;
+        }
+
+        .phase-transition-fields input {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            width: 150px;
+        }
