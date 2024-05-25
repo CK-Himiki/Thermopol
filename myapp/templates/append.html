@@ -6,12 +6,21 @@
     <link rel="stylesheet" href="{% static 'append.css' %}">
     <div class="form-group">
         <label for="substance_class">Класс соединения:</label>
-        <input type="text" id="substance_class" name="substance_class">
+        <select id="substance_class" name="substance_class">
+            {% for class in classes %}
+                <option value="{{ class.name }}">{{ class.name }}</option>
+            {% endfor %}
+        </select>
     </div>
 
     <div class="form-group">
         <label for="substance_type">Тип соединения:</label>
-        <input type="text" id="substance_type" name="substance_type">
+        <select id="substance_type" name="substance_type">
+            {% for type in types %}
+                <option value="{{ type }}">{{ type }}</option>
+            {% endfor %}
+        </select>
+
     </div>
 
     <div class="form-group">

@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
+from .models import SubstanceClass
 
 
 def home(request):
@@ -9,4 +10,8 @@ def home(request):
 
 
 def append(request):
-    return render(request, "append.html", None)
+    context = {
+        "types": ["Мономер", "Полимер", "Олигомер", "неизвестно"],
+        "classes": SubstanceClass.objects.all(),
+    }
+    return render(request, "append.html", context)
