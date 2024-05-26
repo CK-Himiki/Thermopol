@@ -452,14 +452,14 @@ bluetext {
 }
 
 .accordion-button.collapsed::after {
-	content: url("{% static 'img/icon/plus-circle.svg' %}");
+	content: url("{% static 'static/img/icon/plus-circle.svg' %}");
 	float: right;
 	justify-self: flex-end;
 	margin-left: auto;
 }
 
 .accordion-button:not(.collapsed)::after {
-	content: url("{% static 'img/icon/minus-circle.svg' %}");
+	content: url("{% static 'static/img/icon/minus-circle.svg' %}");
 	float: right;
 	justify-self: flex-end;
 	margin-left: auto;
