@@ -80,7 +80,7 @@
 
         </select>
 
-        <button class="add-source-button" onclick="addSource()">Добавить источник</button>
+        <button class="add-button " onclick="addSource()">Добавить источник</button>
 
         <div class="source-fields">
             <input type="text" id="description" placeholder="Описание">
@@ -159,7 +159,7 @@
 
     </select>
 
-    <button class="add-property-button" onclick="addProperty()">Добавить свойство</button>
+    <button class="add-button" onclick="addProperty()">Добавить свойство</button>
 
     <div class="property-fields">
         <input type="text" id="state" placeholder="State">
@@ -401,7 +401,7 @@ propertiesListbox.addEventListener('dblclick', () => {
 
     </select>
 
-    <button class="add-phase-transition-button" onclick="addPhaseTransition()">Добавить фазовый переход</button>
+    <button class="add-button" onclick="addPhaseTransition()">Добавить фазовый переход</button>
 
     <div class="phase-transition-fields">
         <input type="text" id="source_phase" placeholder="Исходная фаза">
@@ -438,7 +438,7 @@ propertiesListbox.addEventListener('dblclick', () => {
       <tbody>
       </tbody>
     </table>
-    <button id="add-row">Добавить строку</button>
+    <button class="add-button" id="add-row">Добавить строку</button>
   </div>
 
   <script>
@@ -695,14 +695,14 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
 
   </div>
   <div class="form-group">
-    <button id="powerLawButton">Расчет степенной зависимости</button>
+    <button class="add-button" id="powerLawButton">Расчет степенной зависимости</button>
     <input type="text" id="powerLawExponent" placeholder="Показатель степени">
     <input type="text" id="powerLawCoefficient" placeholder="Коэффициент">
   </div>
   <script>
 
   </script>
-    <button id="submitButton">Отправить</button>
+    <button class="add-button" id="submitButton">Отправить</button>
 </div>
 
 
