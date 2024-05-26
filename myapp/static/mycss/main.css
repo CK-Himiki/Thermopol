@@ -1,91 +1,1263 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-@media all and (min-width:769px) {
-	#nvb-menu{
-		width: auto;
-		height: auto;
-	}
-	p{
-		font-size: 3em;
-	}
-}
-@media all and (max-width:769px) {
-	#nvb-menu{
-		position: absolute;
-		margin-top: 10px;
-		z-index: 100;
-		height: 100%;
-		width: 100%;
-		max-width: 367px;
-		max-height: 178px;
-		margin-left: 1em;
-		margin-right: 1em;
-	}
-	a{
-		font-size: x-small;
-	}
-	p{
-		font-size: 1em;
-	}
-}
-
+@import url(https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap);
+@import url(https://db.onlinewebfonts.com/c/1b35d95a201282c34fa09c1c3883865f?family=Nexa+Demo+Light);
 
 body {
+
 	background-color: #F2F4F4;
 	-webkit-font-soothing: antialiased;
-	-webkit-overflow-scrolling: touch; 
-	font-family: "Roboto";
+	-webkit-overflow-scrolling: touch;
+	font-family: "Raleway";
 	overflow-y: scroll;
 	display: flex;
 	flex-direction: column;
-	padding: 24px 64px;
+	--blue-bg-color: #13B1E3;
+	font-weight: 400;
+	color: black;
+	align-items: center;
+	gap: 32px;
 }
 
+.overlay {
+	position: fixed;
+	background-color: rgba(54, 54, 54);
+	height: 100% !important;
+	z-index: 80 !important;
+	opacity: 0.5;
+	left: 0px !important;
+	top: 0px !important;
+	min-width: 100vw;
+}
 
-a{
+#thermopol {
+	font-family: "Nexa Demo Light";
+	width: auto;
+	position: absolute;
+	margin: 0 auto;
+	font-weight: 700;
+	position: sticky;
+	font-size: 54px;
+}
+
+a {
 	font-size: 100%;
+	color: black;
 }
 
-.box{
-	margin-bottom: 32px;
+.box {
 	background-color: white;
 	border-radius: 32px;
 	border-width: 0px;
-	flex-direction:row;
-	justify-content: space-between;
-	margin-left:0;
-	height: 40vh;
+	margin-left: 0;
+	width: 100%;
+	background-size: cover;
+	padding: 1em;
 }
 
-.overlay{
-background-color: black;
-opacity: 0;
-z-index: 80;
-display: none;
-position:absolute;
-left: 0px!important;
-top: 0px !important;
-min-width: 100vw;
-height: 100vh;
+.content-row .box {
+	width: 50%;
 
+}
+
+.box p strong {
+	font-weight: 600;
 }
 
 .nav {
-	z-index: 100!important;
-	padding-left: 2em;
+	z-index: 100 !important;
+	margin-bottom: 0;
 }
 
-.nav-btn{
-	height: 60px; 
+go-to-app {
+	align-self: center;
+}
+
+.navbar-collapse {
+	margin-right: 0 !important;
+}
+
+.nav-btn {
+
+	height: 60px !important;
 	width: 60px;
+	border-width: 0;
+	position: relative;
+	background-color: transparent !important;
 	text-align: center;
+	margin: 0;
+	margin-right: 1em !important;
+}
+
+#nvb-menu {
+	float: right;
+	right: 0;
+	background-color: white;
+	border-radius: 8px;
+	width: 100%;
+	font-weight: 400 !important;
+	color: black;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
+
+
+.nav-btn:hover {
+	background-color: transparent !important;
+}
+
+.navbar-header,
+.container-fluid {
+	height: 100% !important;
+	font-family: "Raleway";
+}
+
+.navbar-toggle {
+	margin: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: black;
+	padding-left: 1em;
+	margin-top: 0;
+
+}
+
+.nav-btn-el {
+	width: 60px;
+	border: 0 !important;
+	margin: 0;
+}
+
+.go-to-app {
+	background-color: var(--blue-bg-color);
+	padding: 12px 12px 16px 16px;
+	height: 54px;
+	width: fit-content;
+	max-width: 100%;
+	gap: 24px;
+	border-radius: 180px;
+	border-width: 0;
+	color: white;
+	white-space: nowrap;
+	justify-content: flex-end;
+	transition: all 1s;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.go-to-app:hover {
+	background-color: #94CEEC;
+}
+
+.go-to-app:active {
+	background-color: #13B1E3;
+}
+
+#nav-go-to-app {
+	display: none;
+}
+
+#cont-go-to-app {
+	display: flex;
+	font-size: 0.4em;
+}
+
+.go-to-app p {
+	margin: 0;
+}
+
+.go-to-app .ellipse {
+	border-radius: 180px;
+	height: 30px;
+	width: 30px;
+	background-color: white;
+	color: var(--blue-bg-color);
+	text-align: center;
+	font-weight: 700;
+	font-size: 1.5em;
+	float: right;
+}
+
+.ellipse {
+	border-radius: 200px;
 	border-width: 0;
 }
 
-#nvb-menu{
-	float:right; 
-	background-color: rgb(113, 181, 144);
-	border-radius: 8px;
+.ellipse-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 4px;
+	justify-content: center;
+}
+
+.box h1>strong {
+	font-size: 56px;
+}
+
+#univlob img {
+	max-width: 188px;
+	height: 100%;
+}
+
+#labacad img {
+	max-width: 75px;
+	height: 100%;
+
+}
+
+#chemlog img {
+	height: 48px;
+	width: 127px;
+}
+
+#chemlog {
+	object-fit: contain;
+}
+
+#therm-chem-cont {
+	display: flex;
+	width: 100%;
 	padding: 0;
+	margin: 0;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+
+.logo {
+	max-height: 53px;
+	flex-direction: row;
+	align-items: center;
+	gap: 32px;
+	margin-top: auto;
+	display: flex;
+	white-space: nowrap;
+}
+
+.info-ab-pr {
+	font-size: 19px;
+}
+
+.footer {
+	margin: 0;
+	padding: 0;
+	justify-content: space-between;
+}
+
+.index-link {
+	background-color: #C1C8CB;
+	height: 7px;
+	width: 7px;
+}
+
+.index-link.active {
+	background-color: var(--blue-bg-color);
+	margin-top: 0;
+}
+
+
+.mob-ver-scroll {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 100%;
+}
+
+.scrollingBlock {
+	display: flex;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	min-height: 220px;
+	height: max-content;
+	width: 100%;
+	gap: 8px;
+	padding-bottom: 0;
+}
+
+.scrollingBlock::-webkit-scrollbar {
+	width: 0 !important;
+	height: 0 !important;
+}
+
+.scrollingBlock .item {
+	min-width: 230px;
+	width: 80%;
+	border-radius: 10px;
+	background-color: white;
+	margin: 0;
+	padding: 16px 12px 16px 12px;
+	gap: 16px;
+	display: flex;
+	flex-direction: column;
+}
+
+.item h4,
+h5 {
+	font-weight: 700;
+}
+
+h3 {
+	color: var(--blue-bg-color);
+	font-weight: 700;
+	margin: 0;
+	font-size: 24px;
+	font-family: "Nexa Demo Light";
+}
+
+
+.item p {
+	font-weight: 400;
+	font-size: 12px;
+}
+
+
+.mobile-v {
+	display: none;
+}
+
+.mobile-antiv {
+	display: flex;
+}
+
+#formul {
+	display: flex;
+	float: right;
+	flex-direction: row-reverse;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.blueonblue {
+	color: var(--blue-bg-color) !important;
+	background-color: #DDF2FE !important;
+	width: max-content;
+	text-transform: uppercase;
+	height: max-content;
+	padding: 4px 12px 4px 12px !important;
+	margin: 0%;
+	align-self: flex-start;
+}
+
+.whiteongray
+
+/*Белым по серому white on gray*/
+	{
+	color: white !important;
+	background-color: #C1C8CB !important;
+	width: max-content;
+	text-transform: uppercase;
+	height: max-content;
+	padding: 4px 12px 4px 12px !important;
+	margin: 0%;
+	align-self: flex-start;
+}
+
+.blackonwhite
+
+/*Чёрным по белому black on white*/
+	{
+	color: black !important;
+	background-color: white !important;
+	width: max-content;
+	text-transform: uppercase;
+	height: max-content;
+	padding: 4px 12px 4px 12px !important;
+	margin: 0%;
+	align-self: flex-start;
+}
+
+.whiteonblue
+
+/*Белым по синему white on blue*/
+	{
+	color: white !important;
+	background-color: #00405D !important;
+	width: max-content;
+	text-transform: uppercase;
+	height: max-content;
+	padding: 4px 12px 4px 12px !important;
+	margin: 0%;
+	align-self: flex-start;
+}
+
+.content-row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	justify-content: center;
+}
+
+.textboxes {
+	gap: 24px;
+	align-self: flex-start;
+	width: max-content;
+	display: flex;
+	flex-direction: row
+}
+
+.textboxes:first-child {
+	margin: 24px !important;
+}
+
+.box p {
+
+	background-color: transparent;
+	font-size: clamp(12px, 2.7*(1vw + 1vh) / 2, 3em);
+}
+
+bluetext {
+	color: var(--blue-bg-color);
+}
+
+
+#page7 .box {
+	gap: 32px;
+}
+
+.go-to-app br {
+	display: none;
+}
+
+.accordion {
+	width: 100%;
+	font-family: 'Raleway';
+	border-color: transparent;
+	border-radius: 8px;
+}
+
+.accordion-item {
+	margin-bottom: 1em;
+
+}
+
+.accordion-header {
+	display: flex;
+	border-color: transparent;
+	border-radius: 8px;
+	margin: 0;
+
+}
+
+.accordion-button {
+
+	border-color: transparent;
+	background-color: transparent;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+
+}
+
+.accordion-button.collapsed::after {
+	content: url("{% static '../img/icon/plus-circle.svg' %}");
+	float: right;
+	justify-self: flex-end;
+	margin-left: auto;
+}
+
+.accordion-button:not(.collapsed)::after {
+	content: url('{% static "../img/icon/minus-circle.svg" %}');
+	float: right;
+	justify-self: flex-end;
+	margin-left: auto;
+}
+
+
+.bold-large {
+	font-weight: 700 !important;
+	margin: 0;
+}
+
+h1 {
+	font-weight: 700 !important;
+	font-family: "Nexa Demo Light";
+}
+
+.onl-text-pg {
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.onl-text-pg .text-cont {
+	text-align: left;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 1em;
+	font-size: large;
+}
+
+#page2 .text-cont div {
+	width: 50%;
+	font-size: 40px;
+}
+
+h4 {
+	font-family: 'Raleway';
+	font-weight: 600;
+	margin: 0;
+
+
+}
+
+.item .box .mobile-antiv {
+	display: flex;
+	flex-direction: column !important;
+
+}
+
+#page5 p {
+	font-size: 36px;
+	font-family: "Raleway";
+	font-weight: 500;
+}
+
+#page5 {
+	padding: 10vh 10vw 10vh 10vw;
+}
+
+#left-footer-row {
+	display: flex;
+	justify-items: flex-start;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.footer p {
+	font-size: 19px;
+}
+
+.footer #thermopol {
+	margin: 0 !important;
+
+}
+
+#info-row-box {
+	background-color: transparent;
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+}
+
+.info-row {
+	width: 100% !important;
+	border-radius: 24px;
+	display: flex;
+	flex-direction: row;
+	padding: 24px !important;
+	gap: 16px;
+	align-self: center;
+
+}
+
+.info-row p {
+	font-size: 19px;
+	margin-bottom: 0;
+
+}
+
+.numder {
+	color: var(--blue-bg-color);
+	font-size: 48px !important;
+	margin: 0 !important;
+	font-weight: 700;
+	font-family: "Nexa Demo Light";
+}
+
+
+
+/*media*/
+
+@media all and (min-width:1440px) {
+
+	#formul {
+		height: 30vh;
+	}
+
+	#nav-go-to-app {
+		display: flex;
+	}
+
+	#cont-go-to-app {
+		display: none;
+	}
+
+	#nvb-menu {
+		width: auto;
+		height: auto;
+		display: inline-block;
+		height: 54px;
+		background-color: transparent;
+		margin-top: 0;
+	}
+
+	.overlay {
+		display: none;
+	}
+
+	body {
+		padding: 24px 64px;
+		font-size: 16px;
+		gap: 32px;
+	}
+
+	.navbar {
+		padding: 16px 24px 16px 24px;
+		height: 86px;
+	}
+
+	#thermopol {
+		line-height: 1;
+	}
+
+	.overlay {
+		display: none;
+	}
+
+	.bold-large {
+		font-family: "Raleway";
+		font-size: 20px !important;
+		line-height: normal;
+	}
+
+	h1 {
+		font-size: 56px !important;
+		line-height: 62px !important;
+	}
+
+	.regular {
+		font-family: "Raleway";
+		font-size: 16px !important;
+		line-height: normal;
+	}
+
+	h4 {
+		font-size: 18px !important;
+	}
+
+	.go-to-app {
+		font-size: 20px;
+		height: auto;
+	}
+
+	.go-to-app ing {
+		height: 100%;
+	}
+
+
+}
+
+
+
+@media (max-width:1440px) and (min-width:768px) {
+
+	.box h1>strong {
+		font-size: 32px;
+	}
+
+	#page5 {
+		padding: 5vh 2vw 2vh 5vw;
+	}
+
+	#nvb-menu {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		display: inline-block;
+		height: 54px;
+		background-color: transparent;
+	}
+
+	.overlay {
+		display: none;
+	}
+
+	body {
+		padding: 24px 64px;
+		font-size: 16px;
+	}
+
+	.navbar {
+		padding: 16px 24px 16px 24px;
+		height: 86px;
+	}
+
+	#thermopol {
+		line-height: 1;
+		font-size: 50px;
+	}
+
+	.nav>li>a {
+		margin-top: 1.2em;
+		padding: 0px;
+	}
+
+	.content-row .box {
+		padding: 2em;
+	}
+
+	#page2 .text-cont div {
+		font-size: 30px;
+	}
+
+	@media (max-width:950px) {
+	
+		.nav>li>a {
+			margin-top: 1em;
+			padding-left: 0px;
+		}
+
+		#nvb-menu a {
+			font-size: 15px;
+			padding-right: 4px;
+		}
+
+		#chemlog img {
+			width: auto;
+		}
+	}
+
+	@media (max-width:900px) {
+		#thermopol {
+			font-size: 30px;
+			line-height: 2;
+		}
+
+		#nvb-menu {
+			max-width: 400px;
+		}
+
+		.item .regular{
+			font-size: 12px!important;
+		}
+
+		.info-row p{
+			font-size: 15px;
+		}
+
+
+	}
+
+	@media (max-width:800px) {
+		#page2 .text-cont div {
+			font-size: 25px;
+		}
+
+		#chemlog {
+			display: none !important;
+		}
+	}
+
+	.bold-large {
+		font-family: "Raleway";
+		font-size: 20px !important;
+		line-height: normal;
+	}
+
+	h1 {
+		font-size: 40px !important;
+		line-height: 42px !important;
+	}
+
+	.regular {
+		font-family: "Raleway";
+		font-size: 16px !important;
+		line-height: normal;
+	}
+
+	h4 {
+		font-size: 14px !important;
+	}
+
+	.smtxt1 {
+		font-size: 12px !important;
+	}
+
+	.go-to-app {
+		padding: 0.5em 0.5em 0.5em 0.5em;
+	}
+}
+
+
+@media (min-width:320px) and (max-width:768px) {
+
+	.box h1>strong {
+		font-size: 30px;
+	}
+
+	#page5 p {
+		font-size: 20px;
+	}
+
+	#page5 {
+		padding: 3em;
+	}
+
+	#page2 .text-cont div {
+		font-size: 20px;
+	}
+
+	#go-up img {
+		height: 32px !important;
+	}
+
+	.box {
+		border-radius: 16px;
+	}
+
+	.content-row .box {
+		padding: 2em;
+	}
+
+	#nvb-menu {
+		position: absolute;
+		z-index: 100;
+		min-width: auto;
+		max-width: 367px;
+	}
+
+	.overlay {
+		display: block;
+	}
+
+	body {
+		padding: 24px 32px;
+		--right_pad: 24px;
+		gap: 24px;
+	}
+
+	.navbar {
+		padding: 8px 16px 8px 16px;
+		height: 64px;
+
+	}
+
+	.go-to-app {
+		line-height: 1;
+		font-size: 10px;
+	}
+
+	#thermopol {
+		font-size: 28px;
+		line-height: 2.3;
+		margin-left: 1em;
+	}
+
+	.box p {
+		font-size: 20px;
+	}
+
+	h1 {
+		font-size: 48px;
+		line-height: 1;
+	}
+
+
+	@media (max-width:500px) {
+		#thermopol {
+			font-size: 35px;
+			line-height: 2;
+			margin-left: 1em;
+		}
+
+		#formul img {
+			width: 100%;
+			;
+		}
+
+		#chemlog img {
+			width: 80%;
+		}
+
+		.onl-text-pg .text-cont {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		#page2 .text-cont div {
+			width: 100%;
+		}
+
+
+	}
+
+	@media (max-width:450px) {
+
+		#page2 .text-cont div {
+			font-size: 15px;
+		}
+
+		.content-row {
+			gap: 10px;
+		}
+
+		#formul img {
+			width: 70%;
+		}
+
+		#thermopol {
+			font-size: 23px !important;
+			margin-left: 1em;
+			line-height: 2;
+		}
+
+		#chemlog img {
+			height: 100%;
+			width: 80%;
+		}
+
+		.nav-btn {
+
+			width: 30px;
+			padding-left: 0;
+
+		}
+
+		.nav-btn-el {
+			padding-left: 0;
+			width: 30px;
+		}
+
+		#univlog img {
+			max-width: 80px;
+		}
+
+		#ladacad img {
+			max-width: 50px;
+		}
+
+		.logo {
+			flex-direction: column;
+			margin-bottom: 100px;
+		}
+
+		#x {
+			padding: 0;
+			margin: 0;
+		}
+
+		.go-to-app br {
+			display: block;
+		}
+
+		.mobile-v {
+			display: flex;
+		}
+
+		.mobile-antiv {
+			display: none !important;
+		}
+
+		.mobile-v {
+			display: flex;
+		}
+
+		
+		h1 {
+			font-size: 40px;
+			line-height: 1;
+		}
+
+	}
+
+	@media (max-width:370px) {
+		#thermopol {
+			margin-left: 1em;
+			line-height: 3;
+		}
+
+		body {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+			
+		h1 {
+			font-size: 35px;
+			line-height: 1;
+		}
+
+	}
+
+	.left-cont-row-col {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		order: 2;
+	}
+
+	.right-cont-row-col {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		order: 1;
+	}
+
+	.content-row {
+		flex-direction: column;
+		gap: 0px;
+
+	}
+
+	.content-row .box {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.img-box:before {
+		content: "";
+		padding-top: 70%;
+		float: left;
+	}
+
+	.bold-large {
+		font-family: "Raleway";
+		font-size: 12px !important;
+		line-height: normal;
+	}
+
+
+	.regular {
+		font-family: "Raleway";
+		font-size: 12px !important;
+		line-height: 16px !important;
+	}
+
+	h4 {
+		font-size: 12px !important;
+		line-height: 14px !important;
+	}
+
+
+
+
+
+
+.mobile-v {
+	display: flex;
+}
+
+.mobile-antiv {
+	display: none !important;
+}
+}
+@media (max-width:320px) {
+
+	.box h1>strong {
+		font-size: 20px;
+	}
+
+	.mobile-v {
+		display: flex;
+	}
+
+	.mobile-antiv {
+		display: none !important;
+	}
+
+	#page5 p {
+		font-size: 15px;
+	}
+
+	#page5 br {
+		display: block;
+	}
+
+	#page5 {
+		padding: 3em;
+
+	}
+
+	#page2 .text-cont div {
+		width: 100%;
+		font-size: 12px;
+	}
+
+	.text-cont div {
+		width: 100%;
+
+	}
+
+	.content-row {
+		flex-direction: column;
+		gap: 0px;
+
+	}
+
+	.go-to-app {
+		height: max-content;
+	}
+
+	.go-to-app .ellipse {
+
+		width: 100%;
+	}
+
+	.content-row .box {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#nvb-menu {
+		position: absolute;
+		z-index: 100;
+		max-width: 367px;
+		margin: 0 auto;
+	}
+
+	.overlay {
+		display: block;
+	}
+
+	.box {
+		border-radius: 10px;
+	}
+
+	body {
+		--right_pad: 16px;
+		padding: 16px var(--right_pad);
+		gap: 24px;
+	}
+
+	.navbar {
+		padding: 3px;
+		height: 36px;
+	}
+
+	#thermopol {
+		padding-left: 1.2em;
+		font-size: 20px !important;
+		line-height: 3;
+	}
+
+	.logo {
+		flex-direction: column;
+		margin-bottom: 100px;
+	}
+
+	#chemlog img {
+		height: 100%;
+		width: 100%;
+		margin-right: 10px;
+	}
+
+	#chemlog {
+		margin-top: 5px;
+	}
+
+	.img-box:before {
+		content: "";
+		padding-top: 70%;
+		float: left;
+	}
+
+	.img-box {
+
+		margin: auto;
+		overflow: hidden;
+	}
+
+	.onl-text-pg strong>br {
+		display: none;
+	}
+
+	.onl-text-pg .text-cont {
+		flex-direction: column;
+		text-align: center;
+		font-size: 15px;
+	}
+
+	#formul img {
+		width: 100%;
+	}
+
+	@media (max-width:270px) {
+		.nav-btn {
+			width: 30px;
+			padding-left: 0;
+		}
+
+		.nav-btn-el {
+			padding-left: 0;
+			width: 30px;
+		}
+
+		#x {
+			padding: 0;
+			margin: 0;
+		}
+
+		.go-to-app br {
+			display: block;
+		}
+
+	}
+
+	#go-to-app {
+		align-items: center;
+		height: auto;
+		margin: 5em 0 0.5em 0;
+		gap: 3px;
+	}
+
+	#go-to-app p {
+		margin-bottom: 0;
+	}
+
+	.left-cont-row-col {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		order: 2;
+
+	}
+
+	.right-cont-row-col {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		order: 1;
+
+
+	}
+
+	.right-cont-row-col {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		order: 1;
+
+	}
+
+	h1 {
+		font-size: 20px !important;
+		line-height: 24px !important;
+	}
+
+	.bold-large {
+		font-family: "Raleway";
+		font-size: 14px !important;
+		line-height: normal;
+	}
+
+	.regular {
+		font-family: "Raleway";
+		font-size: 14px !important;
+		line-height: normal;
+	}
+
+	h4 {
+		font-size: 12px !important;
+		line-height: 14px !important;
+	}
 }
