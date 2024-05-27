@@ -10,9 +10,94 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-        {% block content %}
-        {% endblock %}
+{% block header %}
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-default box nav " style="height: auto; border-radius: 180px;"
+     id="navbar">
+    <div class="container-fluid" style="margin:0; padding: 0;">
+        <div class="navbar-header">
+            <div id="therm-chem-cont" onclick="window.location.href='/'">
+                <div style="display: flex; justify-items: flex-start;align-items: center;">
+                    <p class="therm-chem-cont-item" id="thermopol">Thermopol</p>
+                    <div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center;">
+                        <img src="{% static 'img/lg/chemlog.png' %}" style="transform: scaleY(1.2);">
+                    </div>
+                </div>
+                <div style="position:sticky; margin-left: auto;">
+                    <button type="button" class="navbar-toggle nav-btn" data-bs-toggle="collapse"
+                            data-bs-target=".multi-collapse" aria-expanded="false"
+                            aria-controls="nvb-menu overl x barbarbar">
 
+                        <p class="collapse multi-collapse navbar-collapse nav-btn-el" id="x">
+                            <img src="{% static 'img/icon/burx.svg' %}">
+                        </p>
+                        <p class="collapse multi-collapse navbar-collapse show  nav-btn-el" id="barbarbar">
+                            <img src="{% static 'img/icon/bur.svg' %}">
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="collapse multi-collapse navbar-collapse " id="nvb-menu">
+            <ul class="nav navbar-nav" style="color: black!important;">
+                <li><a href="/admin">Панель администратора</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--navbar end-->
+{% endblock %}
+{% block content %}
+{% endblock %}
+<div class="container-fluid box footer">
+    <div class="row" style="padding: 0 24px 24px 24px;">
+        <div class=" col-sm-6"
+
+             style="min-height: 179px;height: 100%; display: flex; flex-direction: column;padding-top: 24px; ">
+            <div id="left-footer-row">
+                <div>
+                    <p id="thermopol">Thermopol</p>
+
+                </div>
+
+                <div class="logo">
+                    <div id="univlob">
+                        <img src="{% static 'img/lg/unloblog.svg' %}">
+                    </div>
+                    <div id="labacad">
+                        <img src="{% static 'img/lg/ladaclog.svg' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-sm-6 " style="min-height: 179px; gap: 24px; padding-top: 24px;">
+            <div class="info-ab-pr">
+                <p>Химический Факультет ННГУ им. Н. И. Лобачевского</p>
+                <p><strong>Адрес:</strong></p>
+                <p>603950, г. Нижний Новгород,<br>пр. Гагарина, 23, корп. 5</p>
+                <p>Проект реализован Университетом Лобачевского совместно с IT-академией Lad в рамках проекта
+                    "Цифровые кафедры"</p>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'mycss/main.css' %}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="{% static 'myscr/index.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

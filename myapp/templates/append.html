@@ -2,197 +2,76 @@
 {% block title %} Добавить новое соединение {% endblock %}
 {% load static %}
 {% block content %}
-<!--navbar-->
-	<nav class="navbar navbar-expand-lg navbar-default box nav " style="height: auto; border-radius: 180px;"
-		id="navbar">
-		<div class="container-fluid" style="margin:0; padding: 0;">
-			<div class="navbar-header">
-				<div id="therm-chem-cont" onclick="window.location.href='/'">
-					<div style="display: flex; justify-items: flex-start;align-items: center;">
-						<p class="therm-chem-cont-item" id="thermopol">Thermopol</p>
-						<div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center;">
-							<img src="{% static 'img/lg/chemlog.png' %}" style="transform: scaleY(1.2);">
-						</div>
-					</div>
-					<div style="position:sticky; margin-left: auto;">
-						<button type="button" class="navbar-toggle nav-btn" data-bs-toggle="collapse"
-							data-bs-target=".multi-collapse" aria-expanded="false"
-							aria-controls="nvb-menu overl x barbarbar">
 
-							<p class="collapse multi-collapse navbar-collapse nav-btn-el" id="x">
-								<img src="{% static 'img/icon/burx.svg' %}">
-							</p>
-							<p class="collapse multi-collapse navbar-collapse show  nav-btn-el" id="barbarbar">
-								<img src="{% static 'img/icon/bur.svg' %}">
-							</p>
-						</button>
-					</div>
-				</div>
-			</div>
-			<div class="collapse multi-collapse navbar-collapse " id="nvb-menu">
-				<ul class="nav navbar-nav" style="color: black!important;">
-                    <li><a href="/admin">Панель администратора</a></li>
-
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!--navbar end-->
-<div class="box onl-text-pg" id="page2">
+<div class="box onl-text-pg container">
 
     <link rel="stylesheet" href="{% static 'append.css' %}">
-    <div class="form-group">
-        <label for="substance_class">Класс соединения:</label>
-        <select id="substance_class" name="substance_class">
-            {% for class in classes %}
-                <option value="{{ class.name }}">{{ class.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    <div class="row">
+        <div class="col-md-6">
 
-    <div class="form-group">
-        <label for="substance_type">Тип соединения:</label>
-        <select id="substance_type" name="substance_type">
-            {% for type in types %}
-                <option value="{{ type }}">{{ type }}</option>
-            {% endfor %}
-        </select>
+            <div class="form-group">
+                <label for="substance_class">Класс соединения:</label>
+                <input class="form-control" list="substance_class" placeholder="Введите класс соединения...">
+                <datalist id="substance_class">
+                    {% for class in classes %}
+                    <option value="{{ class.name }}">{{ class.name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
 
-    </div>
+            <div class="form-group">
+                <label for="substance_type">Тип соединения:</label>
+                <select id="substance_type" name="substance_type">
+                    {% for type in types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
 
-    <div class="form-group">
-        <label for="name">Название:</label>
-        <input type="text" id="name" name="name">
-    </div>
+            </div>
 
-    <div class="form-group">
-        <label for="formula">Формула:</label>
-        <input type="text" id="formula" name="formula">
-    </div>
+            <div class="form-group">
+                <label for="name">Название:</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
 
-    <div class="form-group">
-        <label for="source">Источник:</label>
-        <input type="text" id="source" name="source">
-    </div>
+            <div class="form-group">
+                <label for="formula">Формула:</label>
+                <input type="text" id="formula" name="formula" class="form-control">
+            </div>
 
-    <div class="form-group">
-        <label for="cas">CAS:</label>
-        <input type="text" id="cas" name="cas">
-    </div>
+            <div class="form-group">
+                <label for="source">Источник:</label>
+                <input type="text" id="source" name="source" class="form-control">
+            </div>
 
-    <div class="form-group">
-        <label for="literatura">Литература:</label>
-        <select id="literatura" name="literatura" multiple>
+            <div class="form-group">
+                <label for="cas">CAS:</label>
+                <input type="text" id="cas" name="cas" class="form-control">
+            </div>
 
-        </select>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="literatura">Литература:</label>
+                        <select id="literatura" name="literatura" multiple class="form-select">
 
-        <button class="add-button " onclick="addSource()">Добавить источник</button>
-
-        <div class="source-fields">
-            <input type="text" id="description" placeholder="Описание">
-            <input type="text" id="url" placeholder="URL">
-            <input type="text" id="doi" placeholder="DOI">
-        </div>
-    </div>
+                        </select>
 
 
+                    </div>
 
-
-
-<script>
-        const literatura = document.getElementById('literatura');
-        const phases = document.getElementById('phases');
-
-
-
-        let literatureList = []; // Глобальная переменная для хранения списка литературы
-
-        function addSource() {
-            const descriptionInput = document.getElementById('description');
-            const urlInput = document.getElementById('url');
-            const doiInput = document.getElementById('doi');
-
-            const description = descriptionInput.value.trim();
-            const url = urlInput.value.trim();
-            const doi = doiInput.value.trim();
-
-            if (description) {
-                const literatureItem = {
-                    description: description,
-                    url: url,
-                    doi: doi
-                };
-
-                literatureList.push(literatureItem);
-
-                const option = document.createElement('option');
-                option.value = description;
-                option.textContent = description;
-                literatura.add(option);
-
-                descriptionInput.value = '';
-                urlInput.value = '';
-                doiInput.value = '';
-            }
-        }
-        literatura.addEventListener('dblclick', function(event) {
-            const selectedOption = event.target;
-            const selectedIndex = Array.prototype.indexOf.call(literatura.children, selectedOption);
-            const selectedLiterature = literatureList[selectedIndex];
-
-            if (selectedLiterature) {
-                document.getElementById('description').value = selectedLiterature.description;
-                document.getElementById('url').value = selectedLiterature.url;
-                document.getElementById('doi').value = selectedLiterature.doi;
-            }
-        });
-
-
-    // Call the displayStateData function to set up the event listener
-    displayStateData();
-
-    </script>
-
-
-
-
-<div class="form-group">
-    <label for="properties">Состояния:</label>
-    <select id="properties" name="properties" multiple>
-
-    </select>
-
-    <button class="add-button" onclick="addProperty()">Добавить свойство</button>
-
-    <div class="property-fields">
-        <input type="text" id="state" placeholder="State">
-        <input type="text" id="agregate_state" placeholder="Aggregate State">
-        <input type="number" id="number_phase" placeholder="Number Phase">
-        <input type="number" id="degree_of_crystallinity" placeholder="Degree of Crystallinity">
-        <input type="number" id="enthalpy_of_combustion" placeholder="Enthalpy of Combustion">
-        <input type="number" id="enthalpy_of_combustion_err" placeholder="Enthalpy of Combustion Error">
-        <input type="number" id="enthalpy_of_formation" placeholder="Enthalpy of Formation">
-        <input type="number" id="enthalpy_of_formation_err" placeholder="Enthalpy of Formation Error">
-        <input type="number" id="entropy_of_formation" placeholder="Entropy of Formation">
-        <input type="number" id="entropy_of_formation_err" placeholder="Entropy of Formation Error">
-        <input type="number" id="gibbs_energy_of_formation" placeholder="Gibbs Energy of Formation">
-        <input type="number" id="gibbs_energy_of_formation_err" placeholder="Gibbs Energy of Formation Error">
-        <input type="number" id="lnK" placeholder="lnK">
-        <input type="number" id="residual_entropy_at_0_k" placeholder="Residual Entropy at 0 K">
-        <input type="number" id="residual_entropy_at_0_k_err" placeholder="Residual Entropy at 0 K Error">
-        <input type="number" id="configurational_entropy" placeholder="Configurational Entropy">
-        <input type="number" id="configurational_entropy_err" placeholder="Configurational Entropy Error">
-        <input type="number" id="difference_of_zero" placeholder="Difference of Zero">
-        <input type="number" id="difference_of_zero_err" placeholder="Difference of Zero Error">
-        <input type="text" id="T" placeholder="T (ArrayField)">
-        <input type="text" id="Cp" placeholder="Cp (ArrayField)">
-        <input type="text" id="HT_H0" placeholder="HT_H0 (ArrayField)">
-        <input type="text" id="ST" placeholder="ST (ArrayField)">
-        <input type="text" id="GT" placeholder="GT (ArrayField)">
-    </div>
-</div>
-
-<script>
+                    <div class="col">
+                        <div class="source-fields">
+                            <input type="text" id="description" placeholder="Описание" class="form-control">
+                            <input type="text" id="url" placeholder="URL" class="form-control">
+                            <input type="text" id="doi" placeholder="DOI" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="add-button btn btn-primary" onclick="addSource()">Добавить источник</button>
+                </div>
+                <script>
     let propertiesList = [];
 
 function addProperty() {
@@ -397,54 +276,179 @@ propertiesListbox.addEventListener('dblclick', () => {
 
 
 
-</script>
-    <div class="form-group">
-    <label for="phase-transitions">Фазовые переходы:</label>
-    <select id="phase-transitions" name="phase-transitions" multiple>
 
-    </select>
 
-    <button class="add-button" onclick="addPhaseTransition()">Добавить фазовый переход</button>
+                </script>
+                <div class="form-group">
+                    <label for="phase-transitions">Фазовые переходы:</label>
+                    <select id="phase-transitions" name="phase-transitions" multiple>
 
-    <div class="phase-transition-fields">
-        <input type="text" id="source_phase" placeholder="Исходная фаза">
-        <input type="text" id="target_phase" placeholder="Конечная фаза">
-        <input type="number" id="source_phase_number" placeholder="Номер исходной фазы">
-        <input type="number" id="target_phase_number" placeholder="Номер конечной фазы">
-        <input type="number" id="temperature" placeholder="Температура">
-        <input type="number" id="temperature_err" placeholder="Ошибка температуры">
-        <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода">
-        <input type="number" id="enthalpy_transition_err" placeholder="Ошибка энтальпии перехода">
-        <input type="number" id="entropy_transition" placeholder="Энтропия перехода">
-        <input type="number" id="entropy_transition_err" placeholder="Ошибка энтропии перехода">
-        <input type="number" id="jump_heat_capacity" placeholder="Скачок теплоёмкости">
-        <input type="number" id="start_temperature" placeholder="Начальная температура">
-        <input type="number" id="end_temperature" placeholder="Конечная температура">
+                    </select>
+
+                    <button class="add-button btn btn-primary" onclick="addPhaseTransition()">Добавить фазовый переход
+                    </button>
+
+                    <div class="phase-transition-fields">
+                        <input type="text" id="source_phase" placeholder="Исходная фаза" class="form-control">
+                        <input type="text" id="target_phase" placeholder="Конечная фаза" class="form-control">
+                        <input type="number" id="source_phase_number" placeholder="Номер исходной фазы"
+                               class="form-control">
+                        <input type="number" id="target_phase_number" placeholder="Номер конечной фазы"
+                               class="form-control">
+                        <input type="number" id="temperature" placeholder="Температура" class="form-control">
+                        <input type="number" id="temperature_err" placeholder="Ошибка температуры" class="form-control">
+                        <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода"
+                               class="form-control">
+                        <input type="number" id="enthalpy_transition_err" placeholder="Ошибка энтальпии перехода"
+                               class="form-control">
+                        <input type="number" id="entropy_transition" placeholder="Энтропия перехода"
+                               class="form-control">
+                        <input type="number" id="entropy_transition_err" placeholder="Ошибка энтропии перехода"
+                               class="form-control">
+                        <input type="number" id="jump_heat_capacity" placeholder="Скачок теплоёмкости"
+                               class="form-control">
+                        <input type="number" id="start_temperature" placeholder="Начальная температура"
+                               class="form-control">
+                        <input type="number" id="end_temperature" placeholder="Конечная температура"
+                               class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+        const literatura = document.getElementById('literatura');
+        const phases = document.getElementById('phases');
+
+
+
+        let literatureList = []; // Глобальная переменная для хранения списка литературы
+
+        function addSource() {
+            const descriptionInput = document.getElementById('description');
+            const urlInput = document.getElementById('url');
+            const doiInput = document.getElementById('doi');
+
+            const description = descriptionInput.value.trim();
+            const url = urlInput.value.trim();
+            const doi = doiInput.value.trim();
+
+            if (description) {
+                const literatureItem = {
+                    description: description,
+                    url: url,
+                    doi: doi
+                };
+
+                literatureList.push(literatureItem);
+
+                const option = document.createElement('option');
+                option.value = description;
+                option.textContent = description;
+                literatura.add(option);
+
+                descriptionInput.value = '';
+                urlInput.value = '';
+                doiInput.value = '';
+            }
+        }
+        literatura.addEventListener('dblclick', function(event) {
+            const selectedOption = event.target;
+            const selectedIndex = Array.prototype.indexOf.call(literatura.children, selectedOption);
+            const selectedLiterature = literatureList[selectedIndex];
+
+            if (selectedLiterature) {
+                document.getElementById('description').value = selectedLiterature.description;
+                document.getElementById('url').value = selectedLiterature.url;
+                document.getElementById('doi').value = selectedLiterature.doi;
+            }
+        });
+
+
+    // Call the displayStateData function to set up the event listener
+    displayStateData();
+
+
+
+            </script>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="properties">Состояния:</label>
+                <select id="properties" name="properties" multiple>
+
+                </select>
+
+                <button class="add-button btn btn-primary" onclick="addProperty()">Добавить свойство</button>
+
+                <div class="property-fields">
+                    <input type="text" id="state" placeholder="State" class="form-control">
+                    <input type="text" id="agregate_state" placeholder="Aggregate State" class="form-control">
+                    <input type="number" id="number_phase" placeholder="Number Phase" class="form-control">
+                    <input type="number" id="degree_of_crystallinity" placeholder="Degree of Crystallinity"
+                           class="form-control">
+                    <input type="number" id="enthalpy_of_combustion" placeholder="Enthalpy of Combustion"
+                           class="form-control">
+                    <input type="number" id="enthalpy_of_combustion_err" placeholder="Enthalpy of Combustion Error"
+                           class="form-control">
+                    <input type="number" id="enthalpy_of_formation" placeholder="Enthalpy of Formation"
+                           class="form-control">
+                    <input type="number" id="enthalpy_of_formation_err" placeholder="Enthalpy of Formation Error"
+                           class="form-control">
+                    <input type="number" id="entropy_of_formation" placeholder="Entropy of Formation"
+                           class="form-control">
+                    <input type="number" id="entropy_of_formation_err" placeholder="Entropy of Formation Error"
+                           class="form-control">
+                    <input type="number" id="gibbs_energy_of_formation" placeholder="Gibbs Energy of Formation"
+                           class="form-control">
+                    <input type="number" id="gibbs_energy_of_formation_err"
+                           placeholder="Gibbs Energy of Formation Error" class="form-control">
+                    <input type="number" id="lnK" placeholder="lnK" class="form-control">
+                    <input type="number" id="residual_entropy_at_0_k" placeholder="Residual Entropy at 0 K"
+                           class="form-control">
+                    <input type="number" id="residual_entropy_at_0_k_err" placeholder="Residual Entropy at 0 K Error"
+                           class="form-control">
+                    <input type="number" id="configurational_entropy" placeholder="Configurational Entropy"
+                           class="form-control">
+                    <input type="number" id="configurational_entropy_err" placeholder="Configurational Entropy Error"
+                           class="form-control">
+                    <input type="number" id="difference_of_zero" placeholder="Difference of Zero" class="form-control">
+                    <input type="number" id="difference_of_zero_err" placeholder="Difference of Zero Error"
+                           class="form-control">
+                    <input type="text" id="T" placeholder="T (ArrayField)" class="form-control">
+                    <input type="text" id="Cp" placeholder="Cp (ArrayField)" class="form-control">
+                    <input type="text" id="HT_H0" placeholder="HT_H0 (ArrayField)" class="form-control">
+                    <input type="text" id="ST" placeholder="ST (ArrayField)" class="form-control">
+                    <input type="text" id="GT" placeholder="GT (ArrayField)" class="form-control">
+                </div>
+            </div>
+        </div>
+
+
     </div>
-</div>
 
-  <title>Сводная таблица</title>
+    <div class="row">
+        <div class="form-group">
+            <label for="phase-transition-table">Таблица фазового перехода:</label>
+            <table id="phase-transition-table" class="table">
+                <thead>
+                <tr>
+                    <th>T</th>
+                    <th>Cp</th>
+                    <th>H</th>
+                    <th>S</th>
+                    <th>G</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button class="add-button btn btn-primary" id="add-row">Добавить строку</button>
+        </div>
 
-
-  <div class="form-group">
-    <label for="phase-transition-table">Таблица фазового перехода:</label>
-    <table id="phase-transition-table">
-      <thead>
-        <tr>
-          <th>T</th>
-          <th>Cp</th>
-          <th>H</th>
-          <th>S</th>
-          <th>G</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-    <button class="add-button" id="add-row">Добавить строку</button>
-  </div>
-
-  <script>
+        <script>
     const table = document.getElementById('phase-transition-table');
     const tbody = table.getElementsByTagName('tbody')[0];
     const addRowButton = document.getElementById('add-row');
@@ -506,15 +510,13 @@ propertiesListbox.addEventListener('dblclick', () => {
         }
       }
     });
-  </script>
+    addRow();
 
 
+        </script>
 
 
-
-
-
-<script>
+        <script>
     // Глобальные переменные для хранения данных
 let phaseTransitionsList = [];
 let selectedTransitionIndex = -1;
@@ -693,68 +695,23 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
   }
 }
 
-</script>
-<div class="form-group">
 
-  </div>
-  <div class="form-group">
-    <button class="add-button" id="powerLawButton">Расчет степенной зависимости</button>
-    <input type="text" id="powerLawExponent" placeholder="Показатель степени">
-    <input type="text" id="powerLawCoefficient" placeholder="Коэффициент">
-  </div>
-  <script>
 
-  </script>
-    <button class="add-button" id="submitButton">Отправить</button>
+        </script>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+            <button class="add-button btn btn-primary" id="powerLawButton">Расчет степенной зависимости</button>
+            <input type="text" id="powerLawExponent" placeholder="Показатель степени" class="form-control">
+            <input type="text" id="powerLawCoefficient" placeholder="Коэффициент" class="form-control">
+        </div>
+        <script>
+
+        </script>
+        <button class="btn btn-primary" id="submitButton">Отправить</button>
+    </div>
 </div>
 
 
-<div class="container-fluid box footer">
-		<div class="row" style="padding: 0 24px 24px 24px;">
-			<div class=" col-sm-6"
-
-				style="min-height: 179px;height: 100%; display: flex; flex-direction: column;padding-top: 24px; " >
-				<div id="left-footer-row">
-					<div>
-						<p  id="thermopol">Thermopol</p>
-
-					</div>
-
-					<div class="logo">
-						<div id="univlob">
-							<img src="{% static 'img/lg/unloblog.svg' %}">
-						</div>
-						<div id="labacad">
-							<img src="{% static 'img/lg/ladaclog.svg' %}">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class=" col-sm-6 " style="min-height: 179px; gap: 24px; padding-top: 24px;">
-				<div class="info-ab-pr">
-					<p>Химический Факультет ННГУ им. Н. И. Лобачевского</p>
-					<p><strong>Адрес:</strong></p>
-					<p>603950, г. Нижний Новгород,<br>пр. Гагарина, 23, корп. 5</p>
-					<p>Проект реализован Университетом Лобачевского совместно с IT-академией Lad в рамках проекта
-						"Цифровые кафедры"</p>
-				</div>
-			</div>
-		</div>
-	</div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<link rel="stylesheet" href="{% static 'mycss/main.css' %}">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
-	<script src="{% static 'myscr/index.js' %}"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
