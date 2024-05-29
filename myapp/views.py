@@ -31,6 +31,7 @@ def append(request):
     return render(request, "append.html", context)
 
 class SourceView(APIView):
+    authentication_classes = []
 
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
