@@ -23,6 +23,8 @@ from drf_yasg.generators import OpenAPISchemaGenerator
 from django.conf import settings
 from django.conf.urls.static import static
 
+from myapp.views import SourceView
+
 schema_view = get_schema_view(
     openapi.Info(
         title=" API Thermopol",
@@ -37,6 +39,7 @@ urlpatterns = [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
+    path('api/append/', SourceView.as_view(), name='append'),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),

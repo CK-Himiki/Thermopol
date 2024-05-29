@@ -709,9 +709,63 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
         <script>
 
         </script>
-        <button class="btn btn-primary" id="submitButton">Отправить</button>
+        <button class="btn btn-primary" id="sendDataButton">Отправить</button>
     </div>
 </div>
+<script>
+
+      // Пример данных
+      window.phaseTransitionsList = [];
+      window.propertiesList = [];
+      window.literatureList = [
+          { description: "Example 1", url: "http://example1.com", doi: "10.1000/example1" },
+          { description: "Example 2", url: "http://example2.com", doi: "10.1000/example2" },
+          // ... другие записи
+      ];
+
+      const url = window.location.origin + '/api/append/';
+
+      document.getElementById('sendDataButton').addEventListener('click', function() {
+          sendOneRecordToServer();
+      });
+
+      function sendOneRecordToServer() {
+          if (window.literatureList.length === 0) {
+              alert('Список литературы пуст!');
+              return;
+          }
+
+          // Отправляем только одну запись (первую)
+          const data = {
+              literatureList: [window.literatureList[0]]
+          };
+
+          fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          })
+          .then(response => {
+              return response.text().then(text => {
+                  console.log('Response Text:', text);  // выводим текст ответа в консоль
+                  try {
+                      const jsonData = JSON.parse(text);
+                      console.log('Success:', jsonData);
+                      alert('Одна запись успешно отправлена на сервер');
+                  } catch (error) {
+                      console.error('Error parsing JSON:', error);
+                      alert('Ошибка при разборе ответа сервера');
+                  }
+              });
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              alert('Ошибка при отправке данных на сервер');
+          });
+      }
+  </script>
 
 
 {% endblock %}
