@@ -721,63 +721,81 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
         <script>
 
         </script>
-        <button class="btn btn-primary" id="sendDataButton">Отправить</button>
+        <button class="btn btn-primary" id="sendDataButton" onclick="sendData()">Отправить</button>
     </div>
 </div>
 <script>
+  async function sendData() {
+    // Инициализация переменных для тестов
+    const substanceClass = "class_value"; // Замените на тестовое значение
+    const substanceType = "type_value"; // Замените на тестовое значение
+    const name = "name_value"; // Замените на тестовое значение
+    const formula = "formula_value"; // Замените на тестовое значение
+    const source = "source_value"; // Замените на тестовое значение
 
-      // Пример данных
-      window.phaseTransitionsList = [];
-      window.propertiesList = [];
-      window.literatureList = [
-          { description: "Example 1", url: "http://example1.com", doi: "10.1000/example1" },
-          { description: "Example 2", url: "http://example2.com", doi: "10.1000/example2" },
-          // ... другие записи
-      ];
+    const literatureList = [
+      { description: "description1", url: "http://example1.com", doi: "123" },
+      { description: "description2", url: "http://example1.com", doi: "123456789" },
+    ]; // Пример тестовых данных для literatureList
 
-      const url = window.location.origin + '/api/append/';
+    const AggregateStateList = [
 
-      document.getElementById('sendDataButton').addEventListener('click', function() {
-          sendOneRecordToServer();
+    ];
+
+    const phaseTransitionsList = [
+
+    ];
+
+    const data = {
+      substance_class: substanceClass,
+      substance_type: substanceType,
+      name: name,
+      formula: formula,
+      source: source,
+      literature: literatureList,
+      AggregateState: AggregateStateList,
+      phase_transitions: phaseTransitionsList,
+    };
+
+    console.log("Data to be sent:", JSON.stringify(data)); // Логирование данных
+
+    try {
+      const response = await fetch("/api/append/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify(data),
       });
 
-      function sendOneRecordToServer() {
-          if (window.literatureList.length === 0) {
-              alert('Список литературы пуст!');
-              return;
-          }
-
-          // Отправляем только одну запись (первую)
-          const data = {
-              literatureList: [window.literatureList[0]]
-          };
-
-          fetch(url, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          })
-          .then(response => {
-              return response.text().then(text => {
-                  console.log('Response Text:', text);  // выводим текст ответа в консоль
-                  try {
-                      const jsonData = JSON.parse(text);
-                      console.log('Success:', jsonData);
-                      alert('Одна запись успешно отправлена на сервер');
-                  } catch (error) {
-                      console.error('Error parsing JSON:', error);
-                      alert('Ошибка при разборе ответа сервера');
-                  }
-              });
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-              alert('Ошибка при отправке данных на сервер');
-          });
+      if (response.ok) {
+        alert("Данные успешно отправлены");
+      } else {
+        const errorData = await response.json();
+        console.error("Ошибка при отправке данных:", errorData);
+        alert("Ошибка при отправке данных");
       }
-  </script>
+    } catch (error) {
+      console.error("Ошибка:", error);
+      alert("Ошибка при отправке данных");
+    }
+  }
 
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+</script>
 
 {% endblock %}
