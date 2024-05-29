@@ -17,7 +17,7 @@
     <tbody>
     {% cache 600 subs_table %}
     {% for substance in substances %}
-    <tr class="fs-4">
+    <tr class="fs-2">
         <td>{{ substance.substance_type }}</td>
         <td><a href="/edit/{{substance.pk}}">{{ substance.formula }}</a></td>
         <td><a href="/edit/{{substance.pk}}">{{ substance.name }}</a></td>
