@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %} Добавить новое соединение {% endblock %}
-{% csrf_token %}
 {% load static %}
 {% block content %}
 
@@ -10,9 +9,10 @@
     <div class="row">
         <div class="col-md-6">
 
-            <div class="form-group">
-                <label for="substance_class">Класс соединения:</label>
+            <div class="form-group form-outline" data-mdb-input-init>
+
                 <input class="form-control" list="substance_class" placeholder="Введите класс соединения...">
+                <label class="form-label" for="substance_class">Класс соединения:</label>
                 <datalist id="substance_class">
                     {% for class in classes %}
                     <option value="{{ class.name }}">{{ class.name }}</option>
@@ -20,8 +20,8 @@
                 </datalist>
             </div>
 
-            <div class="form-group">
-                <label for="substance_type">Тип соединения:</label>
+            <div class="form-group" >
+
                 <select id="substance_type" name="substance_type">
                     {% for type in types %}
                     <option value="{{ type }}">{{ type }}</option>
@@ -30,33 +30,43 @@
 
             </div>
 
-            <div class="form-group">
-                <label for="name">Название:</label>
+            <div class="form-group form-outline" data-mdb-input-init>
+
                 <input type="text" id="name" name="name" class="form-control">
+                <label class="form-label" for="name">Название:</label>
             </div>
 
-            <div class="form-group">
-                <label for="formula">Формула:</label>
+
+            <div class="form-group form-outline" data-mdb-input-init>
+
                 <input type="text" id="formula" name="formula" class="form-control">
+                <label class="form-label" for="formula">Формула:</label>
             </div>
 
-            <div class="form-group">
-                <label for="source">Источник:</label>
+            <div class="form-group form-outline" data-mdb-input-init>
+
                 <input type="text" id="source" name="source" class="form-control">
+                <label class="form-label" for="source">Источник:</label>
             </div>
 
-            <div class="form-group">
-                <label for="cas">CAS:</label>
+            <div class="form-group form-outline" data-mdb-input-init>
+
                 <input type="text" id="cas" name="cas" class="form-control">
+                <label class="form-label" for="cas">CAS:</label>
             </div>
 
             <div class="form-group">
                 <div class="row">
+                    <label for="literatura">Литература:</label>
+                </div>
+                <div class="row">
                     <div class="col">
-                        <label for="literatura">Литература:</label>
+
                         <select id="literatura" name="literatura" multiple class="form-select">
 
                         </select>
+
+
 
 
                     </div>
@@ -66,11 +76,14 @@
                             <input type="text" id="description" placeholder="Описание" class="form-control">
                             <input type="text" id="url" placeholder="URL" class="form-control">
                             <input type="text" id="doi" placeholder="DOI" class="form-control">
+
                         </div>
+
                     </div>
                 </div>
                 <div class="row">
                     <button class="add-button btn btn-primary" onclick="addSource()">Добавить источник</button>
+
                 </div>
                 <script>
     let propertiesList = [];
@@ -278,7 +291,6 @@ propertiesListbox.addEventListener('dblclick', () => {
 
 
 
-
                 </script>
                 <div class="form-group">
                     <label for="phase-transitions">Фазовые переходы:</label>
@@ -315,6 +327,7 @@ propertiesListbox.addEventListener('dblclick', () => {
                     </div>
                 </div>
             </div>
+
 
 
             <script>
@@ -370,7 +383,6 @@ propertiesListbox.addEventListener('dblclick', () => {
     displayStateData();
 
 
-
             </script>
 
 
@@ -382,7 +394,7 @@ propertiesListbox.addEventListener('dblclick', () => {
 
                 </select>
 
-                <button class="add-button btn btn-primary" onclick="addProperty()">Добавить свойство</button>
+
 
                 <div class="property-fields">
                     <input type="text" id="state" placeholder="State" class="form-control">
@@ -424,6 +436,7 @@ propertiesListbox.addEventListener('dblclick', () => {
                     <input type="text" id="ST" placeholder="ST (ArrayField)" class="form-control">
                     <input type="text" id="GT" placeholder="GT (ArrayField)" class="form-control">
                 </div>
+                <button class="add-button btn btn-primary" onclick="addProperty()">Добавить свойство</button>
             </div>
         </div>
 
@@ -512,7 +525,6 @@ propertiesListbox.addEventListener('dblclick', () => {
       }
     });
     addRow();
-
 
         </script>
 
@@ -695,7 +707,6 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
     tbody.appendChild(tr);
   }
 }
-
 
 
         </script>
