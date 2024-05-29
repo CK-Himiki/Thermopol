@@ -30,6 +30,20 @@ def append(request):
     }
     return render(request, "append.html", context)
 
+def stream(request):
+    context={
+        "substances": Substance.objects.all(),
+    }
+    return render(request, "stream.html", context)
+
+
+def edit(request,pkey):
+    context = {
+        "substance": Substance.objects.get(id=pkey),
+    }
+    return render(request, "edit.html", context)
+
+
 class SourceView(APIView):
     authentication_classes = []
 

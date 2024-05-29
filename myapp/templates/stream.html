@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %} Thermopol {% endblock %}
+{% load static %}
+{% load cache %}
+
+{% block content %}
+<div class="box onl-text-pg container">
+<table id="search_table" class="table table-striped-columns table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Тип</th>
+      <th scope="col">Брутто-формула</th>
+      <th scope="col">Название</th>
+      <th scope="col">Класс</th>
+    </tr>
+  </thead>
+    <tbody>
+    {% cache 600 subs_table %}
+    {% for substance in substances %}
+    <tr class="fs-4">
+        <td>{{ substance.substance_type }}</td>
+        <td><a href="/edit/{{substance.pk}}">{{ substance.formula }}</a></td>
+        <td><a href="/edit/{{substance.pk}}">{{ substance.name }}</a></td>
+        <td>{{ substance.substance_class  }}</td>
+    </tr>
+    {% endfor %}
+    {% endcache %}
+    </tbody>
+</table>
+
+
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script
+  type="text/javascript"
+  src="https://cdn.datatables.net/2.0.8/js/dataTables.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"
+></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+<script typt="text/javascript">
+    new DataTable('#search_table', {
+    pagingType: 'simple_numbers'
+});
+</script>
+{% endblock %}
