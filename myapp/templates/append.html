@@ -303,12 +303,22 @@ propertiesListbox.addEventListener('dblclick', () => {
                     </button>
 
                     <div class="phase-transition-fields">
-                        <input type="text" id="source_phase" placeholder="Исходная фаза" class="form-control">
-                        <input type="text" id="target_phase" placeholder="Конечная фаза" class="form-control">
-                        <input type="number" id="source_phase_number" placeholder="Номер исходной фазы"
-                               class="form-control">
-                        <input type="number" id="target_phase_number" placeholder="Номер конечной фазы"
-                               class="form-control">
+                        <select id="source_phase" >
+                        {% for phase in phases %}
+                    <option value="{{ phase }}">{{ phase }}</option>
+                            {% endfor %}</select>
+                        <select id="target_phase" >
+                            {% for phase in phases %}
+                    <option value="{{ phase }}">{{ phase }}</option>
+                            {% endfor %}</select>
+                        <select id="source_phase_number">
+                        {% for number in phase_numbers %}
+                    <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}</select>
+                        <select id="target_phase_number" >
+                            {% for number in phase_numbers %}
+                    <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}</select>
                         <input type="number" id="temperature" placeholder="Температура" class="form-control">
                         <input type="number" id="temperature_err" placeholder="Ошибка температуры" class="form-control">
                         <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода"
@@ -398,9 +408,16 @@ propertiesListbox.addEventListener('dblclick', () => {
 
 
                 <div class="property-fields">
-                    <input type="text" id="state" placeholder="State" class="form-control">
-                    <input type="text" id="agregate_state" placeholder="Aggregate State" class="form-control">
-                    <input type="number" id="number_phase" placeholder="Number Phase" class="form-control">
+
+                    <select id="agregate_state" >
+                    {% for phase in phases %}
+                    <option value="{{ phase }}">{{ phase }}</option>
+                    {% endfor %}
+                    </select>
+                    <select id="number_phase" >
+                    {% for number in phase_numbers %}
+                    <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}</select>
                     <input type="number" id="degree_of_crystallinity" placeholder="Degree of Crystallinity"
                            class="form-control">
                     <input type="number" id="enthalpy_of_combustion" placeholder="Enthalpy of Combustion"

@@ -40,11 +40,23 @@
             </div>
         </div>
         <div class="collapse multi-collapse navbar-collapse " id="nvb-menu">
-            <ul class="nav navbar-nav" style="color: black!important;">
-                <li><a href="/admin">Панель администратора</a></li>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                
+
 
             </ul>
+
+
+
         </div>
+        <div class="col-md-3 text-end">
+            {% if user.is_authenticated %}
+                 {{ user.username }}
+                    <a class="btn btn-primary" href="/logout">Выйти</a>
+            {% else %}
+        <a href="/login" class="btn btn-primary">Войти</a>
+             {% endif %}
+      </div>
     </div>
 </nav>
 <!--navbar end-->
