@@ -21,12 +21,12 @@
 	<!--navbar-->
 	<nav class="navbar navbar-expand-lg navbar-default box nav " style="height: auto; border-radius: 180px;"
 		id="navbar">
-		<div class="container-fluid" style="margin:0; padding: 0;">
-			<div class="navbar-header">
+		<div class="container-fluid row" style="margin:0; padding: 0;">
+			<div class="navbar-header ">
 				<div id="therm-chem-cont">
 					<div style="display: flex; justify-items: flex-start;align-items: center;">
 						<p class="therm-chem-cont-item" id="thermopol">Thermopol</p>
-						<div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center;">
+						<div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center; margin-top: 1em;">
 							<img src="{% static 'img/lg/chemlog.png' %}" style="transform: scaleY(1.2);">
 						</div>
 					</div>
@@ -68,18 +68,18 @@
 	<!-- content-->
 	<!--page 1-->
 	<div class="content-row" style="height:max-content;">
-		<div class="box left-cont-row-col">
-			<p><strong>
-					Революционизируйте свои физикохимические исследования с помощью
+		<div class="box bottom-cont-row-col">
+			<h2 style="font-weight: 700; font-family: 'Nexa Demo B';">
+				Реализуйте свои физикохимические исследования с помощью
 					веб-приложения
 					от химического факультета Университета Лобачевского.
-				</strong>
+			</h2>
 
-			<div id="formul">
-				<img src="{% static 'img/lg/form.svg' %}">
+			<div id="formul"style="width: 90%; margin: 1.5em;">
+				<img src="{% static 'img/lg/form.svg' %}"style="width: 100%;">
 			</div>
-			</p>
-			<button class="go-to-app" id="cont-go-to-app" onclick="window.location.href='append'">
+			<button class="go-to-app" id="cont-go-to-app">
+
 				<p>
 					Перейти к <br> приложению
 				</p>
@@ -101,29 +101,30 @@
 		</div>
 		<br>
 		<div>
-			<strong>
-				<p>Представляем нашу <bluetext></bluetext>передовую химическую базу данных</bluetext>,<br> оснащённую
-					мощным инструментом вычисления термодинамических функций.</p>
-			</strong>
-			<br>
+			<h3>
+				<strong>Представляем нашу <bluetext>передовую химическую базу данных</bluetext>,<br> оснащённую
+					мощным инструментом вычисления термодинамических функций.
+				</strong>
+			</h3>
+			
 			<div class="text-cont">
-				<div>
+				<h4>
 					Наше приложение — бесценный инструмент для учёных, исследователей и студентов, стремящихся расширить
 					свои знания с помощью современных технологий.
 					<br>
 					<br>
-				</div>
-				<div>
+				</h4>
+				<h4 >
 					База данных содержит всеобъемлющую информацию о химических веществах, впервые полученных
 					и исследованных в Университете Лобачевского, о их свойствах, фазовых переходах, предоставляя
 					вам доступ к знаниям, необходимых для ваших научных исследований.
 					<br>
-				</div>
+				</h4>
 			</div>
 			<br><br>
 			
 		</div>	
-		<button class="go-to-app"  onclick="window.location.href='append'">
+		<button class="go-to-app"  >
 			<p>
 				Перейти к <br> приложению
 			</p>
@@ -135,11 +136,11 @@
 	<!-- end page 2-->
 
 	<!--page 3-->
-
-	<div class="content-row" style="height:max-content;" id="page3">
+	<div id="page3" style="width: 100%; display: flex; flex-direction: column; gap:30px;">
+	<div class="content-row" style="height:max-content; align-items: stretch" >
 		<div class="box img-box" style="background-image: url(&#39;{% static 'img/1440/1440_3.jpg' %}&#39;);background-size: cover;align-items: flex-start;
         justify-content: flex-start;">
-			<div style="position: absolute;width:auto">
+			<div style="position: flex;;width:auto; flex-direction: top;">
 				<div class="textboxes" style="margin-left:0!important;margin-top:0!important;">
 					<div class="box blackonwhite" style="width:max-content;">
 						<h4>Особенности </h4>
@@ -149,39 +150,57 @@
 					</div>
 
 				</div>
-				<h1 style="color:white;width:60%">Почему наше приложение?</h1>
+				<div style="display: flex;; ;width:100%;">
+					<h1 style="color:white;">Почему наше приложение?</h1>
+				</div>
 			</div>
 		
 				
 
 		</div>
-		<div class="box mobile-antiv" style="background-color:transparent;padding:0">
-				<div class="column"style="display:flex;flex-direction:column;gap:16px">
-					<div class="content-row"style="gap:16px">
-						<div class="item box mobile-antiv"style="display: flex;flex-direction:column!important;" id="item1">
-							<p class="bold-large">Информация</p>
-							<p class="regular">При использовании нашего продукта вы получите доступ к базе данных
+		<div class="box mobile-antiv" style="background-color:transparent;padding: 0!important;height: 100%; ">
+			<div style="display: flex;flex-direction: column; height: 100%;gap:16px;;">
+					<div class="content-row"style="gap:16px; min-height:50%">
+						<div class="item box"style="display: flex;flex-direction:column!important;" id="item1">
+							<h4>Информация</h4>
+							<p><small>
+								При использовании нашего продукта вы получите доступ к базе данных
 								химических веществ, включая их физические и физикохимические свойства, а также
-								к их вычислениям.</p>
+								к их вычислениям.
+								</small>
+							</p>
 						</div>
-						<div class="item box mobile-antiv"style="display: flex;flex-direction:column!important;" id="item2">
-							<p class="bold-large">Свойства</p>
-							<p class="regular">При помощи нашего встроенного инструмента вычисления вам откроется
+						<div class="item box"style="display: flex;flex-direction:column!important;" id="item2">
+							<h4>Свойства</h4>
+							
+							<p>
+								<small>
+								При помощи нашего встроенного инструмента вычисления вам откроется
 								возможность быстро и легко вычислять энтальпию, энтропию и функцию Гиббса фазовых
 								переходов, а также сохранять эти данные, которые будут доступны другим пользователям
-								с любого устройства.</p>
+								с любого устройства.
+							</small>
+							</p>
 						</div>
 					</div>
-					<div class="content-row"style="gap:16px">
-						<div class="item box mobile-antiv"style="display: flex;flex-direction:column!important;" id="item3">
-							<p class="bold-large">Мощный поиск</p>
-							<p class="regular">Найдите необходимую информацию быстро и легко с помощью нашего интуитивно
-								понятного механизма поиска по нескольким критериям.</p>
+					<div class="content-row"style="gap:16px; min-height:50%;">
+						<div class="item box  img-box"style="display: flex;flex-direction:column!important;" id="item3">
+							<h4>Мощный поиск</h4>
+							<p  style="margin-bottom: auto;height: 100%;">
+								<small>
+								Найдите необходимую информацию быстро и легко с помощью нашего интуитивно
+								понятного механизма поиска по нескольким критериям.
+							</small>
+							</p>
 						</div>
-						<div class="item box mobile-antiv"style="display: flex;flex-direction:column!important;" id="item4">
-							<p class="bold-large">Удобный интерфейс</p>
-							<p class="regular">Наша платформа разработана с учетом удобства использования, обеспечивая
-								простой и интуитивно понятный интерфейс для работы.</p>
+						<div class="item box"style="display: flex;flex-direction:column!important;" id="item4">
+							<h4>Удобный интерфейс</h4>
+							<p>
+								<small>
+								Наша платформа разработана с учетом удобства использования, обеспечивая
+								простой и интуитивно понятный интерфейс для работы.
+							</small>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -197,24 +216,24 @@
 	<div class="mob-ver-scroll mobile-v">
 		<div class="scrollingBlock" scrl="#peculiarities-ellipse-cont">
 			<div class="item" id="info-scr-bl">
-				<h5>Информация</h5>
+				<h4>Информация</h4>
 				<p>При использовании нашего продукта вы получите доступ к базе данных химических веществ, включая
 					их физические и физикохимические свойства, а также к их вычислениям.</p>
 			</div>
 			<div class="item" id="properties-scr-bl">
-				<h5>Свойства</h5>
+				<h4>Свойства</h4>
 				<p>При помощи нашего встроенного инструмента вычисления вам откроется возможность быстро и легко
 					вычислять энтальпию, энтропию и функцию Гиббса фазовых переходов, а также сохранять эти данные,
 					которые будут доступны другим пользователям с любого устройства.</p>
 			</div>
 			<div class="item" id="search-scr-bl">
-				<h5>Информация</h5>
+				<h4>Информация</h4>
 				<p>При помощи нашего встроенного инструмента вычисления вам откроется возможность быстро и легко
 					вычислять энтальпию, энтропию и функцию Гиббса фазовых переходов, а также сохранять эти данные,
 					которые будут доступны другим пользователям с любого устройства.</p>
 			</div>
 			<div class="item" id="comf-scr-bl">
-				<h5>Мощный поиск</h5>
+				<h4>Мощный поиск</h4>
 				<p>Найдите необходимую информацию быстро и легко с помощью нашего интуитивно понятного механизма поиска
 					по нескольким критериям.</p>
 			</div>
@@ -226,24 +245,102 @@
 			<a class="ellipse index-link" href="#comf-scr-bl"></a>
 		</div>
 	</div>
+</div>
 	<!--end modile vers page 3-->
+<!--page 4-->
+<div class="textboxes">
+	<div class="box blackonwhite">
+		<h4>Преимущества </h4>
+	</div>
+	<div class="box whiteongray">
+		<h4> 02 </h4>
+	</div>
+</div>
+<div class="accordion" id="page4">
+	<div class="accordion-item box">
+		<p class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+				<p style="font-weight: 700;">Сокращённое время исследований</p>
+			</button>
+			<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#page4">
+				<div class="accordion-body">
+					<p>
+						<small>
+						При использовании нашего продукта вы получите доступ к базе данных химических
+						веществ, включая их физические и физикохимические свойства, а также к их вычислениям.
+						</small>
+					</p>
+				</div>
+			</div>
+		</p>
+	
+	</div>
+	<div class="accordion-item box ">
+		<p class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				<p style="font-weight: 700;"> Улучшенное понимание</p>
+			</button>
+		</p>
+		<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#page4">
+			<div class="accordion-body">
+				<p> <small>Раскройте взаимосвязи между строением химических соединений и их свойствами,
+					расширяя ваше понимание химии и выявляя новые закономерности.
+					</small>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-item box">
+		<p class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				<p style="font-weight: 700;"> Повышение производительности</p>
+			</button>
+		</p>
+		<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#page4">
+			<div class="accordion-body">
+				<p>
+					<small>Оптимизируйте свои рабочие процессы и повышайте производительность с помощью
+					мощных инструментов поиска и обработки.
+				</small> </p>
+			</div>
+		</div>
+	</div>
+	<div class="accordion-item box">
+		<p class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+				data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+				<p style="font-weight: 700;"> Инновационные открытия</p>
+			</button>
+		</p>
+		<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#page4">
+			<div class="accordion-body">
+				<p> <small>Наше приложение вдохновляет на новые идеи и открывает возможности для
+					революционных открытий в области химии.
+				</small> </p>
+			</div>
+		</div>
+	</div>
+</div>
 
-	<!--page 4-->
-
-	<!--end page 4-->
+<!--end page 4-->
 
 	<!--page 5-->
 	<div class="box onl-text-pg" id="page5" style="background-image: url(&#39;{% static 'img/1440/1440_4.jpg' %}&#39;); color: white;">
-		<div>
-			<strong><p>
+		<div style="max-width: 1205px">
+			<h3>
+				<strong style="font-family: 'Nexa Demo';">
 				Присоединяйтесь к <bluetext>Thermopol</bluetext> и группе исследователей, которые используют нашу химическую базу для расширения своих знаний, хранения информации, а также для вычислений.
 				<br>
 				<br>
 				Переходите на нашу платформу и откройте для себя бесценный ресурс, который преобразит ваши химические исследования
-			</p></strong>
+				</strong>
+			</h3>
 			<br>
 		</div>	
-		<button class="go-to-app" onclick="window.location.href='append'">
+		<button class="go-to-app" >
 			<p>
 				Перейти к <br> приложению
 			</p>
@@ -255,7 +352,7 @@
 
 	<!--page 6-->
 	<div class="content-row" style="height:max-content;" >
-				<div class="box">
+				<div class="box" style="display: flex;flex-direction: column; gap: 30px;">
 					<div style="display: flex;flex-direction: row; gap: 30px; align-self: flex-start;"">
 						<div class="box blueonblue" style="align-self: center; width: fit-content;">
 						<h4>ПРЕИМУЩЕСТВА</h4>
@@ -264,40 +361,38 @@
 							<h4>03</h4>
 						</div>
 					</div>
-				<h1><strong>
+					<h1><strong>
 						Использование данного веб-приложения дает
 					</strong>
-					<div id="formul" style="margin-top: auto;">
-						<img src="{% static 'img/lg/form.svg' %}" style="width: 90%!important" >
+					<div id="formul" style="margin-top: auto;align-self: flex-end; height: 100%;">
+						<img src="{% static 'img/lg/form.svg' %}" style="width: 90%; max-height: 400px;margin-top: 1em;" >
 					</div>
 				</h1>
-				
-				</div>
 
 				<div class="box mobile-antiv" id="info-row-box" >
 					<div class="info-row box">
 						<p class="numder">1</p>
-						<p>Быстрый и удобный доступ к актуальной базе данных химических соединений, полученных и изученных в Университете Лобачевского, с их термодинамическими характеристиками.</p>
+						<small><p>Быстрый и удобный доступ к актуальной базе данных химических соединений, полученных и изученных в Университете Лобачевского, с их термодинамическими характеристиками.</p></small>
 					</div>
 					<div class="info-row box">
 						<p class="numder">2</p>
-						<p>Возможность добавления новых данных и редактирования информации с последующей проверкой.</p>
+						<small><p>Возможность добавления новых данных и редактирования информации с последующей проверкой.</p></small>
 					</div>
 					<div class="info-row  box">
 						<p class="numder">3</p>
-						<p>Удобный поиск и просмотр информации о химических веществах.</p>
+						<small><p>Удобный поиск и просмотр информации о химических веществах.</p></small>
 					</div>
 					<div class="info-row  box">
 						<p class="numder">4</p>
-						<p>Возможность использования приложения для научно-исследовательских и учебных целей.</p>
+						<small><p>Возможность использования приложения для научно-исследовательских и учебных целей.</p></small>
 					</div>
 					<div class="info-row  box">
 						<p class="numder">5</p>
-						<p>Полный контроль и безопасность данных.</p>
+						<small><p>Полный контроль и безопасность данных.</p></small>
 					</div>
 					<div class="info-row  box">
 						<p class="numder">6</p>
-						<p>Расширенные функции для расчета термодинамических свойств.</p>
+						<small><p>Расширенные функции для расчета термодинамических свойств.</p></small>
 					</div>
 			
 				</div>
@@ -305,33 +400,34 @@
 	
 	<!--end page 6-->
 
-	<!--mobile vers page 6-->
 	
+	<!--mobile vers page 6-->
+		
 	<div class="mob-ver-scroll mobile-v">
 		<div class="scrollingBlock" scrl="#advantages-ellipse-cont">
 			<div class="item" id="item1">
-				<h3>1</h3>
+				<h3 class="numder">1</h3>
 				<p>Быстрый и удобный доступ к актуальной базе данных химических соединений, полученных и изученных
 					в Университете Лобачевского, с их термодинамическими характеристиками.</p>
 			</div>
 			<div class="item" id="item2">
-				<h3>2</h3>
+				<h3 class="numder">2</h3>
 				<p>Возможность добавления новых данных и редактирования информации с последующей проверкой.</p>
 			</div>
 			<div class="item" id="item3">
-				<h3>3</h3>
+				<h3 class="numder">3</h3>
 				<p>Удобный поиск и просмотр информации о химических веществах.</p>
 			</div>
 			<div class="item" id="item4">
-				<h3>4</h3>
+				<h3 class="numder">4</h3>
 				<p>Возможность использования приложения для научно-исследовательских и учебных целей.</p>
 			</div>
 			<div class="item" id="item5">
-				<h3>5</h3>
+				<h3 class="numder">5</h3>
 				<p>Полный контроль и безопасность данных.</p>
 			</div>
 			<div class="item" id="item6">
-				<h3>6</h3>
+				<h3 class="numder">6</h3>
 				<p>Расширенные функции для расчета термодинамических свойств.</p>
 			</div>
 		</div>
@@ -344,124 +440,24 @@
 			<a class="ellipse index-link" href="#item6"> </a>
 		</div>
 	</div>
-
-
-	<!--page 4-->
-	<div class="textboxes">
-		<div class="box blackonwhite">
-			<h4>Преимущества </h4>
-		</div>
-		<div class="box whiteongray">
-			<h4> 02 </h4>
-		</div>
-	</div>
-	<div class="accordion" id="page4">
-		<div class="accordion-item box">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-					<p class="bold-large">Сокращённое время исследований</p>
-				</button>
-			</h2>
-			<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#page4">
-				<div class="accordion-body">
-					<p class="regular smtxt1"> При использовании нашего продукта вы получите доступ к базе данных химических
-						веществ, включая их физические и физикохимические свойства, а также к их вычислениям.</p>
-				</div>
-			</div>
-		</div>
-		<div class="accordion-item box ">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					<p class="bold-large"> Улучшенное понимание</p>
-				</button>
-			</h2>
-			<div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#page4">
-				<div class="accordion-body">
-					<p class="regular smtxt1">Раскройте взаимосвязи между строением химических соединений и их свойствами,
-						расширяя ваше понимание химии и выявляя новые закономерности. </p>
-				</div>
-			</div>
-		</div>
-		<div class="accordion-item box">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-					<p class="bold-large"> Повышение производительности</p>
-				</button>
-			</h2>
-			<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#page4">
-				<div class="accordion-body">
-					<p class="regular smtxt1">Оптимизируйте свои рабочие процессы и повышайте производительность с помощью
-						мощных инструментов поиска и обработки. </p>
-				</div>
-			</div>
-		</div>
-		<div class="accordion-item box">
-			<h2 class="accordion-header">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-					data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-					<p class="bold-large"> Инновационные открытия</p>
-				</button>
-			</h2>
-			<div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#page4">
-				<div class="accordion-body">
-					<p class="regular smtxt1">Наше приложение вдохновляет на новые идеи и открывает возможности для
-						революционных открытий в области химии. </p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!--end page 4-->
-
-	<!--page 5-->
-	<div class="box onl-text-pg" id="page5" style="background-image: url(&#39;{% static 'img/1440/1440_4.jpg' %}&#39;); color: white;">
-		<div>
-			<strong><p>
-				Присоединяйтесь к <bluetext>Thermopol</bluetext> и группе исследователей, которые используют нашу химическую базу для расширения своих знаний, хранения информации, а также для вычислений.
-				<br>
-				<br>
-				Переходите на нашу платформу и откройте для себя бесценный ресурс, который преобразит ваши химические исследования
-			</p></strong>
-			<br>
-		</div>	
-		<button class="go-to-app" onclick="window.location.href='append'">
-			<p>
-				Перейти к <br> приложению
-			</p>
-			<img class="ellipse" src="{% static 'img/icon/right.svg' %}" style="object-fit: contain; background-color: white;">
-		</button>
-	</div>
-	<!--end page 5-->
-
-	<!--page 6-->
-
-
-	<!--end page 6-->
-
-
 	<!--end mobile vers page 6-->
 
 	<!--page 7-->
 	<div class="content-row" style="height:max-content;" id="page7">
-		<div class="box img-box left-cont-row-col"
+		<div class="box img-box top-cont-row-col"
 			style="background-image: url(&#39;{% static 'img/1440/1440_6.jpg' %}&#39;);background-size: cover;"></div>
 
-		<div class="box right-cont-row-col" style="display: flex; flex-direction: column;align-items: center;">
-			<strong style="text-align: center; margin:1em;">
-				<p>
+		<div class="box bottom-cont-row-col" style="display: flex; flex-direction: column;align-items: center; justify-content: center;">
+			<div style="font-weight: 500; max-width: 562px; text-align: center;">
+				<h4>
 					Не упустите возможность использовать это удобное веб-приложение для работы с химическими данными!
-				</p>
+				</h4>
 				<br>
-				<p>
+				<h4>
 					Попробуйте прямо сейчас и оцените все его преимущества.
-
-				</p>
-			</strong>
-
-			<button class="go-to-app"  onclick="window.location.href='append'">
+				</h4>
+			</div>
+			<button class="go-to-app" >
 
 				<p>
 					Перейти к <br class="mobile-v"> приложению
@@ -485,29 +481,27 @@
 		<br>
 		<div>
 			<strong>
-				<p>Проект реализован студентами <bluetext>Цифровой кафедры<br></bluetext> университета им. Лобачевского:
-				</p>
+				<h3>Проект реализован студентами <bluetext>Цифровой кафедры<br></bluetext> университета им. Лобачевского:</h3>
 			</strong>
-			<br>
 			<div class="text-cont">
-				<div>
+				<p>
 					Седова Ольга<br>
 					Васенков Андрей <br>
-					Митюкова Юлия<br>
 					Куликов Александр<br>
-				</div>
-				<div>
+					Митюкова Юлия<br>
+				</p>
+				<p>
 					Кауркина Светлана<br>
 					Клейман Григорий<br>
 					Мамонова Екатерина<br>
 					Лебедева Ксения<br>
-				</div>
-				<div>
+				</p>
+				<p>
 					Маркин Захар<br>
 					Зудина Полина<br>
 					Страхов Андрей<br>
 					Владимирова Юлия<br>
-				</div>
+				</p>
 			</div>
 		</div>
 	</div>
