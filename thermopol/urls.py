@@ -46,4 +46,6 @@ urlpatterns = [
     path("append", views.append, name="append"),
     path("stream", views.stream, name="stream"),
     path("edit/<int:pkey>",views.edit,name="edit"),
+    path("login",views.login_view,name="login"),
+    path("logout",views.logout_view,name="logout"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

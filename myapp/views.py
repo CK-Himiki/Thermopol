@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 from django.http import HttpResponse
@@ -11,6 +12,10 @@ from .models import Substance
 from .serializers import SubstanceSerializer
 
 from django.http import JsonResponse
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout
+
 
 
 from .models import Source
@@ -66,3 +71,23 @@ class SourceView(APIView):
             except Exception as e:
 
                 return JsonResponse({'error': str(e)}, status=500)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect("append")
+            # Redirect to a success page or home page
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect("append")

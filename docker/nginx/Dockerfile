@@ -1,4 +1,4 @@
-FROM nginx:1.25.3-alpine
+FROM dh-mirror.gitverse.ru/nginx:1.25.3-alpine
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY django.conf /etc/nginx/conf.d/
