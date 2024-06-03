@@ -44,7 +44,10 @@ body {
 	top: 0px !important;
 	min-width: 100vw;
 }
-
+.advantages {
+	background-color:transparent;
+	padding: 0!important;
+}
 #thermopol {
 	font-family: "Nexa Demo";
 	width: auto;
@@ -132,7 +135,7 @@ go-to-app {
 	background-color: transparent !important;
 	text-align: center;
 	margin: 0;
-	margin-right: 1em !important;
+	margin-right: 2em;
 }
 
 #nvb-menu {
@@ -145,6 +148,7 @@ go-to-app {
 	color: black;
 	justify-content: flex-end;
 	margin-top: 10px;
+	top:90%;
 }
 
 
@@ -176,8 +180,9 @@ go-to-app {
 }
 
 .go-to-app {
+	margin-top: 1em;
 	background-color: var(--blue-bg-color);
-	padding: 12px 12px 16px 16px;
+	padding: 16px 12px 16px 24px;
 	height: 54px;
 	width: fit-content;
 	max-width: 100%;
@@ -191,6 +196,10 @@ go-to-app {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin: 0;
+	font-weight: 600!important;
+	font-size: 18px!important;
+	line-height: 21.13px;
 }
 
 .go-to-app:hover {
@@ -212,12 +221,15 @@ go-to-app {
 
 .go-to-app p {
 	margin: 0;
+	font-weight: 600!important;
+	font-size: 18px!important;
+	line-height: 21.13px;
 }
 
 .go-to-app .ellipse {
 	border-radius: 180px;
-	height: 30px;
-	width: 30px;
+	height: 170%;
+	width: auto;
 	background-color: white;
 	color: var(--blue-bg-color);
 	text-align: center;
@@ -355,7 +367,6 @@ h5 {
 	float: right;
 	flex-direction: row-reverse;
 	width: 100%;
-	overflow-x: hidden;
 }
 #formul img {
 
@@ -458,7 +469,10 @@ bluetext {
 .accordion-item {
 	margin-bottom: 1em;
 	padding-left: 2em;
+}
 
+.accordion-item p {
+	text-align: left!important;
 }
 
 .accordion-header {
@@ -599,13 +613,6 @@ h4 {
 
 }
 
-.numder {
-	color: var(--blue-bg-color);
-	font-size: 48px !important;
-	margin: 0 !important;
-	font-weight: 700;
-	font-family: "Nexa Demo B"!important;
-}
 .img-box:after {
 	content: "";
 	padding-top: 70%;
@@ -616,11 +623,54 @@ p {
 	margin-bottom: 0;
 }
 
+#barbarbar {
+	padding-left: 0;
+}
+#x {
+
+	text-align: auto;
+	padding-left: 0;
+}
+#x img{
+	max-height: 32px;
+}
+.nav-btn{
+	padding: 0;
+	object-fit: contain!important;
+}
+
+#left-footer-row{
+	margin-top: auto;
+}
+
+
+.numder {
+	color: var(--blue-bg-color);
+	margin: 0 !important;
+	font-weight: 700;
+	font-family: "Nexa Demo B"!important;
+	display: flex;
+	align-items: center;
+} 
+
+#left-footer-col{
+	min-height: 179px;
+	display: flex;
+	flex-direction: column;
+	padding-top: 24px;
+	height: auto;
+	display: flex;
+}
 /*media*/
 
 @media all and (min-width:1440px) {
-
-
+	.advantages{
+	background-color:transparent;
+	padding: 0!important;
+	}
+	.numder {
+		font-size: 48px!important;
+	} 
 	#nav-go-to-app {
 		display: flex;
 	}
@@ -667,8 +717,6 @@ p {
 		line-height: normal;
 	}
 
-
-
 	.regular {
 		font-family: "Raleway";
 		font-size: 16px !important;
@@ -677,20 +725,42 @@ p {
 	}
 
 	.go-to-app {
-		font-size: 20px;
-		height: auto;
+		background-color: var(--blue-bg-color);
+		padding: 16px 12px 16px 24px;
+		height: 54px;
+		width: fit-content;
+		max-width: 100%;
+		gap: 24px;
+		border-radius: 180px;
+		border-width: 0;
+		color: white;
+		white-space: nowrap;
+		justify-content: flex-end;
+		transition: all 1s;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 	}
 
-	.go-to-app ing {
+	.go-to-app img {
 		height: 100%;
 	}
 
-
+ 
 }
 
 
 
 @media (max-width:1440px) and (min-width:768px) {
+
+	.advantages{
+		background-color:transparent;
+	padding: 0!important;
+		height: 100%; 
+	}
+	.numder {
+		font-size: 48px!important;
+	} 
 
 	.box p{
 		background-color: transparent;
@@ -705,13 +775,14 @@ p {
 		font-size: calc( 12px + 10 * ( 100vw / 1450 ) );
 		line-height: 20px;
 	}
+	
 	h1{
 		font-size: calc( 24px + 32 * ( 100vw / 1450 ) );
 		line-height: 48px;
 	}
 	h2{
 		font-size: calc( 20px + 16 * ( 100vw / 1450 ) );
-		line-height: 32px;
+		line-height: 36px;
 	}
 	
 	h3{
@@ -720,10 +791,9 @@ p {
 	}
 	h4{
 		font-size: calc( 12px + 12 * ( 100vw / 1450 ) );
-		line-height: 24px;
+		line-height: 30px;
 	}
 
-	
 	#page3 .img-box::after{
 		content: "";
 		padding-top: 0%;
@@ -777,7 +847,22 @@ p {
 		font-size: 30px;
 	}
 
+	.go-to-app {
+		padding: 8px, 16px, 8px, 24px;
+		
+	}
+	.go-to-app p {
+		margin: 0;
+		font-weight: 600!important;
+		font-size: 16px!important;
+		line-height: 18.78px!important;
+	}
+	
 	@media (max-width:950px) {
+		/* .go-to-app .ellipse{
+			width: 24px;
+			height: 24px;
+		} */
 	
 		.nav>li>a {
 			margin-top: 1em;
@@ -800,6 +885,9 @@ p {
 	}
 
 	@media (max-width:900px) {
+		.go-to-app {
+			font-size: 20px!important;
+		}
 		#thermopol {
 			font-size: 30px;
 			line-height: 2;
@@ -811,6 +899,7 @@ p {
 
 		.info-row p{
 			font-size: 15px;
+			line-height: normal;
 		}
 	}
 
@@ -818,19 +907,30 @@ p {
 		#page2 .text-cont div {
 			font-size: 25px;
 		}
-
+		
 		#chemlog {
 			display: none !important;
 		}
+		.go-to-app p {
+			font-size: 16px!important;
+		}
 	}
 
-	.go-to-app {
-		padding: 0.5em 0.5em 0.5em 0.5em;
-	}
+	
 }
 
 
 @media (min-width:320px) and (max-width:768px) {
+
+	.advantages{
+		background-color:transparent;
+	padding: 0!important;
+		height: 100%; 
+	}
+	
+	.numder {
+		font-size: 20px!important;
+	} 
 
 	#page5 {
 		padding: 8px;
@@ -860,9 +960,6 @@ p {
 		line-height: 22px;
 	}
 
-	
-
-
 	#go-up img {
 		height: 32px !important;
 	}
@@ -873,6 +970,7 @@ p {
 		z-index: 100;
 		min-width: auto;
 		max-width: 367px;
+	
 	}
 
 	.overlay {
@@ -891,10 +989,7 @@ p {
 
 	}
 
-	.go-to-app {
-		line-height: 1;
-		font-size: 10px;
-	}
+	
 
 	#thermopol {
 		font-size: 28px;
@@ -903,14 +998,14 @@ p {
 	}
 
 	.bottom-cont-row-col {
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
+		border-top-left-radius: 0!important;
+		border-top-right-radius: 0!important;
 		order: 2;
 	}
 
 	.top-cont-row-col {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0!important;
+		border-bottom-right-radius: 0!important;
 		order: 1;
 	}
 
@@ -936,6 +1031,25 @@ p {
 	.mobile-antiv {
 		display: none !important;
 	}
+
+	.number p{
+		font-size: 24px;
+	}
+
+	.scrollingBlock .item{
+		padding: 16px 16px 24px 16px;
+		min-width: 230px;
+		gap:8px;
+	}
+	
+	.footer .row{
+		flex-direction: column;
+	}
+	#page8 .text-cont{
+		gap:8px;
+		line-height: 16px;
+	}
+
 	@media (max-width:500px) {
 		.box {
 			padding: 12px;
@@ -947,11 +1061,7 @@ p {
 		}
 
 		#formul img {
-			width: 100%;;
-		}
-
-		#chemlog img {
-			width: 80%;
+			width: 100%;
 		}
 
 		#page2 .text-cont div {
@@ -959,8 +1069,8 @@ p {
 		}
 
 		small{
-			font-size: calc( 8px + 2 * ( 100vw / 500 ) );
-			line-height: 12px;
+			font-size: calc( 10px + 2 * ( 100vw / 500 ) );
+			line-height: calc( 12 * ( 100vw / 500 ) );
 		}
 		p{
 			font-size: calc( 12px + 4 * ( 100vw / 500 ) );
@@ -988,6 +1098,7 @@ p {
 		}
 		.box p{
 			font-size: calc( 12px + 4 * ( 100vw / 500 ) );
+			line-height: normal;
 			margin-bottom: 0;
 		}
 		.text-cont{
@@ -1010,11 +1121,16 @@ p {
 		.text-cont h4{
 			width: 100%;
 		}
-	
+		#formul img {
+			width: 70%;
+		}
+		
 	}
 
 	@media (max-width:450px) {
-
+		.go-to-app p {
+			font-size: 16px!important;
+		}
 		#page2 .text-cont div {
 			font-size: 15px;
 		}
@@ -1029,16 +1145,11 @@ p {
 			line-height: 2;
 		}
 
-		#chemlog img {
-			height: 100%;
-			width: 80%;
-		}
-
 		.nav-btn {
 
 			width: 30px;
 			padding-left: 0;
-
+			margin-right: 2em;
 		}
 
 		.nav-btn-el {
@@ -1046,17 +1157,19 @@ p {
 			width: 30px;
 		}
 
-		#univlog img {
-			max-width: 80px;
-		}
-
 		#ladacad img {
 			max-width: 50px;
 		}
 
 		.logo {
-			flex-direction: column;
 			margin-bottom: 100px;
+			margin-bottom: 1em;
+		}
+		#univlob img{
+			width: calc(112px + 68*(100vw/768));
+		}
+		#labacad img{
+			width: calc(45px + 30*(100vw/768));
 		}
 
 		#x {
@@ -1086,7 +1199,17 @@ p {
 			width: 100%;
 		}
 	
-	
+		#chemlog{
+			width: 70%;
+			object-fit: cover;
+			margin-top: 0;
+		}
+		#chemlog img{
+			margin-top: 0;
+			width: auto;
+		}
+		
+
 
 		.box {
 			border-radius: 16px;
@@ -1094,6 +1217,11 @@ p {
 	
 		.content-row .box {
 			padding: 12px;
+		}
+
+		#left-footer-col{
+			min-height: auto;
+			padding-top: 0;
 		}
 
 	}
@@ -1108,18 +1236,69 @@ p {
 			padding-left: 20px;
 			padding-right: 20px;
 		}
-	}
+		.go-to-app p {
+			font-size: 14px!important;
+		}
 
+		#left-footer-col{
+			min-height: auto;
+			padding-top: 0;
+		}
+	}
+	
 }
 @media (max-width:320px) {
+	.go-to-app {
+		height:38px;
+		padding: 8px, 16px, 8px, 24px;
+		gap: 4px;
+	}
+	.go-to-app .ellipse{
+		width: 22px;
+		height: 22px;
+	} 
+	
+	.advantages{
+		background-color:transparent;
+	padding: 0!important;
+		height: 100%; 
+	}
 
+	
+	.numder {
+		font-size: 20px!important;
+	} 
+
+	#page8 .text-cont{
+		display: flex;
+		flex-direction: column;
+		gap:8px;
+		line-height: normal!important;
+	} 
+
+	.box p{
+		font-size: calc( 10px + 2 * ( 100vw / 320 ) );
+		line-height: normal;
+		margin-bottom: 0;
+	}
+
+	.scrollingBlock .item{
+		padding: 16px 16px 24px 16px;
+		min-width: 230px;
+		gap: 8px;
+	}
+	
+	.footer .row{
+		flex-direction: column;
+	}
 	small{
-		font-size: calc( 8px + 4 * ( 100vw / 320 ) );
-		line-height: 12px;
+		font-size: calc( 10px + 4 * ( 100vw / 320 ) );
+		line-height: 10px;
 	}
 	p{
 		font-size: calc( 10px + 2 * ( 100vw / 320 ) );
 		margin-bottom: 0;
+		
 	}
 
 	h1{
@@ -1129,22 +1308,19 @@ p {
 	h2{
 		margin-top: 0em;
 		font-size: calc( 12px + 4 * ( 100vw / 320 ) );
-		line-height: 28px;
+		line-height: 24px;
 	}
 	
 	h3{
 		font-size: calc( 12px + 4 * ( 100vw / 320 ) );
-		line-height: 28px;
+		line-height: 22px;
 	}
 		
 	h4{
 		font-size: calc( 10px + 2 * ( 100vw / 320 ) );
 		line-height: 22px;
 	}
-	.box p{
-		font-size: calc( 10px + 2 * ( 100vw / 320 ) );
-		margin-bottom: 0;
-	}
+
 	#page5{
 		padding: 6px;
 	}
@@ -1176,29 +1352,26 @@ p {
 	.accordion-item{
 		padding: 10px;
 	}
-
 	#page5 br {
 		display: block;
 	}
-
 	#page2 .text-cont div {
 		width: 100%;
 		font-size: 12px;
 	}
 
+	/* Фронт писали Владимирова Юлия и Страхов Андрей  */
 	.content-row {
 		flex-direction: column;
 		gap: 0px;
 
 	}
 
-	.go-to-app {
-		height: max-content;
-	}
 
-	.go-to-app .ellipse {
-
-		width: 100%;
+	.go-to-app p {
+		margin: 0;
+		font-size: 14px!important;
+		line-height: 17px;
 	}
 
 	.content-row .box {
@@ -1214,6 +1387,7 @@ p {
 		z-index: 100;
 		max-width: 367px;
 		margin: 0 auto;
+		top:105%;
 	}
 
 	.overlay {
@@ -1242,8 +1416,15 @@ p {
 	}
 
 	.logo {
-		flex-direction: column;
 		margin-bottom: 100px;
+		gap: 8px;
+	}
+	
+	#univlob img{
+		width: calc(80px + 48*(100vw/320));
+	}
+	#labacad img{
+		width: calc(35px + 20*(100vw/320));
 	}
 
 	#chemlog img {
@@ -1290,13 +1471,22 @@ p {
 		.go-to-app br {
 			display: block;
 		}
-
+		.go-to-app p {
+			margin: 0;
+			font-size: 10px!important;
+			line-height: 15px;
+		}
+		.go-to-app p {
+			font-size: 11px!important;
+		}
+	
 	}
 
 	#go-to-app {
 		align-items: center;
 		height: auto;
 		margin: 5em 0 0.5em 0;
+
 		gap: 3px;
 	}
 
@@ -1312,15 +1502,16 @@ p {
 	}
 
 	.top-cont-row-col {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0!important;
+		border-bottom-right-radius: 0!important;
 		order: 1;
 	}
 
 	.top-cont-row-col {
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0!important;
+		border-bottom-right-radius: 0!important;
 		order: 1;
 
 	}
+	
 }

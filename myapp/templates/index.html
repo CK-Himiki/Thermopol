@@ -26,7 +26,7 @@
 				<div id="therm-chem-cont">
 					<div style="display: flex; justify-items: flex-start;align-items: center;">
 						<p class="therm-chem-cont-item" id="thermopol">Thermopol</p>
-						<div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center; margin-top: 1em;">
+						<div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center;">
 							<img src="{% static 'img/lg/chemlog.png' %}" style="transform: scaleY(1.2);">
 						</div>
 					</div>
@@ -45,18 +45,18 @@
 					</div>
 				</div>
 			</div>
-			<div class="collapse multi-collapse navbar-collapse " id="nvb-menu">
+			<div class="collapse multi-collapse navbar-collapse " id="nvb-menu" >
 				<ul class="nav navbar-nav" style="color: black!important;">
 					<li><a href="#page2">О проекте</a></li>
 					<li><a href="#page3">Особенности</a></li>
 					<li><a href="#page4">Преимущества</a></li>
-					<button class="go-to-app" id="nav-go-to-app" onclick="window.location.href='append'">
+					<a href="https://thermopol.lad-academy.ru/append" id="nav-go-to-app" class="go-to-app" >
 						Перейти к приложению
 
 						<img class="ellipse" src="{% static 'img/icon/right.svg' %}"
 							style="object-fit: contain; background-color: white; display: flex;">
 
-					</button>
+					</a>
 				</ul>
 			</div>
 		</div>
@@ -72,24 +72,22 @@
 			<h2 style="font-weight: 700; font-family: 'Nexa Demo B';">
 				Реализуйте свои физикохимические исследования с помощью
 					веб-приложения
-					от химического факультета Университета Лобачевского.
-			</h2>
-
-			<div id="formul"style="width: 90%; margin: 1.5em;">
-				<img src="{% static 'img/lg/form.svg' %}"style="width: 100%;">
-			</div>
-			<button class="go-to-app" id="cont-go-to-app">
-
+					от химического факультета Университета Лобачевского
+				</h2>
+				<div id="formul" style="width: 90%; margin: 1.5em;">
+					<img src="{% static 'img/lg/form.svg' %}" style="width: 100%;">
+				</div>
+				<a href="https://thermopol.lad-academy.ru/append" id="cont-go-to-app" class="go-to-app" >
 				<p>
-					Перейти к <br> приложению
+					Перейти к приложению
 				</p>
 				<img class="ellipse" src="{% static 'img/icon/right.svg' %}" style="object-fit: contain; background-color: white;">
 
-			</button>
+			</a>
 		</div>
 
-		<div class="box img-box right-cont-row-col"
-			style="background-image: url(&#39; {% static 'img/1440/hum1.png' %} &#39;);background-size: cover;"></div>
+		<div class="box img-box top-cont-row-col"
+		style="background-image: url(&#39; {% static 'img/1440/hum1.png' %} &#39;);background-size: cover;"></div>
 	</div>
 	<!--end page 1-->
 
@@ -124,13 +122,6 @@
 			<br><br>
 			
 		</div>	
-		<button class="go-to-app"  >
-			<p>
-				Перейти к <br> приложению
-			</p>
-			<img class="ellipse" src="{% static 'img/icon/right.svg' %}" style="object-fit: contain; background-color: white;">
-			
-		</button>
 	</div>
 
 	<!-- end page 2-->
@@ -138,8 +129,7 @@
 	<!--page 3-->
 	<div id="page3" style="width: 100%; display: flex; flex-direction: column; gap:30px;">
 	<div class="content-row" style="height:max-content; align-items: stretch" >
-		<div class="box img-box" style="background-image: url(&#39;{% static 'img/1440/1440_3.jpg' %}&#39;);background-size: cover;align-items: flex-start;
-        justify-content: flex-start;">
+		<div class="box img-box" style="background-image: url(&#39;{% static 'img/1440/1440_3.jpg' %}&#39;);background-size: cover;align-items: flex-start;justify-content: flex-start;">
 			<div style="position: flex;;width:auto; flex-direction: top;">
 				<div class="textboxes" style="margin-left:0!important;margin-top:0!important;">
 					<div class="box blackonwhite" style="width:max-content;">
@@ -158,7 +148,7 @@
 				
 
 		</div>
-		<div class="box mobile-antiv" style="background-color:transparent;padding: 0!important;height: 100%; ">
+		<div class="box mobile-antiv advantages">
 			<div style="display: flex;flex-direction: column; height: 100%;gap:16px;;">
 					<div class="content-row"style="gap:16px; min-height:50%">
 						<div class="item box"style="display: flex;flex-direction:column!important;" id="item1">
@@ -340,12 +330,12 @@
 			</h3>
 			<br>
 		</div>	
-		<button class="go-to-app" >
+		<a href="https://thermopol.lad-academy.ru/append" class="go-to-app" >
 			<p>
-				Перейти к <br> приложению
+				Перейти к приложению
 			</p>
 			<img class="ellipse" src="{% static 'img/icon/right.svg' %}" style="object-fit: contain; background-color: white;">
-		</button>
+		</a>
 		<br>
 	</div>
 	<!--end page 5-->
@@ -364,11 +354,13 @@
 					<h1><strong>
 						Использование данного веб-приложения дает
 					</strong>
-					<div id="formul" style="margin-top: auto;align-self: flex-end; height: 100%;">
-						<img src="{% static 'img/lg/form.svg' %}" style="width: 90%; max-height: 400px;margin-top: 1em;" >
-					</div>
 				</h1>
+				<div id="formul" style="margin-top: auto; height: 90%; align-self:flex-end;max-height: 400px;">
+					<img src="{% static 'img/lg/form.svg' %}" style="height: 90%;max-width: 90%;margin-top: 1em; align-self: flex-end;" >						
 				</div>
+				
+				</div>
+
 				<div class="box mobile-antiv" id="info-row-box" >
 					<div class="info-row box">
 						<p class="numder">1</p>
@@ -396,8 +388,8 @@
 					</div>
 			
 				</div>
-		
-	</div>
+		</div>
+	
 	<!--end page 6-->
 
 	
@@ -457,14 +449,14 @@
 					Попробуйте прямо сейчас и оцените все его преимущества.
 				</h4>
 			</div>
-			<button class="go-to-app" >
+			<a href="https://thermopol.lad-academy.ru/append" class="go-to-app" >
 
 				<p>
-					Перейти к <br class="mobile-v"> приложению
+					Перейти к приложению
 				</p>
 				<img class="ellipse" src="{% static 'img/icon/right.svg' %}" style="object-fit: contain; background-color: white;">
 
-			</button>
+			</a>
 		</div>
 	</div>
 	<!--end page 7-->
@@ -513,17 +505,15 @@
 
 
 	<div class="container-fluid box footer">
-		<div class="row" style="padding: 0 24px 24px 24px;">
-			<div class=" col-sm-6"
+		<div class="row" style="padding: 24px; height: max-content; align-items: stretch; display: flex;">
+			<div class=" col-sm-6"	id="left-footer-col" >
+				<div>
+					<p  id="thermopol">Thermopol</p>
 
-				style="min-height: 179px;height: 100%; display: flex; flex-direction: column;padding-top: 24px; " >
+				</div>
 				<div id="left-footer-row">
-					<div>
-						<p  id="thermopol">Thermopol</p>
-
-					</div>
 					
-					<div class="logo">
+					<div class="logo" style="margin-bottom: 2em;">
 						<div id="univlob">
 							<img src="{% static 'img/lg/unloblog.svg' %}">
 						</div>
