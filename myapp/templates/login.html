@@ -4,11 +4,13 @@
 {% load cache %}
 
 {% block content %}
-<h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-
+<div class="box"style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;">
+    <h2 style="margin-top: 0;">Login</h2>
+        <form method="post"style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="general-button"style="align-self:center;" type="submit">Login</button>
+        </form>
+    </div>
+    
 {% endblock %}
