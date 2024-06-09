@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.shortcuts import redirect
 from myapp import views
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -48,4 +49,5 @@ urlpatterns = [
     path("edit/<int:pkey>",views.edit,name="edit"),
     path("login",views.login_view,name="login"),
     path("logout",views.logout_view,name="logout"),
+    path("favicon.ico", lambda request: redirect("static/favicon.ico")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
