@@ -7,6 +7,12 @@ class SubstanceSerializer(serializers.ModelSerializer):
         model = Substance
         fields = '__all__'
 
+class SubstanceClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        modeol= SubstanceClass
+        fields = '__all__'
+
+
 
 class SourceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,16 +20,6 @@ class SourceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class StateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = State
-        fields = '__all__'
-
-
-class PhaseTransitionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PhaseTransition
-        fields = '__all__'
 
 
 class TransitionSerializer(serializers.ModelSerializer):

@@ -5,6 +5,7 @@
 
 {% block content %}
 <div class="box onl-text-pg container">
+    <div class="col-md-12 fs-2">
 <table id="search_table" class="table table-striped-columns table-hover table-bordered">
   <thead>
     <tr>
@@ -15,7 +16,7 @@
     </tr>
   </thead>
     <tbody>
-    {% cache 600 subs_table %}
+    {% cache 6 subs_table %}
     {% for substance in substances %}
     <tr class="fs-2">
         <td>{{ substance.substance_type }}</td>
@@ -27,6 +28,7 @@
     {% endcache %}
     </tbody>
 </table>
+    </div>
 
 
 

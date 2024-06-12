@@ -24,7 +24,7 @@ from drf_yasg.generators import OpenAPISchemaGenerator
 from django.conf import settings
 from django.conf.urls.static import static
 
-from myapp.views import SourceView
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -40,14 +40,17 @@ urlpatterns = [
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
-    path('api/append/', SourceView.as_view(), name='append'),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
     path("append", views.append, name="append"),
     path("stream", views.stream, name="stream"),
-    path("edit/<int:pkey>",views.edit,name="edit"),
-    path("login",views.login_view,name="login"),
-    path("logout",views.logout_view,name="logout"),
-    path("favicon.ico", lambda request: redirect("static/favicon.ico")),
+    path("me", views.me, name="me"),
+    path("edit/<int:pkey>", views.edit, name="edit"),
+    path("delete/<int:pkey>", views.delete_substance, name="delete"),
+    path("login", views.login_view, name="login"),
+    path("logout", views.logout_view, name="logout"),
+    path('register/', views.register, name='register'),
+    path('api/', include('myapp.api_urls', namespace='api')),
+    path("favicon.ico", lambda request: redirect("static/favicon.ico"))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
