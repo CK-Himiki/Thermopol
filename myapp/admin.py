@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import SubstanceClass, Substance, Source, State, Phase, Transition, PhaseTransition
+from .models import SubstanceClass, Substance, Source, Phase, Transition
 
 
 @admin.register(SubstanceClass)
@@ -19,9 +19,7 @@ class LiteratureAdmin(admin.ModelAdmin):
     list_display = ("description",)
 
 
-@admin.register(State)
-class StateAdmin(admin.ModelAdmin):
-    list_display = ("substance",)
+
 
 
 @admin.register(Phase)
@@ -30,10 +28,8 @@ class PhaseAdmin(admin.ModelAdmin):
 
 @admin.register(Transition)
 class TransitionAdmin(admin.ModelAdmin):
-    list_display = ("state",)
+    list_display = ("source_phase","target_phase",)
 
-@admin.register(PhaseTransition)
-class PhaseTransitionAdmin(admin.ModelAdmin):
-    list_display = ("transition",)
+
 
 admin.site.site_header = "Администрирование Thermopol"

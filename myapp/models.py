@@ -11,50 +11,6 @@ class TypeEnum(Enum):
     Олигомер = "Олигомер"
     неизвестно = "неизвестно"
 
-
-# Create your models here.
-class SubstanceClass(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "класс вещества"
-        verbose_name_plural = "классы веществ"
-
-
-class Source(models.Model):
-    description = models.TextField()
-    url = models.URLField(null=True, blank=True)
-    doi = models.CharField(max_length=100)
-
-    class Meta:
-        verbose_name = "литература"
-        verbose_name_plural = "список литературы"
-
-
-class Substance(models.Model):
-    substance_class = models.ForeignKey(SubstanceClass, on_delete=models.CASCADE)
-    substance_type = models.CharField(
-        max_length=20, choices=[(tag.value, tag.name) for tag in TypeEnum]
-    )
-    name = models.CharField(max_length=150)
-    formula = models.CharField(max_length=100)
-    source = models.CharField(max_length=100, default="", null=True, blank=True)
-    literatura = models.ManyToManyField(Source, null=True, blank=True)
-    cas = models.CharField(max_length=100, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-
-    class Meta:
-        verbose_name = "соединение"
-        verbose_name_plural = "соединения"
-
-
-class State(models.Model):
-    substance = models.OneToOneField(Substance, on_delete=models.CASCADE)
-
-
 class PhaseEnum(Enum):
     Crystal = "Crystal"
     Liquid = "Liquid"
@@ -78,9 +34,28 @@ class Number_phase(Enum):
     X = 10
 
 
+
+class SubstanceClass(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "класс вещества"
+        verbose_name_plural = "классы веществ"
+
+
+class Source(models.Model):
+    description = models.TextField()
+    url = models.URLField(null=True, blank=True)
+    doi = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "литература"
+        verbose_name_plural = "список литературы"
 class Phase(models.Model):
     # General
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
     agregate_state = models.CharField(
         max_length=20, choices=[(tag.value, tag.name) for tag in PhaseEnum]
     )
@@ -109,14 +84,12 @@ class Phase(models.Model):
     HT_H0 = ArrayField(models.FloatField(), default=list, blank=True, null=True)
     ST = ArrayField(models.FloatField(), default=list, blank=True, null=True)
     GT = ArrayField(models.FloatField(), default=list, blank=True, null=True)
+    class Meta:
+        verbose_name = "состояние"
+        verbose_name_plural = "состояния"
 
 
 class Transition(models.Model):
-    state = models.OneToOneField(State, on_delete=models.CASCADE)
-
-
-class PhaseTransition(models.Model):
-    transition = models.ForeignKey(Transition, on_delete=models.CASCADE)
     source_phase = models.CharField(
         max_length=20, choices=[(tag.value, tag.name) for tag in PhaseEnum]
     )
@@ -137,3 +110,33 @@ class PhaseTransition(models.Model):
 
     start_temperature = models.FloatField(default=0)
     end_temperature = models.FloatField(default=0)
+
+    class Meta:
+        verbose_name = "переход"
+        verbose_name_plural = "переходы"
+
+class Substance(models.Model):
+    substance_class = models.ForeignKey(SubstanceClass, on_delete=models.CASCADE)
+    substance_type = models.CharField(
+        max_length=20, choices=[(tag.value, tag.name) for tag in TypeEnum]
+    )
+    name = models.CharField(max_length=150)
+    formula = models.CharField(max_length=100)
+    source = models.CharField(max_length=100, default="", null=True, blank=True)
+    literatura = models.ManyToManyField(Source, null=True, blank=True)
+    cas = models.CharField(max_length=100, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    phases = models.ManyToManyField(Phase, null=True, blank=True)
+    transitions = models.ManyToManyField(Transition, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "соединение"
+        verbose_name_plural = "соединения"
+
+
+
+
+
+
+
+
