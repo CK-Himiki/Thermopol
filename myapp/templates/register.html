@@ -1,17 +1,65 @@
-<!-- register.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Регистрация</title>
-</head>
-<body>
-    <h2>Регистрация</h2>
-    
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %} Thermopol {% endblock %}
+{% load static %}
 
+{% block content %}
+<div class="box"
+     style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;">
+    <h2 style="margin-top: 0;">Регистрация</h2>
+    <form method="post"
+          class="form-outline"
+          style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;"
+
+    >
+        {% csrf_token %}
+
+
+            <div class="helptext" id="id_username_helptext">Обязательное поле. Не более 150 символов. Только буквы,
+                цифры и символы @/./+/-/_.
+            </div>
+
+<div data-mdb-input-init class="form-outline mb-8">
+    <input class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username"
+                   autofocus="" required="" aria-describedby="id_username_helptext" id="id_username">
+            <label class="form-label" for="id_username">Имя пользователя:</label>
+</div>
+
+
+
+
+
+
+
+            <div class="helptext" id="id_password1_helptext">
+                <ul>
+                    <li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
+                    <li>Ваш пароль должен содержать как минимум 8 символов.</li>
+                    <li>Пароль не должен быть слишком простым и распространенным.</li>
+                    <li>Пароль не может состоять только из цифр.</li>
+                </ul>
+            </div>
+<div data-mdb-input-init class="form-outline mb-8">
+            <input class="form-control" type="password" name="password1" autocomplete="new-password" required=""
+                   aria-describedby="id_password1_helptext" id="id_password1">
+            <label class="form-label" for="id_password1">Пароль:</label>
+
+        </div>
+
+
+
+
+            <div class="helptext" id="id_password2_helptext">Для подтверждения введите, пожалуйста, пароль ещё раз.
+            </div>
+<div data-mdb-input-init class="form-outline mb-8">
+            <input class="form-control" type="password" name="password2" autocomplete="new-password" required=""
+                   aria-describedby="id_password2_helptext" id="id_password2">
+            <label class="form-label" for="id_password2">Подтверждение пароля:</label>
+
+
+        </div>
+        <button class="general-button" style="align-self:center;" type="submit">Зарегистрироваться</button>
+
+    </form>
+</div>
+
+{% endblock %}
