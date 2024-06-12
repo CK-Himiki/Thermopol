@@ -7,12 +7,13 @@
 <div class="box onl-text-pg container">
 
     <link rel="stylesheet" href="{% static 'append.css' %}">
+    <script src="{% static 'append.js' %}"  ></script>
     <div class="row">
         <div class="col-md-6">
 
             <div class="form-group form-outline" data-mdb-input-init>
 
-                <input class="form-control" list="substance_class" placeholder="Введите класс соединения...">
+                <input  class="form-control" list="substance_class" placeholder="Введите класс соединения...">
                 <label class="form-label" for="substance_class">Класс соединения:</label>
                 <datalist id="substance_class">
                     {% for class in classes %}
@@ -47,7 +48,7 @@
             <div class="form-group form-outline" data-mdb-input-init>
 
                 <input type="text" id="source" name="source" class="form-control">
-                <label class="form-label" for="source">Источник:</label>
+                <label class="form-label" for="source">От кого полученно соединение:</label>
             </div>
 
             <div class="form-group form-outline" data-mdb-input-init>
@@ -73,7 +74,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="source-fields">
+                        <div class="source-fields" data-mdb-input-init>
                             <input type="text" id="description" placeholder="Описание" class="form-control">
                             <input type="text" id="url" placeholder="URL" class="form-control">
                             <input type="text" id="doi" placeholder="DOI" class="form-control">
@@ -83,216 +84,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button class="add-button btn btn-primary" onclick="addSource()">Добавить источник</button>
+                    <button id="add_source_btn" class="add-button btn btn-primary" >Добавить источник</button>
 
                 </div>
-                <script>
-    let propertiesList = [];
 
-function addProperty() {
-    const stateInput = document.getElementById('state');
-    const agregateStateInput = document.getElementById('agregate_state');
-    const numberPhaseInput = document.getElementById('number_phase');
-    const degreeOfCrystallinityInput = document.getElementById('degree_of_crystallinity');
-    const enthalpyOfCombustionInput = document.getElementById('enthalpy_of_combustion');
-    const enthalpyOfCombustionErrInput = document.getElementById('enthalpy_of_combustion_err');
-    const enthalpyOfFormationInput = document.getElementById('enthalpy_of_formation');
-    const enthalpyOfFormationErrInput = document.getElementById('enthalpy_of_formation_err');
-    const entropyOfFormationInput = document.getElementById('entropy_of_formation');
-    const entropyOfFormationErrInput = document.getElementById('entropy_of_formation_err');
-    const gibbsEnergyOfFormationInput = document.getElementById('gibbs_energy_of_formation');
-    const gibbsEnergyOfFormationErrInput = document.getElementById('gibbs_energy_of_formation_err');
-    const lnKInput = document.getElementById('lnK');
-    const residualEntropyAt0KInput = document.getElementById('residual_entropy_at_0_k');
-    const residualEntropyAt0KErrInput = document.getElementById('residual_entropy_at_0_k_err');
-    const configurationalEntropyInput = document.getElementById('configurational_entropy');
-    const configurationalEntropyErrInput = document.getElementById('configurational_entropy_err');
-    const differenceOfZeroInput = document.getElementById('difference_of_zero');
-    const differenceOfZeroErrInput = document.getElementById('difference_of_zero_err');
-    const TInput = document.getElementById('T');
-    const CpInput = document.getElementById('Cp');
-    const HTH0Input = document.getElementById('HT_H0');
-    const STInput = document.getElementById('ST');
-    const GTInput = document.getElementById('GT');
-
-    const state = stateInput.value.trim();
-    const agregateState = agregateStateInput.value.trim();
-    const numberPhase = numberPhaseInput.value.trim();
-    const degreeOfCrystallinity = degreeOfCrystallinityInput.value.trim();
-    const enthalpyOfCombustion = enthalpyOfCombustionInput.value.trim();
-    const enthalpyOfCombustionErr = enthalpyOfCombustionErrInput.value.trim();
-    const enthalpyOfFormation = enthalpyOfFormationInput.value.trim();
-    const enthalpyOfFormationErr = enthalpyOfFormationErrInput.value.trim();
-    const entropyOfFormation = entropyOfFormationInput.value.trim();
-    const entropyOfFormationErr = entropyOfFormationErrInput.value.trim();
-    const gibbsEnergyOfFormation = gibbsEnergyOfFormationInput.value.trim();
-    const gibbsEnergyOfFormationErr = gibbsEnergyOfFormationErrInput.value.trim();
-    const lnK = lnKInput.value.trim();
-    const residualEntropyAt0K = residualEntropyAt0KInput.value.trim();
-    const residualEntropyAt0KErr = residualEntropyAt0KErrInput.value.trim();
-    const configurationalEntropy = configurationalEntropyInput.value.trim();
-    const configurationalEntropyErr = configurationalEntropyErrInput.value.trim();
-    const differenceOfZero = differenceOfZeroInput.value.trim();
-    const differenceOfZeroErr = differenceOfZeroErrInput.value.trim();
-    const T = TInput.value.trim();
-    const Cp = CpInput.value.trim();
-    const HTH0 = HTH0Input.value.trim();
-    const ST = STInput.value.trim();
-    const GT = GTInput.value.trim();
-
-    if (state) {
-        const property = {
-            state: state,
-            agregateState: agregateState,
-            numberPhase: numberPhase,
-            degreeOfCrystallinity: degreeOfCrystallinity,
-            enthalpyOfCombustion: enthalpyOfCombustion,
-            enthalpyOfCombustionErr: enthalpyOfCombustionErr,
-            enthalpyOfFormation: enthalpyOfFormation,
-            enthalpyOfFormationErr: enthalpyOfFormationErr,
-            entropyOfFormation: entropyOfFormation,
-            entropyOfFormationErr: entropyOfFormationErr,
-            gibbsEnergyOfFormation: gibbsEnergyOfFormation,
-            gibbsEnergyOfFormationErr: gibbsEnergyOfFormationErr,
-            lnK: lnK,
-            residualEntropyAt0K: residualEntropyAt0K,
-            residualEntropyAt0KErr: residualEntropyAt0KErr,
-            configurationalEntropy: configurationalEntropy,
-            configurationalEntropyErr: configurationalEntropyErr,
-            differenceOfZero: differenceOfZero,
-            differenceOfZeroErr: differenceOfZeroErr,
-            T: T,
-            Cp: Cp,
-            HTH0: HTH0,
-            ST: ST,
-            GT: GT
-        };
-
-        propertiesList.push(property);
-
-        const option = document.createElement('option');
-        option.value = state;
-        option.textContent = state;
-        document.getElementById('properties').add(option);
-
-        stateInput.value = '';
-        agregateStateInput.value = '';
-        numberPhaseInput.value = '';
-        degreeOfCrystallinityInput.value = '';
-        enthalpyOfCombustionInput.value = '';
-        enthalpyOfCombustionErrInput.value = '';
-        enthalpyOfFormationInput.value = '';
-        enthalpyOfFormationErrInput.value = '';
-        entropyOfFormationInput.value = '';
-        entropyOfFormationErrInput.value = '';
-        gibbsEnergyOfFormationInput.value = '';
-        gibbsEnergyOfFormationErrInput.value = '';
-        lnKInput.value = '';
-        residualEntropyAt0KInput.value = '';
-        residualEntropyAt0KErrInput.value = '';
-        configurationalEntropyInput.value = '';
-        configurationalEntropyErrInput.value = '';
-        differenceOfZeroInput.value = '';
-        differenceOfZeroErrInput.value = '';
-        TInput.value = '';
-        CpInput.value = '';
-        HTH0Input.value = '';
-        STInput.value = '';
-        GTInput.value = '';
-    }
-}
-
-function fillPropertyFields(state, agregateState, numberPhase, degreeOfCrystallinity, enthalpyOfCombustion, enthalpyOfCombustionErr, enthalpyOfFormation, enthalpyOfFormationErr, entropyOfFormation, entropyOfFormationErr, gibbsEnergyOfFormation, gibbsEnergyOfFormationErr, lnK, residualEntropyAt0K, residualEntropyAt0KErr, configurationalEntropy, configurationalEntropyErr, differenceOfZero, differenceOfZeroErr, T, Cp, HTH0, ST, GT) {
-    const stateInput = document.getElementById('state');
-    const agregateStateInput = document.getElementById('agregate_state');
-    const numberPhaseInput = document.getElementById('number_phase');
-    const degreeOfCrystallinityInput = document.getElementById('degree_of_crystallinity');
-    const enthalpyOfCombustionInput = document.getElementById('enthalpy_of_combustion');
-    const enthalpyOfCombustionErrInput = document.getElementById('enthalpy_of_combustion_err');
-    const enthalpyOfFormationInput = document.getElementById('enthalpy_of_formation');
-    const enthalpyOfFormationErrInput = document.getElementById('enthalpy_of_formation_err');
-    const entropyOfFormationInput = document.getElementById('entropy_of_formation');
-    const entropyOfFormationErrInput = document.getElementById('entropy_of_formation_err');
-    const gibbsEnergyOfFormationInput = document.getElementById('gibbs_energy_of_formation');
-    const gibbsEnergyOfFormationErrInput = document.getElementById('gibbs_energy_of_formation_err');
-    const lnKInput = document.getElementById('lnK');
-    const residualEntropyAt0KInput = document.getElementById('residual_entropy_at_0_k');
-    const residualEntropyAt0KErrInput = document.getElementById('residual_entropy_at_0_k_err');
-    const configurationalEntropyInput = document.getElementById('configurational_entropy');
-    const configurationalEntropyErrInput = document.getElementById('configurational_entropy_err');
-    const differenceOfZeroInput = document.getElementById('difference_of_zero');
-    const differenceOfZeroErrInput = document.getElementById('difference_of_zero_err');
-    const TInput = document.getElementById('T');
-    const CpInput = document.getElementById('Cp');
-    const HTH0Input = document.getElementById('HT_H0');
-    const STInput = document.getElementById('ST');
-    const GTInput = document.getElementById('GT');
-
-    stateInput.value = state;
-    agregateStateInput.value = agregateState;
-    numberPhaseInput.value = numberPhase;
-    degreeOfCrystallinityInput.value = degreeOfCrystallinity;
-    enthalpyOfCombustionInput.value = enthalpyOfCombustion;
-    enthalpyOfCombustionErrInput.value = enthalpyOfCombustionErr;
-    enthalpyOfFormationInput.value = enthalpyOfFormation;
-    enthalpyOfFormationErrInput.value = enthalpyOfFormationErr;
-    entropyOfFormationInput.value = entropyOfFormation;
-    entropyOfFormationErrInput.value = entropyOfFormationErr;
-    gibbsEnergyOfFormationInput.value = gibbsEnergyOfFormation;
-    gibbsEnergyOfFormationErrInput.value = gibbsEnergyOfFormationErr;
-    lnKInput.value = lnK;
-    residualEntropyAt0KInput.value = residualEntropyAt0K;
-    residualEntropyAt0KErrInput.value = residualEntropyAt0KErr;
-    configurationalEntropyInput.value = configurationalEntropy;
-    configurationalEntropyErrInput.value = configurationalEntropyErr;
-    differenceOfZeroInput.value = differenceOfZero;
-    differenceOfZeroErrInput.value = differenceOfZeroErr;
-    TInput.value = T;
-    CpInput.value = Cp;
-    HTH0Input.value = HTH0;
-    STInput.value = ST;
-    GTInput.value = GT;
-}
-
-const propertiesListbox = document.getElementById('properties');
-propertiesListbox.addEventListener('dblclick', () => {
-    const selectedIndex = propertiesListbox.selectedIndex;
-    if (selectedIndex !== -1) {
-        const selectedProperty = propertiesList[selectedIndex];
-        fillPropertyFields(
-            selectedProperty.state,
-            selectedProperty.agregateState,
-            selectedProperty.numberPhase,
-            selectedProperty.degreeOfCrystallinity,
-            selectedProperty.enthalpyOfCombustion,
-            selectedProperty.enthalpyOfCombustionErr,
-            selectedProperty.enthalpyOfFormation,
-            selectedProperty.enthalpyOfFormationErr,
-            selectedProperty.entropyOfFormation,
-            selectedProperty.entropyOfFormationErr,
-            selectedProperty.gibbsEnergyOfFormation,
-            selectedProperty.gibbsEnergyOfFormationErr,
-            selectedProperty.lnK,
-            selectedProperty.residualEntropyAt0K,
-            selectedProperty.residualEntropyAt0KErr,
-            selectedProperty.configurationalEntropy,
-            selectedProperty.configurationalEntropyErr,
-            selectedProperty.differenceOfZero,
-            selectedProperty.differenceOfZeroErr,
-            selectedProperty.T,
-            selectedProperty.Cp,
-            selectedProperty.HTH0,
-            selectedProperty.ST,
-            selectedProperty.GT
-        );
-    }
-});
-
-
-
-
-
-                </script>
                 <div class="form-group">
                     <label for="phase-transitions">Фазовые переходы:</label>
                     <select id="phase-transitions" name="phase-transitions" multiple>
@@ -342,57 +137,6 @@ propertiesListbox.addEventListener('dblclick', () => {
 
 
             <script>
-        const literatura = document.getElementById('literatura');
-        const phases = document.getElementById('phases');
-
-
-
-        let literatureList = []; // Глобальная переменная для хранения списка литературы
-
-        function addSource() {
-            const descriptionInput = document.getElementById('description');
-            const urlInput = document.getElementById('url');
-            const doiInput = document.getElementById('doi');
-
-            const description = descriptionInput.value.trim();
-            const url = urlInput.value.trim();
-            const doi = doiInput.value.trim();
-
-            if (description) {
-                const literatureItem = {
-                    description: description,
-                    url: url,
-                    doi: doi
-                };
-
-                literatureList.push(literatureItem);
-
-                const option = document.createElement('option');
-                option.value = description;
-                option.textContent = description;
-                literatura.add(option);
-
-                descriptionInput.value = '';
-                urlInput.value = '';
-                doiInput.value = '';
-            }
-        }
-        literatura.addEventListener('dblclick', function(event) {
-            const selectedOption = event.target;
-            const selectedIndex = Array.prototype.indexOf.call(literatura.children, selectedOption);
-            const selectedLiterature = literatureList[selectedIndex];
-
-            if (selectedLiterature) {
-                document.getElementById('description').value = selectedLiterature.description;
-                document.getElementById('url').value = selectedLiterature.url;
-                document.getElementById('doi').value = selectedLiterature.doi;
-            }
-        });
-
-
-    // Call the displayStateData function to set up the event listener
-    displayStateData();
-
 
             </script>
 
@@ -404,6 +148,8 @@ propertiesListbox.addEventListener('dblclick', () => {
                 <select id="properties" name="properties" multiple>
 
                 </select>
+                <script>
+                </script>
 
 
 
@@ -454,7 +200,7 @@ propertiesListbox.addEventListener('dblclick', () => {
                     <input type="text" id="ST" placeholder="ST (ArrayField)" class="form-control">
                     <input type="text" id="GT" placeholder="GT (ArrayField)" class="form-control">
                 </div>
-                <button class="add-button btn btn-primary" onclick="addProperty()">Добавить свойство</button>
+                <button class="add-button btn btn-primary" id="add_phase_btn">Добавить свойство</button>
             </div>
         </div>
 
@@ -745,75 +491,90 @@ function populatePhaseTransitionTable(phaseTransitionTable) {
 <script>
   async function sendData() {
     // Инициализация переменных для тестов
-    const substanceClass = "class_value"; // Замените на тестовое значение
-    const substanceType = "type_value"; // Замените на тестовое значение
-    const name = "name_value"; // Замените на тестовое значение
-    const formula = "formula_value"; // Замените на тестовое значение
-    const source = "source_value"; // Замените на тестовое значение
-
-    const literatureList = [
-      { description: "description1", url: "http://example1.com", doi: "123" },
-      { description: "description2", url: "http://example1.com", doi: "123456789" },
-    ]; // Пример тестовых данных для literatureList
-
-    const AggregateStateList = [
-
-    ];
-
-    const phaseTransitionsList = [
-
-    ];
-
+    const substanceClass = $('[list="substance_class"]').val(); // Замените на тестовое значение
+    const substanceType = $("#substance_type").val(); // Замените на тестовое значение
+    const name = $("#name").val(); // Замените на тестовое значение
+    const formula = $("#formula").val(); // Замените на тестовое значение
+    const source = $("#source").val(); // Замените на тестовое значение
+    const cas = $("#cas").val(); // Замените на тестовое значение
+     // Пример тестовых данных для literatureList
+    const AggregateStatesList = [{
+        "state": 0,
+        "agregate_state": "Glass",
+        "number_phase": 6,
+        "degree_of_crystallinity": 0.5,
+        "enthalpy_of_combustion": 100.0,
+        "enthalpy_of_combustion_err": 0.1,
+        "enthalpy_of_formation": 50.0,
+        "enthalpy_of_formation_err": 0.05,
+        "entropy_of_formation": 10.0,
+        "entropy_of_formation_err": 0.01,
+        "gibbs_energy_of_formation": -20.0,
+        "gibbs_energy_of_formation_err": 0.02,
+        "lnK": 0.5,
+        "residual_entropy_at_0_k": 1.0,
+        "residual_entropy_at_0_k_err": 0.01,
+        "configurational_entropy": 5.0,
+        "configurational_entropy_err": 0.05,
+        "difference_of_zero": 0.1,
+        "difference_of_zero_err": 0.01,
+        "T": [300, 310, 320],
+        "Cp": [1.0, 1.1, 1.2],
+        "HT_H0": [0.1, 0.2, 0.3],
+        "ST": [0.01, 0.02, 0.03],
+        "GT": [0.001, 0.002, 0.003]
+    }];
+    const phaseTransitionsList = [{
+        "transition": 1,
+        "source_phase": "Glass",
+        "target_phase": "Glass",
+        "source_phase_number": 1,
+        "target_phase_number": 2,
+        "temperature": 100,
+        "temperature_err": 1,
+        "enthalpy_transition": 50,
+        "enthalpy_transition_err": 2,
+        "entropy_transition": 30,
+        "entropy_transition_err": 1,
+        "jump_heat_capacity": 10,
+        "start_temperature": 0,
+        "end_temperature": 100
+    }];
     const data = {
-      substance_class: substanceClass,
-      substance_type: substanceType,
-      name: name,
-      formula: formula,
-      source: source,
-      literature: literatureList,
-      AggregateState: AggregateStateList,
-      phase_transitions: phaseTransitionsList,
+        substance_class: substanceClass,
+        substance_type: substanceType,
+        name: name,
+        formula: formula,
+        cas: cas,
+        source: source,
+        literature: literatureList,
+        AggregateState: propertiesList,
+        transactions_list: phaseTransitionsList,
     };
-
     console.log("Data to be sent:", JSON.stringify(data)); // Логирование данных
-
     try {
-      const response = await fetch("/api/append/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        alert("Данные успешно отправлены");
-      } else {
-        const errorData = await response.json();
-        console.error("Ошибка при отправке данных:", errorData);
-        alert("Ошибка при отправке данных");
-      }
-    } catch (error) {
-      console.error("Ошибка:", error);
-      alert("Ошибка при отправке данных");
-    }
-  }
-
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      const cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
+        const response = await fetch("/api/append/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) {
+            alert("Данные успешно отправлены");
+        } else {
+            const errorData = await response.json();
+            console.error("Ошибка при отправке данных:", errorData);
+            alert("Ошибка при отправке данных");
         }
-      }
+    } catch (error) {
+        console.error("Ошибка:", error);
+        alert("Ошибка при отправке данных");
     }
-    return cookieValue;
-  }
+}
+
+
 </script>
 {% else %}
 
