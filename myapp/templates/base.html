@@ -7,65 +7,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Thermopol{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" type="text/css"/>
-    <script src="{% static 'js/jquery.js' %}"></script>
     {% block head_l %}{% endblock %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'mycss/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <link href="{% static 'mycss/base.css' %}" rel="stylesheet">
 </head>
-<body>
+<body >
 {% block header %}
 <!--navbar-->
-<nav class="navbar navbar-expand-lg navbar-default box nav " style="height: auto; border-radius: 180px;"
+<nav class="navbar navbar-expand-lg box nav" style="height: auto; border-radius: 180px;"
      id="navbar">
-    <div class="container-fluid" style="margin:0; padding: 0;">
-        <div class="navbar-header">
+    <div class="container-fluid" style="margin:0; padding: 0; background-color:transparent!important">
+        <div class="navbar-header" >
             <div id="therm-chem-cont" onclick="window.location.href='/'">
                 <div style="display: flex; justify-items: flex-start;align-items: center;">
-                    <p class="therm-chem-cont-item" id="thermopol">Thermopol</p>
+                    <p class="therm-chem-cont-item" id="thermopol" style="margin-left:1em">Thermopol</p>
                     <div class="therm-chem-cont-item" id="chemlog" style="display: flex;align-items: center;">
                         <img src="{% static 'img/lg/chemlog.png' %}" style="transform: scaleY(1.2);">
                     </div>
                 </div>
-                <div style="position:sticky; margin-left: auto;">
-                    <button type="button" class="navbar-toggle nav-btn" data-bs-toggle="collapse"
-                            data-bs-target=".multi-collapse" aria-expanded="false"
-                            aria-controls="nvb-menu overl x barbarbar">
-
-                        <p class="collapse multi-collapse navbar-collapse nav-btn-el" id="x">
-                            <img src="{% static 'img/icon/burx.svg' %}">
-                        </p>
-                        <p class="collapse multi-collapse navbar-collapse show  nav-btn-el" id="barbarbar">
-                            <img src="{% static 'img/icon/bur.svg' %}">
-                        </p>
-                    </button>
-                </div>
+               
             </div>
         </div>
-        <div class="collapse multi-collapse navbar-collapse " id="nvb-menu">
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                
-
-
-            </ul>
-
-
-
-        </div>
-        <div class="col-md-3 text-end">
+        <div class="text-end user-st" style="display:flex; flex-direction:row;  gap:1em;align-items:center;justify-content:flex-end; width:100%;">
             {% if user.is_authenticated %}
-                 <a href="/me">{{ user.username }}</a>
-                    <a class="btn btn-primary" href="/logout">Выйти</a>
+                    <a href="/me">{{ user.username }}</a>
+                    <a class="btn base-btn" href="/logout">Выйти</a>
             {% else %}
-
-        Гость  <a href="/login" class="btn btn-primary">Войти</a>
+            Гость  <a href="/login" class="btn base-btn" >Войти</a>
              {% endif %}
+
+            {% block header_mcont %} {% endblock %}
       </div>
     </div>
 </nav>
@@ -75,7 +48,7 @@
 {% block content %}
 
 {% endblock %}
-
+<br>
 <div class="container-fluid box footer">
     <div class="row" style="padding: 0 24px 24px 24px;">
         <div class=" col-sm-6"
@@ -108,6 +81,12 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

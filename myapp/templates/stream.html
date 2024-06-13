@@ -3,37 +3,34 @@
 {% load static %}
 {% load cache %}
 
+ {% block head_l %}
+<link rel="stylesheet" href="{% static 'mycss/stream.css' %}">
+ {% endblock %}
 {% block content %}
-<div class="box onl-text-pg container">
-    <div class="col-md-12 fs-2">
-<table id="search_table" class="table table-striped-columns table-hover table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Тип</th>
-      <th scope="col">Брутто-формула</th>
-      <th scope="col">Название</th>
-      <th scope="col">Класс</th>
-    </tr>
-  </thead>
-    <tbody>
-    {% cache 6 subs_table %}
-    {% for substance in substances %}
-    <tr class="fs-2">
-        <td>{{ substance.substance_type }}</td>
-        <td><a href="/edit/{{substance.pk}}">{{ substance.formula }}</a></td>
-        <td><a href="/edit/{{substance.pk}}">{{ substance.name }}</a></td>
-        <td>{{ substance.substance_class  }}</td>
-    </tr>
-    {% endfor %}
-    {% endcache %}
-    </tbody>
-</table>
-    </div>
-
-
-
-
-
+<div class="box" style="width:100%important">
+  <table id="search_table" class="table table-striped-columns table-hover table-bordered" >
+    <thead>
+      <tr>
+        <th scope="col">Тип</th>
+        <th scope="col">Брутто-формула</th>
+        <th scope="col">Название</th>
+        <th scope="col">Класс</th>
+      </tr>
+    </thead>
+    
+      <tbody>
+      {% cache 6 subs_table %}
+      {% for substance in substances %}
+      <tr class="fs-2">
+          <td>{{ substance.substance_type }}</td>
+          <td><a href="/edit/{{substance.pk}}">{{ substance.formula }}</a></td>
+          <td><a href="/edit/{{substance.pk}}">{{ substance.name }}</a></td>
+          <td>{{ substance.substance_class  }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+      {% endcache %}
+  </table>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script
@@ -53,3 +50,4 @@
 });
 </script>
 {% endblock %}
+
