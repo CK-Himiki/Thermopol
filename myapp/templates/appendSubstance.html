@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block title %}Форма ввода данных{% endblock %}
+
+ {% block head_l %}
+  <link rel="stylesheet" href="{% static 'mycss/appendSub.css' %}">
+  <script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
+  <script src="https://jsuites.net/v4/jsuites.js"></script>
+
+  <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+
+  <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+
+  <script src="{% static 'myscr/appendSub.js' %}"></script>
+ {% endblock %}
+
+
+{% block header_mcont %} 
+<a id="search-btn" style=" margin-left: 20px!important;text-decoration:underline ; color:black; font-size: var(--fonts3);display:flex; flex-direction:row;align-items:center" href="https://thermopol.lad-academy.ru/stream">
+Поиск 
+<img src="https://img.icons8.com/?size=100&id=59878&format=png&color=000000" style="height: var(--fonts3); margin-left:5px;">
+</a>
+{% endblock %}
+
+
+    <!-- SUBSTANCE -->
+{% block content %}
+<div class="box" style="display:flex; flex-direction:column; align-items:center; padding:0!important">
+  <div class="container">
+    <h2>Информация о веществе</h2>
+    <div class="form-group">
+      <label for="substanceName">Название вещества</label>
+      <input type="text" id="substanceName" name="substanceName">
+    </div>
+    <div class="form-group">
+      <label for="casNumber">CAS номер</label>
+      <input type="text" id="casNumber" name="casNumber">
+    </div>
+    <div class="form-group">
+      <label for="formula">Формула</label>
+      <input type="text" id="formula" name="formula">
+    </div>
+    <div class="form-group">
+      <label for="class">Класс</label>
+      <select id="class" name="class">
+        {% for class in classes %}
+        <option value="{{ class.name }}">{{ class.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="type">Тип</label>
+      <select id="type" name="type">
+        {% for type in types %}
+        <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+    <!-- LITERATURE == ARTICLE -->
+  <div class="container">
+    <h2>Литература</h2>
+    <div class="form-group">
+      <label for="articleName">Название статьи</label>
+      <input type="text" id="articleName" name="articleName">
+    </div>
+    <div class="form-group">
+      <label for="articleLink">Ссылка</label>
+      <input type="text" id="articleLink" name="articleLink">
+    </div>
+    <div class="form-group">
+      <label for="doiNumber">DOI номер</label>
+      <input type="text" id="doiNumber" name="doiNumber">
+    </div>
+    <div class="buttons">
+      <button type="button" onclick="addArticle()">Добавить</button>
+    </div>
+    <div class="list-box">
+      <ul id="articleList"></ul>
+    </div>
+  </div>
+    <!-- STATES -->
+  <div class="container" style="display:flex; flex-direction: column; gap:0.35em">
+    <h2>Агрегатные состояния</h2>
+    <div class="form-group">
+      <label for="stateName">Название агрегатного состояния</label>
+      <select id="stateName" name="stateName">
+        {% for state in states %}
+        <option value="{{ state }}">{{ state }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="stateNumber">Номер агрегатного состояния</label>
+      <select id="stateNumber" name="stateNumber">
+        {% for state_namber in state_nambers %}
+        <option value="{{ state_namber }}">{{ state_namber }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="number" id="degree_of_crystallinity" placeholder="Степень кристалличности">
+    </div>
+    <div class="form-group">
+      <input type="number" id="enthalpy_of_combustion" placeholder="Энтальпия сгорания">
+    </div>
+    <div class="form-group">
+      <input type="number" id="enthalpy_of_combustion_err" placeholder="Ошибка энтальпии сгорания">
+    </div>
+    <div class="form-group">
+      <input type="number" id="enthalpy_of_formation" placeholder="Энтальпия образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="enthalpy_of_formation_err" placeholder="Ошибка энтальпии образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="entropy_of_formation" placeholder="Энтропия образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="entropy_of_formation_err" placeholder="Ошибка энтропии образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="gibbs_energy_of_formation" placeholder="Энергия Гиббса образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="gibbs_energy_of_formation_err" placeholder="Ошибка энергии Гиббса образования">
+    </div>
+    <div class="form-group">
+      <input type="number" id="lnK" placeholder="lnK">
+    </div>
+    <div class="form-group">
+      <input type="number" id="residual_entropy_at_0_k" placeholder="Остаточная энтропия при 0 K">
+    </div>
+    <div class="form-group">
+      <input type="number" id="residual_entropy_at_0_k_err" placeholder="Ошибка остаточной энтропии при 0 K">
+    </div>
+    <div class="form-group">
+      <input type="number" id="configurational_entropy" placeholder="Конфигурационная энтропия">
+    </div>
+    <div class="form-group">
+      <input type="number" id="configurational_entropy_err" placeholder="Ошибка конфигурационной энтропии">
+    </div>
+    <div class="form-group">
+      <input type="number" id="difference_of_zero" placeholder="Разница от нуля">
+    </div>
+    <div class="form-group">
+      <input type="number" id="difference_of_zero_err" placeholder="Ошибка разницы от нуля">
+    </div>
+    <div class="buttons">
+      <button type="button" onclick="addState()">Добавить</button>
+    </div>
+    <div class="list-box">
+      <ul id="stateList"></ul>
+    </div>
+    <div class="table-container">
+      <h2>Таблица данных</h2>
+      <div id="spreadsheet"></div>
+      <p>нажмите на таблицу для прокрутки</p>
+    </div>
+  </div>
+    <!-- TRANSITIONS -->
+  <div class="container">
+    <h2>Фазовые переходы</h2>
+    <div class="form-group">
+      <label for="phase-transitions">Фазовые переходы:</label>
+      <label for="source_phase">Исходная фаза</label>
+      <select id="source_phase" name="source_phase">
+        {% for state in states %}
+        <option value="{{ state }}">{{ state }}</option>
+        {% endfor %}
+      </select>
+      <label for="target_phase">Конечная фаза</label>
+      <select id="target_phase" name="target_phase">
+        {% for state in states %}
+        <option value="{{ state }}">{{ state }}</option>
+        {% endfor %}
+      </select>
+      <div style="display:flex; flex-direction: column; gap:0.35em">
+
+      <label for="source_phase_number">Номер исходной фазы</label>
+      <select id="source_phase_number" name="source_phase_number">
+        {% for state_namber in state_nambers %}
+        <option value="{{ state_namber }}">{{ state_namber }}</option>
+        {% endfor %}
+      </select>
+      <label for="target_phase_number">Номер конечной фазы</label>
+      <select id="target_phase_number" name="target_phase_number">
+        {% for state_namber in state_nambers %}
+        <option value="{{ state_namber }}">{{ state_namber }}</option>
+        {% endfor %}
+      </select>
+        <input type="number" id="temperature" placeholder="Температура" />
+        <input type="number" id="temperature_err" placeholder="Ошибка температуры" />
+        <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода" />
+        <input type="number" id="enthalpy_transition_err" placeholder="Ошибка энтальпии перехода" />
+        <input type="number" id="entropy_transition" placeholder="Энтропия перехода" />
+        <input type="number" id="entropy_transition_err" placeholder="Ошибка энтропии перехода" />
+        <input type="number" id="jump_heat_capacity" placeholder="Скок теплоемкости" />
+        <input type="number" id="start_temperature" placeholder="Начальная температура" />
+        <input type="number" id="end_temperature" placeholder="Конечная температура" />
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="button" onclick="addTransition()">Добавить</button>
+    </div>
+    <div class="list-box">
+      <ul id="transitionList"></ul>
+    </div>
+  </div>
+    <!-- EXTRAPOLATION -->
+  <div class="container">
+    <h2>Экстраполяция</h2>
+    <div class="form-group">
+      <label for="x">x:</label>
+      <input type="text" id="x" name="x">
+    </div>
+    <div class="form-group">
+      <label for="a">a:</label>
+      <input type="text" id="a" name="a">
+    </div>
+    <div class="form-group">
+      <label for="error_percentage">Процент ошибки:</label>
+      <input type="text" id="error_percentage" name="error_percentage">
+    </div>
+    <div class="buttons">
+      <button type="button" onclick="calculateExtrapolation()">Расчет экстраполяции в 0 K по степенной функции</button>
+    </div>
+  </div>
+  <div class="buttons">
+    <button type="button" onclick="sendData()">Отправить данные в Базу данных</button>
+  </div>
+</div>
+{% endblock %}
+
+
+
+<!--
+    ПРОБЛЕМЫ И ЗАДАЧИ:
+
+    1) Решить проблему с добавлением элементов в глобальные переменные в каждом блоке(в блоке с Литературой есть шлобальная переменная literatureData,
+            которая хранит в себе всю информацию о литературе и изменяется как и listbox, надо сделать по аналогии в блоках с состояниями и переходами)
+    2) Написать скрипт для формирования из глобальных переменных запроса на сервер на его API, пример запроса дан, там все поля есть(вроде), имена полей в запрос
+            НЕ МЕНЯТЬ(ну, менять то можно, я буду только рад, а то у меня простоянно разные стили кода проскакивают(извиняюсь), но вы скажите что поменяли чтобы мне на беке это тоже поменять)
+    3) Нужно написать скрипт ограничивающий расширение таблицы по столбцам, чтобы при вставке туда данных она не расширялась в ширину, а вообще можно сделать вставку только в левый верхний угол
+    4) Нужно сделать преобразование таблицы в списки по столбцам(именно так их принимает сервер), чтобы потом было легко отправлять в пункте 2.
+    5) В разные файлы не разнес html код и скрипты потому как даже если они в одной папке хранились django не подгружал их во время показа страницы, пофиксить быстро не получилось, СОРРИ ;(
+    6) Если запустить проект то видно в логах браузера GET запрос на http://127.0.0.1:8000/favicon.ico, притом с ошибкой, надо бы понять что это и почему
+    7) Надо подключить красивые стили в стилистике всего сайта
+
+P.S. УДАЧИ, ДРУЗЬЯ, Я В ВАС ВЕРЮ ;)
+-->
+

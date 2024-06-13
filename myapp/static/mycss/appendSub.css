@@ -1,0 +1,211 @@
+
+@font-face {
+	font-family: "Nexa Demo";
+	src: url("../fonts/Nexa_Demo/NexaDemo-Light.eot") format("eot");
+	src: url("../fonts/Nexa_Demo/NexaTextDemo-Light.woff2") format("woff2");
+	src: url("../fonts/Nexa_Demo/NexaDemo-Light.woff") format("woff");
+  }
+
+ @font-face {
+	font-family: "Nexa Demo B";
+	src: url("../fonts/Nexa_Demo/NexaDemo-Bold.eot") format("eot");
+	src: url("../fonts/Nexa_Demo/NexaTextDemo-Bold.woff2") format("woff2");
+	src: url("../fonts/Nexa_Demo/NexaDemo-Bold.woff") format("woff");
+  }
+@font-face {
+	font-family: "Raleway";
+	src: url("../fonts/Raleway/Raleway-Thin.woff2") format("woff2");
+	src: url("../fonts/Raleway/Raleway-Thin.woff") format("wof");
+  }
+
+:root{
+  --dark_blue:#0968AB;
+  --dark_blue_A1:#0968ab26;
+  --dark_blue_A2:#0968ab5f;
+  --dark_blue_A3:#0968ab8e;
+  --dark_blue_A4:#0968abc3;
+  --fonts2: calc(18px + 5 * ( (50vw + 50vh ) / 1000 ));
+  --fonts1: calc(14px + 5 * ( (50vw + 50vh ) / 1000 ));
+  --fonts3: calc(20px + 5 * ( (50vw + 50vh ) / 1000 ));
+}
+
+body {
+	background-color: #f2f4f4!important;
+}
+.box>*{
+  font-size: var(--fonts1);
+  background-color: white;
+  border-width: 0!important;
+  border-radius: 1em!important;
+  padding: calc(10px + 20 * ( (50vw + 50vh ) / 1000 ))!important;
+  
+}
+h2{
+    color: var(--dark_blue)!important;
+}
+
+.container{
+  width: 100%!important;
+  margin: 0!important;
+}
+select{
+    font-size: var(--fonts1);
+    width: 100%!important;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    background-color: #f2f4f4;
+    color: var(--dark_blue);
+}
+
+input{
+    font-size: var(--fonts1);
+    transition: all 0.4s;
+    border-radius: 0.4em;
+    transition: all 0.3s;
+}
+input:focus, input:hover{
+   font-size: var(--fonts2);
+   padding: 0.5em!important;
+   background-color:var(--dark_blue_A1);
+   border-color: var(--dark_blue)!important; 
+}
+
+input:hover::-webkit-input-placeholder,input:hover::-webkit-input-placeholder{
+    color:#0968AB;
+}
+
+input:active{
+    background-color:var(--dark_blue_A2);
+    color:#0968AB;
+}
+
+.buttons{
+   padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons button{
+    background-color:var(--dark_blue);
+    padding: 0.5em 2em 0.5em 2em;
+    display: flex;
+    font-size:var(--fonts3);
+    font-family: "Nexa Demo B";
+    color: white;
+    border-width: 0;
+    border-radius: 1em;
+    transition: all 0.5s;
+    box-shadow: 0px 13px 20px 2px rgba(88, 114, 133, 0.7);
+}
+
+button:hover, button:active,button:focus{
+    background-color:var(--dark_blue_A3);
+    
+}
+
+.container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container h2 {
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.list-box {
+  margin-top: 10px;
+}
+
+.list-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-box li {
+  margin-bottom: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+#spreadsheet {
+  width: 100%;
+  height: 300px;
+}
+
+.jexcel{
+max-width: 80vw;
+font-size: var(--fonts2);
+font-family: "Nexa Demo";
+}
+
+.jexcel_content{
+    max-width:fit-content;
+}
+
+#spreadsheet{
+    max-width:100%;
+    overflow-x: hidden;
+    height: fit-content;
+    scrollbar-color:  var(--dark_blue_A2)   var(--dark_blue_A1);
+    scrollbar-width: none;
+    transition: all 0.5s;
+    
+}
+#spreadsheet:focus, #spreadsheet:active{
+  overflow-x: scroll;
+  scrollbar-width: auto ;
+  scroll-behavior: smooth;
+}
+
+colgroup col{
+    width: calc(90vw / 6);
+    min-width:5em;
+    overflow-x: scroll;
+   
+}
+
+td {
+    padding: 0.5em 0.3em 0.5em 0.3em!important;
+}
+
+.jexcel > thead > tr > td, .jexcel > tbody > tr > td:first-child{
+background-color: var(--dark_blue_A2)!important;
+color: white;
+font-family: "Nexa Demo B";
+
+}
+
+.table-container>p{
+  color: #0000006c;
+  font-size: var(--fonts1);
+}
+
