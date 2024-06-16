@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали вещества</title>
+    <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+    <script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .state-block, .transition-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .state-block p, .transition-block p {
+            margin: 5px 0;
+        }
+        .state-block div, .transition-block div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .state-block label, .transition-block label {
+            flex: 1 1 150px;
+            font-weight: bold;
+        }
+        .state-block span, .transition-block span {
+            flex: 2 1 300px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .state-header {
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Характеристики вещества</h2>
+            <p><strong>Имя:</strong> {{ substance.name }}</p>
+            <p><strong>Формула:</strong> {{ substance.formula }}</p>
+            <p><strong>Класс:</strong> {{ substance.substance_class }}</p>
+            <p><strong>Тип:</strong> {{ substance.substance_type }}</p>
+            <p><strong>CAS:</strong> {{ substance.cas }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Литература</h2>
+            <div id="literature-table"></div>
+        </div>
+
+        <div class="section">
+            <h2>Состояния</h2>
+            <div id="state-content">
+                {% for state in states %}
+                <div class="state-block">
+                    <div>
+                        <label>Агрегатное состояние:</label> <span>{{ state.agregate_state }}</span>
+                    </div>
+                    <div>
+                        <label>Номер фазы:</label> <span>{{ state.number_phase }}</span>
+                    </div>
+                    <div>
+                        <label>Степень кристалличности:</label> <span>{{ state.degree_of_crystallinity }}</span>
+                    </div>
+                    <div>
+                        <label>Энтальпия сгорания:</label> <span>{{ state.enthalpy_of_combustion }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энтальпии сгорания:</label> <span>{{ state.enthalpy_of_combustion_err }}</span>
+                    </div>
+                    <div>
+                        <label>Энтальпия образования:</label> <span>{{ state.enthalpy_of_formation }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энтальпии образования:</label> <span>{{ state.enthalpy_of_formation_err }}</span>
+                    </div>
+                    <div>
+                        <label>Энтропия образования:</label> <span>{{ state.entropy_of_formation }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энтропии образования:</label> <span>{{ state.entropy_of_formation_err }}</span>
+                    </div>
+                    <div>
+                        <label>Энергия Гиббса образования:</label> <span>{{ state.gibbs_energy_of_formation }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энергии Гиббса образования:</label> <span>{{ state.gibbs_energy_of_formation_err }}</span>
+                    </div>
+                    <div>
+                        <label>lnK:</label> <span>{{ state.lnK }}</span>
+                    </div>
+                    <div>
+                        <label>Остаточная энтропия при 0 K:</label> <span>{{ state.residual_entropy_at_0_k }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность остаточной энтропии при 0 K:</label> <span>{{ state.residual_entropy_at_0_k_err }}</span>
+                    </div>
+                    <div>
+                        <label>Конфигурационная энтропия:</label> <span>{{ state.configurational_entropy }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность конфигурационной энтропии:</label> <span>{{ state.configurational_entropy_err }}</span>
+                    </div>
+                    <div>
+                        <label>Разность нулевой точки:</label> <span>{{ state.difference_of_zero }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность разности нулевой точки:</label> <span>{{ state.difference_of_zero_err }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="table-container">
+                <h2>Таблица функций</h2>
+                <div id="functions-table"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Переходы</h2>
+            <div id="transition-content">
+                {% for transition in transitions %}
+                <div class="transition-block">
+                    <div>
+                        <label>Фаза источник:</label> <span>{{ transition.source_phase }}</span>
+                    </div>
+                    <div>
+                        <label>Фаза цель:</label> <span>{{ transition.target_phase }}</span>
+                    </div>
+                    <div>
+                        <label>Номер фазы источник:</label> <span>{{ transition.source_phase_number }}</span>
+                    </div>
+                    <div>
+                        <label>Номер фазы цель:</label> <span>{{ transition.target_phase_number }}</span>
+                    </div>
+                    <div>
+                        <label>Температура:</label> <span>{{ transition.temperature }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность температуры:</label> <span>{{ transition.temperature_err }}</span>
+                    </div>
+                    <div>
+                        <label>Энтальпия перехода:</label> <span>{{ transition.enthalpy_transition }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энтальпии перехода:</label> <span>{{ transition.enthalpy_transition_err }}</span>
+                    </div>
+                    <div>
+                        <label>Энтропия перехода:</label> <span>{{ transition.entropy_transition }}</span>
+                    </div>
+                    <div>
+                        <label>Погрешность энтропии перехода:</label> <span>{{ transition.entropy_transition_err }}</span>
+                    </div>
+                    <div>
+                        <label>Прыжковая теплоемкость:</label> <span>{{ transition.jump_heat_capacity }}</span>
+                    </div>
+                    <div>
+                        <label>Начальная температура:</label> <span>{{ transition.start_temperature }}</span>
+                    </div>
+                    <div>
+                        <label>Конечная температура:</label> <span>{{ transition.end_temperature }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var literatureData = [
+                {% for item in literature %}
+                ["{{ item.description }}", "{{ item.url }}", "{{ item.doi }}"],
+                {% endfor %}
+            ];
+
+            jspreadsheet(document.getElementById('literature-table'), {
+                data: literatureData,
+                columns: [
+                    { type: 'text', title: 'Описание', width: 200 },
+                    { type: 'text', title: 'Ссылка', width: 300 },
+                    { type: 'text', title: 'DOI', width: 150 }
+                ]
+            });
+
+            var functionsData = [];
+            {% for row in functions_data %}
+            {% if row|length == 1 %}
+            functionsData.push([{ value: "{{ row.0 }}", style: "text-align: center; font-weight: bold;" }]);
+            {% else %}
+            functionsData.push(["{{ row.0 }}", "{{ row.1 }}", "{{ row.2 }}", "{{ row.3 }}", "{{ row.4 }}"]);
+            {% endif %}
+            {% endfor %}
+
+            jspreadsheet(document.getElementById('functions-table'), {
+                data: functionsData,
+                columns: [
+                    { type: 'text', title: 'T', width: 100 },
+                    { type: 'text', title: 'Cp', width: 100 },
+                    { type: 'text', title: 'HT_H0', width: 100 },
+                    { type: 'text', title: 'ST', width: 100 },
+                    { type: 'text', title: 'GT', width: 100 }
+                ],
+                minDimensions: [5, 10]
+            });
+        });
+    </script>
+<a href="{% url 'generate_pdf' substance.id %}" target="_blank">Скачать PDF</a>
+
+</body>
+</html>

@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block title %} Thermopol {% endblock %}
 {% load static %}
-
+ {% block head_l %}
+<link rel="stylesheet" href="{% static 'mycss/login.css' %}">
+ <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" type="text/css"/>
+{% endblock %}
 {% block content %}
-<div class="box"
-     style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;">
-    <h2 style="margin-top: 0;">Вход</h2>
+<div style="width:100%; display:flex; flex-direction:column;align-items:center">
+<div class="box log-box">
+    <h2 style="margin-top: 0; ">Вход</h2>
     <form method="post"
           class="form-outline"
-          style="width:fit-content; display: flex!important;flex-direction:column; justify-items: flex-start;align-items: center;"
             data-mdb-input-init
     >
         {% csrf_token %}
@@ -27,10 +29,10 @@
                    autocompleted="">
             <label class="form-label" for="id_password">Пароль:</label>
 
-
         </div>
-        <button class="general-button" style="align-self:center;" type="submit">Войти</button>
+        <br>
+        <button class="general-button base-btn log-b"  type="submit">ВОЙТИ</button>
     </form>
 </div>
-
+</div>
 {% endblock %}

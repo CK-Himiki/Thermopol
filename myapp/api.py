@@ -4,8 +4,12 @@ from rest_framework import status, generics
 from .models import *
 from .serializers import *
 
-class SourceView(APIView):
 
+class SourceView(APIView):
+    authentication_classes = []
+
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     def post(self, request):
         # import debug
@@ -60,7 +64,7 @@ class SourceView(APIView):
                 else:
                     return Response(transition_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+            print("test compl")
             # Сохранение вещества
             substance_data = {
                 'substance_class': substance_class.id, # ПОПРАВИТЬ
@@ -74,10 +78,12 @@ class SourceView(APIView):
                 'phases': phases_ids,
                 'transitions': transition_ids
             }
-
+            print("test compl")
             substance_serializer = SubstanceSerializer(data=substance_data)
             if substance_serializer.is_valid():
+                print("test compl TRUE")
                 substance = substance_serializer.save()
+                print("test compl TRUEEEEE")
 
             else:
                 return Response(substance_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
