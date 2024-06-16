@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали вещества</title>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .state-block, .transition-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .state-block p, .transition-block p {
+            margin: 5px 0;
+        }
+        .state-block div, .transition-block div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .state-block label, .transition-block label {
+            flex: 1 1 150px;
+            font-weight: bold;
+        }
+        .state-block span, .transition-block span {
+            flex: 2 1 300px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .state-header {
+            text-align: center;
+            font-weight: bold;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>Характеристики вещества</h2>
+            <p><strong>Имя:</strong> {{ substance.name }}</p>
+            <p><strong>Формула:</strong> {{ substance.formula }}</p>
+            <p><strong>Класс:</strong> {{ substance.substance_class }}</p>
+            <p><strong>Тип:</strong> {{ substance.substance_type }}</p>
+            <p><strong>CAS:</strong> {{ substance.cas }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Литература</h2>
+            <table id="literature-table">
+                <thead>
+                    <tr>
+                        <th>Описание</th>
+                        <th>Ссылка</th>
+                        <th>DOI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in literature %}
+                    <tr>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.url }}</td>
+                        <td>{{ item.doi }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Состояния</h2>
+            {% for state in states %}
+            <div class="state-block">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>Агрегатное состояние:</strong></td>
+                            <td>{{ state.agregate_state }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Номер фазы:</strong></td>
+                            <td>{{ state.number_phase }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Степень кристалличности:</strong></td>
+                            <td>{{ state.degree_of_crystallinity }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энтальпия сгорания:</strong></td>
+                            <td>{{ state.enthalpy_of_combustion }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность энтальпии сгорания:</strong></td>
+                            <td>{{ state.enthalpy_of_combustion_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энтальпия образования:</strong></td>
+                            <td>{{ state.enthalpy_of_formation }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность энтальпии образования:</strong></td>
+                            <td>{{ state.enthalpy_of_formation_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энтропия образования:</strong></td>
+                            <td>{{ state.entropy_of_formation }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность энтропии образования:</strong></td>
+                            <td>{{ state.entropy_of_formation_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энергия Гиббса образования:</strong></td>
+                            <td>{{ state.gibbs_energy_of_formation }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность энергии Гиббса образования:</strong></td>
+                            <td>{{ state.gibbs_energy_of_formation_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>lnK:</strong></td>
+                            <td>{{ state.lnK }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Остаточная энтропия при 0 K:</strong></td>
+                            <td>{{ state.residual_entropy_at_0_k }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность остаточной энтропии при 0 K:</strong></td>
+                            <td>{{ state.residual_entropy_at_0_k_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Конфигурационная энтропия:</strong></td>
+                            <td>{{ state.configurational_entropy }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность конфигурационной энтропии:</strong></td>
+                            <td>{{ state.configurational_entropy_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Разность нулевой точки:</strong></td>
+                            <td>{{ state.difference_of_zero }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность разности нулевой точки:</strong></td>
+                            <td>{{ state.difference_of_zero_err }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+
+            <div class="table-container">
+                <h2>Таблица функций</h2>
+                <table id="functions-table">
+                    <thead>
+                        <tr>
+                            <th>T</th>
+                            <th>Cp</th>
+                            <th>HT_H0</th>
+                            <th>ST</th>
+                            <th>GT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in functions_data %}
+                        <tr>
+                            {% for cell in row %}
+                            <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Переходы</h2>
+            {% for transition in transitions %}
+            <div class="transition-block">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>Фаза источник:</strong></td>
+                            <td>{{ transition.source_phase }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Фаза цель:</strong></td>
+                            <td>{{ transition.target_phase }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Номер фазы источник:</strong></td>
+                            <td>{{ transition.source_phase_number }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Номер фазы цель:</strong></td>
+                            <td>{{ transition.target_phase_number }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Температура:</strong></td>
+                            <td>{{ transition.temperature  }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность температуры:</strong></td>
+                            <td>{{ transition.temperature_err }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энтальпия перехода:</strong></td>
+                            <td>{{ transition.enthalpy_transition }}</td>
+                        </tr>
+                                                <tr>
+                            <td><strong>Погрешность энтальпии перехода:</strong></td>
+                            <td>{{ transition.enthalpy_transition_err  }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Энтропия перехода:</strong></td>
+                            <td>{{ transition.entropy_transition }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Погрешность энтропии перехода:</strong></td>
+                            <td>{{ transition.entropy_transition_err }}</td>
+                        </tr>
+                                            <tr>
+                            <td><strong>Прыжковая теплоемкость::</strong></td>
+                            <td>{{ transition.jump_heat_capacity  }}</td>
+                        </tr>
+                                            <tr>
+                            <td><strong>Начальная температура:</strong></td>
+                            <td>{{ transition.start_temperature  }}</td>
+                        </tr>
+                                            <tr>
+                            <td><strong>Конечная температура:</strong></td>
+                            <td>{{ transition.end_temperature }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
