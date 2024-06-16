@@ -233,40 +233,7 @@ function editState(li) {
 
     // <!-- JEXCEL -->
 
-// Инициализация jExcel таблицы
-document.addEventListener('DOMContentLoaded', function() {
-    jspreadsheet(document.getElementById('spreadsheet'), {
-        data: [
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', ''],
-            ['', '', '', '', '']
-        ],
-        columns: [{
-            type: 'text',
-            title: 'T',
-            width: 120
-        }, {
-            type: 'text',
-            title: 'Cp',
-            width: 120
-        }, {
-            type: 'text',
-            title: 'H',
-            width: 120
-        }, {
-            type: 'text',
-            title: 'S',
-            width: 120
-        }, {
-            type: 'text',
-            title: 'G',
-            width: 120
-        }],
-        minDimensions: [5, 5]
-    });
-});
+
 
 
     // <!-- SEND_DATA_TO_DATA_BASE -->

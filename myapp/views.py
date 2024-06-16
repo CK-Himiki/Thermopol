@@ -25,6 +25,114 @@ from django.shortcuts import render, get_object_or_404
 from django.shortcuts import render
 from .models import Substance, Phase, Source, Transition
 
+
+
+
+
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def receive_data(request):
+
+    return JsonResponse({'status': 'fail', 'message': 'Invalid request'}, status=400)
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def handle_post_data(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            column1 = data['column1']
+            column2 = data['column2']
+
+            # Пример обработки данных
+            column3 = [x.upper() for x in column1]  # Пример преобразования данных для колонки 3
+            column4 = [x.lower() for x in column2]  # Пример преобразования данных для колонки 4
+            column5 = [len(x) for x in column1]    # Пример преобразования данных для колонки 5
+
+            # Формируем объект для отправки обратно на клиент
+            response_data = {
+                'column3': column3,
+                'column4': column4,
+                'column5': column5
+            }
+
+            # Возвращаем успешный ответ с данными
+            return JsonResponse(response_data)
+
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Ошибка декодирования JSON.'}, status=400)
+        except KeyError as e:
+            return JsonResponse({'error': 'Отсутствует ожидаемое поле в JSON.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Метод не поддерживается.'}, status=405)
+
+
+@csrf_exempt
+def handle_post_data_table(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            column1 = data['column1']
+            column2 = data['column2']
+            column3 = data['column3']
+            column4 = data['column4']
+            column5 = data['column5']
+            # Пример обработки данных
+
+            column3 = [x.upper() for x in column1]  # Пример преобразования данных для колонки 3
+            column4 = [x.lower() for x in column2]  # Пример преобразования данных для колонки 4
+            column5 = [len(x) for x in column1]    # Пример преобразования данных для колонки 5
+
+            # Формируем объект для отправки обратно на клиент
+            response_data = {
+                'column1': column1,
+                'column2': column2,
+                'column3': column3,
+                'column4': column4,
+                'column5': column5,
+                'Error': 4.95 # процент ошибки
+            }
+
+            # Возвращаем успешный ответ с данными
+            return JsonResponse(response_data)
+
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Ошибка декодирования JSON.'}, status=400)
+        except KeyError as e:
+            return JsonResponse({'error': 'Отсутствует ожидаемое поле в JSON.'}, status=400)
+    else:
+        return JsonResponse({'error': 'Метод не поддерживается.'}, status=405)
+
+
+@csrf_exempt
+def handle_post_data_table_Error(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        # Обработка данных, например:
+        column1 = data['column1']
+        column2 = data['column2']
+        column3 = data['column3']
+        column4 = data['column4']
+        column5 = data['column5']
+
+
+        response_number = 4.95 # процент ошибки
+
+        return JsonResponse({'Error': response_number})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
 def home(request):
     return render(request, "index.html", None)
 

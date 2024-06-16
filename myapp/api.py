@@ -95,6 +95,8 @@ class SourceView(APIView):
             print("Exception:", str(e))  # Отладка: вывод исключения
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+
 class SubstanceListView(generics.ListAPIView):
     queryset = Substance.objects.all()
     serializer_class = SubstanceSerializer
@@ -114,3 +116,7 @@ class PhaseListView(generics.ListAPIView):
 class TransitionListView(generics.ListAPIView):
     queryset = Transition.objects.all()
     serializer_class = TransitionSerializer
+
+
+
+

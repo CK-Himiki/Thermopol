@@ -1,7 +1,14 @@
 from django.urls import path
 from .api import SourceView, SubstanceListView, SubstanceDetailView, PhaseListView, TransitionListView
 
+
+
 app_name = 'myapp'
+
+
+
+
+
 
 urlpatterns = [
     path('getsubstance/', SubstanceListView.as_view(), name='substance_list'),

@@ -53,5 +53,9 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path('register/', views.register, name='register'),
     path('api/', include('myapp.api_urls', namespace='api')),
+    path('functionСalculation/', views.handle_post_data, name='handle_post_data'),
+    path('Extrapolation/', views.handle_post_data_table, name='handle_post_data_table'),
+    path('ExtrapolationError/', views.handle_post_data_table_Error, name='handle_post_data_table_Error'),
     path("favicon.ico", lambda request: redirect("static/favicon.ico"))
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
