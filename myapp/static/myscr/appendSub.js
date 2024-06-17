@@ -4,6 +4,9 @@
 
 // Глобальная переменная для хранения данных о литературе
 let literatureData = [];
+var AggregateStateDicts =[];
+
+
 
 function addArticle() {
     const articleName = document.getElementById('articleName').value;
@@ -12,7 +15,7 @@ function addArticle() {
     if (articleName && articleLink && doiNumber) {
         // Добавление данных в глобальную переменную
         const newArticle = {
-            name: articleName,
+            description: articleName,
             link: articleLink,
             doi: doiNumber
         };
@@ -65,74 +68,152 @@ function editArticle(li) {
 
 
     // <!-- TRANSITION -->
+          // Глобальная переменная для хранения данных о переходах
+        let phaseTransitionsList = [];
 
-function addTransition() {
-    const sourcePhase = document.getElementById('source_phase').value;
-    const targetPhase = document.getElementById('target_phase').value;
-    const sourcePhaseNumber = document.getElementById('source_phase_number').value;
-    const targetPhaseNumber = document.getElementById('target_phase_number').value;
-    const temperature = document.getElementById('temperature').value;
-    const temperatureErr = document.getElementById('temperature_err').value;
-    const enthalpyTransition = document.getElementById('enthalpy_transition').value;
-    const enthalpyTransitionErr = document.getElementById('enthalpy_transition_err').value;
-    const entropyTransition = document.getElementById('entropy_transition').value;
-    const entropyTransitionErr = document.getElementById('entropy_transition_err').value;
-    const jumpHeatCapacity = document.getElementById('jump_heat_capacity').value;
-    const startTemperature = document.getElementById('start_temperature').value;
-    const endTemperature = document.getElementById('end_temperature').value;
-    const li = document.createElement('li');
-    let transitionData = '';
-    if (sourcePhase) transitionData += `${sourcePhase} - `;
-    if (targetPhase) transitionData += `${targetPhase} - `;
-    if (sourcePhaseNumber) transitionData += `${sourcePhaseNumber} - `;
-    if (targetPhaseNumber) transitionData += `${targetPhaseNumber} - `;
-    if (temperature) transitionData += `${temperature} - `;
-    if (temperatureErr) transitionData += `${temperatureErr} - `;
-    if (enthalpyTransition) transitionData += `${enthalpyTransition} - `;
-    if (enthalpyTransitionErr) transitionData += `${enthalpyTransitionErr} - `;
-    if (entropyTransition) transitionData += `${entropyTransition} - `;
-    if (entropyTransitionErr) transitionData += `${entropyTransitionErr} - `;
-    if (jumpHeatCapacity) transitionData += `${jumpHeatCapacity} - `;
-    if (startTemperature) transitionData += `${startTemperature} - `;
-    if (endTemperature) transitionData += `${endTemperature}`;
-    if (transitionData) {
-        li.textContent = transitionData.trim();
-        li.ondblclick = function() {
-            editTransition(li);
-        };
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Удалить';
-        deleteButton.style.marginLeft = '10px';
-        deleteButton.onclick = function() {
-            li.remove();
-        };
-        li.appendChild(deleteButton);
-        document.getElementById('transitionList').appendChild(li);
-        // Очистка полей ввода
-        document.getElementById('source_phase').value = '';
-        document.getElementById('target_phase').value = '';
-        document.getElementById('source_phase_number').value = '';
-        document.getElementById('target_phase_number').value = '';
-        document.getElementById('temperature').value = '';
-        document.getElementById('temperature_err').value = '';
-        document.getElementById('enthalpy_transition').value = '';
-        document.getElementById('enthalpy_transition_err').value = '';
-        document.getElementById('entropy_transition').value = '';
-        document.getElementById('entropy_transition_err').value = '';
-        document.getElementById('jump_heat_capacity').value = '';
-        document.getElementById('start_temperature').value = '';
-        document.getElementById('end_temperature').value = '';
-    } else {
-        alert('Пожалуйста, заполните хотя бы одно поле.');
-    }
-}
+        function addTransition() {
+            const sourcePhase = document.getElementById('source_phase').value;
+            const targetPhase = document.getElementById('target_phase').value;
+            const sourcePhaseNumber = document.getElementById('source_phase').selectedIndex + 1;
+            const targetPhaseNumber = document.getElementById('target_phase').selectedIndex + 1;
+            const temperature = document.getElementById('temperature').value;
+            const temperatureErr = document.getElementById('temperature_err').value;
+            const enthalpyTransition = document.getElementById('enthalpy_transition').value;
+            const enthalpyTransitionErr = document.getElementById('enthalpy_transition_err').value;
+            const entropyTransition = document.getElementById('entropy_transition').value;
+            const entropyTransitionErr = document.getElementById('entropy_transition_err').value;
+            const jumpHeatCapacity = document.getElementById('jump_heat_capacity').value;
+            const startTemperature = document.getElementById('start_temperature').value;
+            const endTemperature = document.getElementById('end_temperature').value;
 
+            if (sourcePhaseNumber && targetPhaseNumber && temperature) {
+                // Добавление данных в глобальную переменную
+                const newTransition = {
+                    source_phase: sourcePhase,
+                    target_phase: targetPhase,
+                    source_phase_number: sourcePhaseNumber,
+                    target_phase_number: targetPhaseNumber,
+                    temperatureErr: temperatureErr,
+                    enthalpyTransition: enthalpyTransition,
+                    enthalpyTransitionErr: enthalpyTransitionErr,
+                    entropyTransition: entropyTransition,
+                    entropyTransitionErr: entropyTransitionErr,
+                    jumpHeatCapacity: jumpHeatCapacity,
+                    startTemperature: startTemperature,
+                    endTemperature: endTemperature
+                };
+                phaseTransitionsList.push(newTransition);
+
+
+                // Создание элемента списка и добавление его в listBox
+                const li = document.createElement('li');
+                li.textContent = `${sourcePhase} - ${targetPhase} - ${sourcePhaseNumber} - ${targetPhaseNumber} - ${temperature} - ${temperatureErr} - ${enthalpyTransition} - ${enthalpyTransitionErr} - ${entropyTransition} - ${entropyTransitionErr} - ${jumpHeatCapacity} - ${startTemperature} - ${endTemperature}`;
+                li.ondblclick = function() {
+                    editTransition(li);
+                };
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Удалить';
+                deleteButton.style.marginLeft = '10px';
+                deleteButton.onclick = function() {
+                    li.remove();
+                    // Удаление данных из глобальной переменной при удалении из listBox
+                    phaseTransitionsList = phaseTransitionsList.filter(transition => !(transition.sourcePhase === sourcePhase &&
+                        transition.targetPhase === targetPhase &&
+                        transition.sourcePhaseNumber === sourcePhaseNumber &&
+                        transition.targetPhaseNumber === targetPhaseNumber &&
+                        transition.temperature === temperature &&
+                        transition.temperatureErr === temperatureErr &&
+                        transition.enthalpyTransition === enthalpyTransition &&
+                        transition.enthalpyTransitionErr === enthalpyTransitionErr &&
+                        transition.entropyTransition === entropyTransition &&
+                        transition.entropyTransitionErr === entropyTransitionErr &&
+                        transition.jumpHeatCapacity === jumpHeatCapacity &&
+                        transition.startTemperature === startTemperature &&
+                        transition.endTemperature === endTemperature));
+                };
+                li.appendChild(deleteButton);
+                document.getElementById('transitionList').appendChild(li);
+                // Очистка полей ввода
+                document.getElementById('source_phase').value = '';
+                document.getElementById('target_phase').value = '';
+                document.getElementById('source_phase_number').value = '';
+                document.getElementById('target_phase_number').value = '';
+                document.getElementById('temperature').value = '';
+                document.getElementById('temperature_err').value = '';
+                document.getElementById('enthalpy_transition').value = '';
+                document.getElementById('enthalpy_transition_err').value = '';
+                document.getElementById('entropy_transition').value = '';
+                document.getElementById('entropy_transition_err').value = '';
+                document.getElementById('jump_heat_capacity').value = '';
+                document.getElementById('start_temperature').value = '';
+                document.getElementById('end_temperature').value = '';
+            } else {
+                alert('Пожалуйста, заполните обязательные поля: номер исходной фазы, номер конечной фазы и температура.');
+            }
+        }
+
+        function editTransition(li) {
+            const [sourcePhase, targetPhase, sourcePhaseNumber, targetPhaseNumber, temperature, temperatureErr, enthalpyTransition, enthalpyTransitionErr, entropyTransition, entropyTransitionErr, jumpHeatCapacity, startTemperature, endTemperature] = li.textContent.split(' - ');
+            const newSourcePhase = prompt('Исходная фаза', sourcePhase);
+            const newTargetPhase = prompt('Конечная фаза', targetPhase);
+            const newSourcePhaseNumber = prompt('Номер исходной фазы', sourcePhaseNumber);
+            const newTargetPhaseNumber = prompt('Номер конечной фазы', targetPhaseNumber);
+            const newTemperature = prompt('Температура', temperature);
+            const newTemperatureErr = prompt('Ошибка температуры', temperatureErr);
+            const newEnthalpyTransition = prompt('Энтальпия перехода', enthalpyTransition);
+            const newEnthalpyTransitionErr = prompt('Ошибка энтальпии перехода', enthalpyTransitionErr);
+            const newEntropyTransition = prompt('Энтропия перехода', entropyTransition);
+            const newEntropyTransitionErr = prompt('Ошибка энтропии перехода', entropyTransitionErr);
+            const newJumpHeatCapacity = prompt('Скачок теплоемкости', jumpHeatCapacity);
+            const newStartTemperature = prompt('Начальная температура', startTemperature);
+            const newEndTemperature = prompt('Конечная температура', endTemperature);
+
+            if (newSourcePhase && newTargetPhase && newSourcePhaseNumber && newTargetPhaseNumber && newTemperature) {
+                // Обновление данных в глобальной переменной
+                transitionDataList = transitionDataList.map(transition => {
+                    if (transition.sourcePhase === sourcePhase &&
+                        transition.targetPhase === targetPhase &&
+                        transition.sourcePhaseNumber === sourcePhaseNumber &&
+                        transition.targetPhaseNumber === targetPhaseNumber &&
+                        transition.temperature === temperature &&
+                        transition.temperatureErr === temperatureErr &&
+                        transition.enthalpyTransition === enthalpyTransition &&
+                        transition.enthalpyTransitionErr === enthalpyTransitionErr &&
+                        transition.entropyTransition === entropyTransition &&
+                        transition.entropyTransitionErr === entropyTransitionErr &&
+                        transition.jumpHeatCapacity === jumpHeatCapacity &&
+                        transition.startTemperature === startTemperature &&
+                        transition.endTemperature === endTemperature) {
+                        return {
+                            sourcePhase: newSourcePhase,
+                            targetPhase: newTargetPhase,
+                            sourcePhaseNumber: newSourcePhaseNumber,
+                            targetPhaseNumber: newTargetPhaseNumber,
+                            temperature: newTemperature,
+                            temperatureErr: newTemperatureErr,
+                            enthalpyTransition: newEnthalpyTransition,
+                            enthalpyTransitionErr: newEnthalpyTransitionErr,
+                            entropyTransition: newEntropyTransition,
+                            entropyTransitionErr: newEntropyTransitionErr,
+                            jumpHeatCapacity: newJumpHeatCapacity,
+                            startTemperature: newStartTemperature,
+                            endTemperature: newEndTemperature
+                        };
+                    }
+                    return transition;
+                });
+                li.childNodes[0].nodeValue = `${newSourcePhase} - ${newTargetPhase} - ${newSourcePhaseNumber} - ${newTargetPhaseNumber} - ${newTemperature} - ${newTemperatureErr} - ${newEnthalpyTransition} - ${newEnthalpyTransitionErr} - ${newEntropyTransition} - ${newEntropyTransitionErr} - ${newJumpHeatCapacity} - ${newStartTemperature} - ${newEndTemperature}`;
+            }
+        }
 
     // <!-- STATE -->
 
+// Глобальная переменная для хранения данных о переходах
+let stateData = [];
+
 function addState() {
     const stateName = document.getElementById('stateName').value;
-    const stateNumber = document.getElementById('stateNumber').value;
+    const stateNumber = document.getElementById('stateNumber').selectedIndex + 1;
     const degreeOfCrystallinity = document.getElementById('degree_of_crystallinity').value;
     const enthalpyOfCombustion = document.getElementById('enthalpy_of_combustion').value;
     const enthalpyOfCombustionErr = document.getElementById('enthalpy_of_combustion_err').value;
@@ -149,7 +230,30 @@ function addState() {
     const configurationalEntropyErr = document.getElementById('configurational_entropy_err').value;
     const differenceOfZero = document.getElementById('difference_of_zero').value;
     const differenceOfZeroErr = document.getElementById('difference_of_zero_err').value;
+
     if (stateName && stateNumber) {
+        const newState = {
+            agregate_state: stateName,
+            number_phase: stateNumber,
+            degreeOfCrystallinity: degreeOfCrystallinity,
+            enthalpyOfCombustion: enthalpyOfCombustion,
+            enthalpyOfCombustionErr: enthalpyOfCombustionErr,
+            enthalpyOfFormation: enthalpyOfFormation,
+            enthalpyOfFormationErr: enthalpyOfFormationErr,
+            entropyOfFormation: entropyOfFormation,
+            entropyOfFormationErr: entropyOfFormationErr,
+            gibbsEnergyOfFormation: gibbsEnergyOfFormation,
+            gibbsEnergyOfFormationErr: gibbsEnergyOfFormationErr,
+            lnK: lnK,
+            residualEntropyAt0K: residualEntropyAt0K,
+            residualEntropyAt0KErr: residualEntropyAt0KErr,
+            configurationalEntropy: configurationalEntropy,
+            configurationalEntropyErr: configurationalEntropyErr,
+            differenceOfZero: differenceOfZero,
+            differenceOfZeroErr: differenceOfZeroErr
+        };
+        stateData.push(newState);
+
         const li = document.createElement('li');
         li.textContent = `${stateName} - ${stateNumber} - ${degreeOfCrystallinity} - ${enthalpyOfCombustion} - ${enthalpyOfCombustionErr} - ${enthalpyOfFormation} - ${enthalpyOfFormationErr} - ${entropyOfFormation} - ${entropyOfFormationErr} - ${gibbsEnergyOfFormation} - ${gibbsEnergyOfFormationErr} - ${lnK} - ${residualEntropyAt0K} - ${residualEntropyAt0KErr} - ${configurationalEntropy} - ${configurationalEntropyErr} - ${differenceOfZero} - ${differenceOfZeroErr}`;
         li.ondblclick = function() {
@@ -160,10 +264,11 @@ function addState() {
         deleteButton.style.marginLeft = '10px';
         deleteButton.onclick = function() {
             li.remove();
+            stateData = stateData.filter(state => !(state.name === stateName && state.number === stateNumber));
         };
         li.appendChild(deleteButton);
         document.getElementById('stateList').appendChild(li);
-        // Очистка полей ввода
+
         document.getElementById('stateName').value = '';
         document.getElementById('stateNumber').value = '';
         document.getElementById('degree_of_crystallinity').value = '';
@@ -207,6 +312,7 @@ function editState(li) {
     const configurationalEntropyErr = data[15];
     const differenceOfZero = data[16];
     const differenceOfZeroErr = data[17];
+
     const newStateName = prompt('Название агрегатного состояния', stateName);
     const newStateNumber = prompt('Номер агрегатного состояния', stateNumber);
     const newDegreeOfCrystallinity = prompt('Degree of Crystallinity', degreeOfCrystallinity);
@@ -225,78 +331,91 @@ function editState(li) {
     const newConfigurationalEntropyErr = prompt('Configurational Entropy Error', configurationalEntropyErr);
     const newDifferenceOfZero = prompt('Difference of Zero', differenceOfZero);
     const newDifferenceOfZeroErr = prompt('Difference of Zero Error', differenceOfZeroErr);
+
     if (newStateName && newStateNumber) {
+        stateData = stateData.map(state => {
+            if (state.name === stateName && state.number === stateNumber) {
+                return {
+                    name: newStateName,
+                    number: newStateNumber,
+                    degreeOfCrystallinity: newDegreeOfCrystallinity,
+                    enthalpyOfCombustion: newEnthalpyOfCombustion,
+                    enthalpyOfCombustionErr: newEnthalpyOfCombustionErr,
+                    enthalpyOfFormation: newEnthalpyOfFormation,
+                    enthalpyOfFormationErr: newEnthalpyOfFormationErr,
+                    entropyOfFormation: newEntropyOfFormation,
+                    entropyOfFormationErr: newEntropyOfFormationErr,
+                    gibbsEnergyOfFormation: newGibbsEnergyOfFormation,
+                    gibbsEnergyOfFormationErr: newGibbsEnergyOfFormationErr,
+                    lnK: newLnK,
+                    residualEntropyAt0K: newResidualEntropyAt0K,
+                    residualEntropyAt0KErr: newResidualEntropyAt0KErr,
+                    configurationalEntropy: newConfigurationalEntropy,
+                    configurationalEntropyErr: newConfigurationalEntropyErr,
+                    differenceOfZero: newDifferenceOfZero,
+                    differenceOfZeroErr: newDifferenceOfZeroErr
+                };
+            }
+            return state;
+        });
         li.childNodes[0].nodeValue = `${newStateName} - ${newStateNumber} - ${newDegreeOfCrystallinity} - ${newEnthalpyOfCombustion} - ${newEnthalpyOfCombustionErr} - ${newEnthalpyOfFormation} - ${newEnthalpyOfFormationErr} - ${newEntropyOfFormation} - ${newEntropyOfFormationErr} - ${newGibbsEnergyOfFormation} - ${newGibbsEnergyOfFormationErr} - ${newLnK} - ${newResidualEntropyAt0K} - ${newResidualEntropyAt0KErr} - ${newConfigurationalEntropy} - ${newConfigurationalEntropyErr} - ${newDifferenceOfZero} - ${newDifferenceOfZeroErr}`;
     }
 }
 
 
+
     // <!-- JEXCEL -->
 
-
-
+// Инициализация jExcel таблицы
+/*
+document.addEventListener('DOMContentLoaded', function() {
+    jspreadsheet(document.getElementById('spreadsheet'), {
+        data: [
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', ''],
+            ['', '', '', '', '']
+        ],
+        columns: [{
+            type: 'text',
+            title: 'T',
+            width: 120
+        }, {
+            type: 'text',
+            title: 'Cp',
+            width: 120
+        }, {
+            type: 'text',
+            title: 'H',
+            width: 120
+        }, {
+            type: 'text',
+            title: 'S',
+            width: 120
+        }, {
+            type: 'text',
+            title: 'G',
+            width: 120
+        }],
+        minDimensions: [5, 5]
+    });
+});
+*/
 
     // <!-- SEND_DATA_TO_DATA_BASE -->
 
 async function sendData() {
     // Инициализация переменных для тестов
-    const substanceClass = "Гели"; // Замените на тестовое значение
-    const substanceType = "Олигомер"; // Замените на тестовое значение
-    const name = "name_value"; // Замените на тестовое значение
-    const formula = "formula_value"; // Замените на тестовое значение
-    const source = "source_value"; // Замените на тестовое значение
-    const cas = "123"; // Замените на тестовое значение
-    const literatureList = [{
-        description: "description1",
-        url: "http://example1.com",
-        doi: "123"
-    }, {
-        description: "description2",
-        url: "http://example1.com",
-        doi: "123456789"
-    }, ]; // Пример тестовых данных для literatureList
-    const AggregateStatesList = [{
-        "state": 0,
-        "agregate_state": "Glass",
-        "number_phase": 6,
-        "degree_of_crystallinity": 0.5,
-        "enthalpy_of_combustion": 100.0,
-        "enthalpy_of_combustion_err": 0.1,
-        "enthalpy_of_formation": 50.0,
-        "enthalpy_of_formation_err": 0.05,
-        "entropy_of_formation": 10.0,
-        "entropy_of_formation_err": 0.01,
-        "gibbs_energy_of_formation": -20.0,
-        "gibbs_energy_of_formation_err": 0.02,
-        "lnK": 0.5,
-        "residual_entropy_at_0_k": 1.0,
-        "residual_entropy_at_0_k_err": 0.01,
-        "configurational_entropy": 5.0,
-        "configurational_entropy_err": 0.05,
-        "difference_of_zero": 0.1,
-        "difference_of_zero_err": 0.01,
-        "T": [300, 310, 320],
-        "Cp": [1.0, 1.1, 1.2],
-        "HT_H0": [0.1, 0.2, 0.3],
-        "ST": [0.01, 0.02, 0.03],
-        "GT": [0.001, 0.002, 0.003]
-    }];
-    const phaseTransitionsList = [{
-        "transition": 1,
-        "source_phase": "Glass",
-        "target_phase": "Glass",
-        "source_phase_number": 1,
-        "target_phase_number": 2,
-        "temperature": 100,
-        "temperature_err": 1,
-        "enthalpy_transition": 50,
-        "enthalpy_transition_err": 2,
-        "entropy_transition": 30,
-        "entropy_transition_err": 1,
-        "jump_heat_capacity": 10,
-        "start_temperature": 0,
-        "end_temperature": 100
-    }];
+            const name = document.getElementById('substanceName').value;
+            const cas = document.getElementById('casNumber').value;
+            const formula = document.getElementById('formula').value;
+            const substanceClass = document.getElementById('class').value;
+            const substanceType = document.getElementById('type').value;
+            const source = document.getElementById('substanceSource').value;
+
+
+    console.log(phaseTransitionsList);
     const data = {
         substance_class: substanceClass,
         substance_type: substanceType,
@@ -304,8 +423,8 @@ async function sendData() {
         formula: formula,
         cas: cas,
         source: source,
-        literature: literatureList,
-        AggregateState: AggregateStatesList,
+        literature: literatureData,
+        AggregateState: stateData,
         transactions_list: phaseTransitionsList,
     };
     console.log("Data to be sent:", JSON.stringify(data)); // Логирование данных
@@ -345,3 +464,77 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+//             JV  code
+//Необходимо реализовать добавление
+// агрегатных состояний и фазовых переходов в множество (аналогично литературе);
+
+function ConsF(){
+    console.log("something");
+    let tempr_per = transitionDataList.map(elem => parseFloat(elem["temperature"]));
+    let tem_flag =0;
+    let alch = document.getElementById("AggregateStateCont").querySelectorAll('select, input');
+    AggregateStateDict = {};
+    
+    alch.forEach(function(element) {
+        if (element.id=="stateName") {
+            AggregateStateDict["agregate_state"] = element.value||"";
+            AggregateStateDict["state"]=parseInt(element.selectedIndex);
+            return;
+        }
+        if (element.id=="stateNumber") {
+            AggregateStateDict["number_phase"]=parseInt(element.selectedIndex)+1;
+            return;
+        }
+        AggregateStateDict[element.id] = parseFloat(element.value)||0;
+        //if (element.tagName=="SELECT")  AggregateStateDict[element.id] = parseInt(element.selectedIndex);
+    });
+    let tblsel = document.getElementById("spreadsheet");
+    let temcol_data = parseInt(tblsel.querySelector('[title="T"]').getAttribute('data-x'));
+    let n = tblsel.childNodes.length;
+    tblsel =Array.from(tblsel.querySelectorAll("tr"));
+    let b=0, e=0;
+    AggregateStateDict["T"] =[];
+    AggregateStateDict["Cp"] = [];
+    AggregateStateDict["HT_H0"] = [];
+    AggregateStateDict["ST"] =[];
+    AggregateStateDict["GT"] = [];
+    for (let t of tblsel.map(element=>element.childNodes[1+temcol_data].textContent)) {
+        if ((parseFloat(t)||-1) >=tempr_per[tem_flag])  {  //тут включительно!!!
+            for (let i=1; i<n+1;i++ ){;
+                let td = tblsel.map(element=>element.childNodes[i].textContent);
+                if (td[0]=="T") AggregateStateDict["T"] = td.slice(b+(b==0),e).map(element=>parseFloat(element)||0);
+                if (td[0]=="Cp") AggregateStateDict["Cp"] = td.slice(b+(b==0),e).map(element=>parseFloat(element)||0);
+                if (td[0]=="H") AggregateStateDict["HT_H0"] = td.slice(+(b==0),e).map(element=>parseFloat(element)||0);
+                if (td[0]=="S") AggregateStateDict["ST"] = td.slice(b+(b==0),e).map(element=>parseFloat(element)||0);
+                if (td[0]=="G") AggregateStateDict["GT"] = td.slice(b+(b==0),e).map(element=>parseFloat(element)||0);
+            }
+            if (b!=e){
+                //где-то тут ОШИБКА!!!!
+            AggregateStateDict["agregate_state"] = (transitionDataList[tem_flag])["sourcePhase"]||"";
+            AggregateStateDict["state"]=parseInt((transitionDataList[tem_flag])["sourcePhase"]);
+            AggregateStateDict["number_phase"] = parseInt((transitionDataList[tem_flag])["sourcePhaseNumber"])
+            AggregateStateDicts.push(AggregateStateDict);
+            console.log(AggregateStateDicts, "djskdskdfs");
+            }
+            tem_flag++;
+            b=e;
+        }
+        e++;
+    }
+    console.log(AggregateStateDict);
+    if (b!=e) AggregateStateDicts.push(AggregateStateDict);
+    console.log(transitionDataList, "!!!!!!!!!!!!");
+    console.log(tempr_per, "!!!!!!!!!!!!");
+    console.log( "!!!!!!!!!!!!");
+}
+
+
+
+
+//------
+
+
+
