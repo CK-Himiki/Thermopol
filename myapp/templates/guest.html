@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %} Добавить новое соединение {% endblock %}
+{% load static %}
+{% block content %}
+
+
+<div class="box onl-text-pg container">
+
+    <link rel="stylesheet" href="{% static 'append.css' %}">
+    <script src="{% static 'append2.js' %}"></script>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="form-group form-outline" data-mdb-input-init>
+
+                <input class="form-control" list="substance_class" placeholder="Введите класс соединения...">
+                <label class="form-label" for="substance_class">Класс соединения:</label>
+                <datalist id="substance_class">
+                    {% for class in classes %}
+                    <option value="{{ class.name }}">{{ class.name }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+
+            <div class="form-group">
+
+                <select id="substance_type" name="substance_type">
+                    {% for type in types %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+
+            <div class="form-group form-outline" data-mdb-input-init>
+
+                <input type="text" id="name" name="name" class="form-control">
+                <label class="form-label" for="name">Название:</label>
+            </div>
+
+
+            <div class="form-group form-outline" data-mdb-input-init>
+
+                <input type="text" id="formula" name="formula" class="form-control">
+                <label class="form-label" for="formula">Формула:</label>
+            </div>
+
+
+            </div>
+
+
+
+                <div class="form-group">
+                    <label for="phase-transitions">Фазовые переходы:</label>
+                    <select id="phase-transitions" name="phase-transitions" multiple>
+
+                    </select>
+
+                    <button class="add-button btn btn-primary" id="add_transition_btn">Добавить фазовый переход
+                    </button>
+
+                    <div class="phase-transition-fields">
+                        <select id="source_phase">
+                            {% for phase in phases %}
+                            <option value="{{ phase }}">{{ phase }}</option>
+                            {% endfor %}</select>
+                        <select id="target_phase">
+                            {% for phase in phases %}
+                            <option value="{{ phase }}">{{ phase }}</option>
+                            {% endfor %}</select>
+                        <select id="source_phase_number">
+                            {% for number in phase_numbers %}
+                            <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}</select>
+                        <select id="target_phase_number">
+                            {% for number in phase_numbers %}
+                            <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}</select>
+
+                        <input type="number" id="enthalpy_transition" placeholder="Энтальпия перехода"
+                               class="form-control">
+
+                    </div>
+                </div>
+
+
+
+
+            <script>
+
+            </script>
+
+
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="properties">Состояния:</label>
+                <select id="properties" name="properties" multiple>
+
+                </select>
+                <script>
+                </script>
+
+
+                <div class="property-fields">
+
+                    <select id="agregate_state">
+                        {% for phase in phases %}
+                        <option value="{{ phase }}">{{ phase }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="number_phase">
+                        {% for number in phase_numbers %}
+                        <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}</select>
+
+
+                </div>
+                <button class="add-button btn btn-primary" id="add_phase_btn" >Добавить свойство</button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label for="phase-transition-table">Таблица фазового перехода:</label>
+            <table id="phase-transition-table" class="table">
+                <thead>
+                <tr>
+                    <th>T</th>
+                    <th>Cp</th>
+                    <th>H</th>
+                    <th>S</th>
+                    <th>G</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button class="add-button btn btn-primary" id="add-row">Добавить строку</button>
+            <button class="add-button btn btn-primary" id="remove-row">Удалить строку</button>
+
+        </div>
+
+        <button class="btn btn-primary" id="sendDataButton" >Выполнить вычисления</button>
+        <div id="res">
+        <table id="result_table">
+        <thead>
+                <tr>
+                    <th>T</th>
+                    <th>Cp</th>
+                    <th>H</th>
+                    <th>S</th>
+                    <th>G</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            </div>
+
+    </div>
+</div>
+<script>
+
+</script>
+
+{% endblock %}

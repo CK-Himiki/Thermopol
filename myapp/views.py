@@ -372,3 +372,12 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+def guest(request):
+    context = {
+        "types": ["Мономер", "Полимер", "Олигомер", "неизвестно"],
+        "classes": SubstanceClass.objects.all(),
+        "phases": ["Crystal", "Liquid", "Gas", "Glass", "High elastic", "Condensed", "Devitrified"],
+        "phase_numbers": ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"],
+    }
+    return render(request, "guest.html", context)

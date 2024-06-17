@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from .models import *
 from .serializers import *
+from .mymath import extrapol,m4
 
 
 class SourceView(APIView):
@@ -118,5 +119,43 @@ class TransitionListView(generics.ListAPIView):
     serializer_class = TransitionSerializer
 
 
+class MathView(APIView):
+    def post(self,request):
+
+        try:
+            # import debug
+            data = request.data
+
+            agregate_states_list = data.get('AggregateState', [])
+            lst_t=[list(filter(None,i['T'])) for i in agregate_states_list]
+            lst_cp=[list(filter(None,i['Cp'])) for i in agregate_states_list]
+            lst_t=[i for i in lst_t if i]
+            lst_cp=[i for i in lst_cp if i]
+            lst_t=[list(map(float,i)) for i in lst_t]
+            lst_cp=[list(map(float,i)) for i in lst_cp]
+            t,cp,a,b,err=extrapol(lst_t[0],lst_cp[0])
+            lst_t[0]=t
+            lst_cp[0]=cp
+
+            transactions_list = data.get('transactions_list', [])
+            coeff=[i['enthalpyTransition'] for i in transactions_list]
+
+            h,s,g=m4(lst_t,lst_cp,coeff)
+
+
+            return Response({'status': 'success',
+                             "a":a,
+                             "b":b,
+                             "mse_err":err,
+                             "t":lst_t,
+                             "cp":lst_cp,
+                             "h":h,
+                             "s":s,
+                             "g":g
+                             }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print("Exception:", str(e))  # Отладка: вывод исключения
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
