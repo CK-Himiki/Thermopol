@@ -35,7 +35,7 @@
                     <a href="/me">{{ user.username }}</a>
                     <a class="btn base-btn" href="/logout">Выйти</a>
             {% else %}
-            Гость  <a href="/login" class="btn base-btn" >Войти</a>
+            <a href="/guest">Гость</a>  <a href="/login" class="btn base-btn" >Войти</a>
              {% endif %}
 
             {% block header_mcont %} {% endblock %}

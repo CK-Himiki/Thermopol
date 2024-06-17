@@ -288,7 +288,7 @@ if (lastChild) {
 
 
 
-
+$("#result_table").hide()
 async function sendData() {
     // Инициализация переменных для тестов
     const substanceClass = $('[list="substance_class"]').val(); // Замените на тестовое значение
@@ -327,6 +327,7 @@ async function sendData() {
         return response.json();
     })
     .then(data => {
+    $("#result_table").show();
         console.log(data);
         $("#res").append("<h3>a="+data.a+"; b="+data.b+"; Ошибка MSE:"+ data.mse_err+"</h3>")
         var table=$("#result_table tbody")
