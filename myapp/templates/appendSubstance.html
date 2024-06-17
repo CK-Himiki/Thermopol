@@ -55,6 +55,10 @@
         <option value="{{ type }}">{{ type }}</option>
         {% endfor %}
       </select>
+      <div class="form-group">
+      <label for="substanceSource">Источник</label>
+      <input type="text" id="substanceSource" name="substanceSource">
+    </div>
     </div>
   </div>
     <!-- LITERATURE == ARTICLE -->
@@ -80,7 +84,7 @@
     </div>
   </div>
     <!-- STATES -->
-  <div class="container" style="display:flex; flex-direction: column; gap:0.35em">
+  <div class="container" style="display:flex; flex-direction: column; gap:0.35em" id="AggregateStateCont" >
     <h2>Агрегатные состояния</h2>
     <div class="form-group">
       <label for="stateName">Название агрегатного состояния</label>
@@ -224,8 +228,7 @@
       <input type="text" id="error_percentage" name="error_percentage">
     </div>
     <div class="buttons">
-      <button type="button" onclick="calculateExtrapolation()">Расчет ошибки экстраполяции в 0 K по степенной функции</button>
-      <button type="button" onclick="exportTableToServer()">Расчет экстраполяции в 0 K по степенной функции<</button>
+      <button type="button" onclick="calculateExtrapolation()">Расчет экстраполяции в 0 K по степенной функции</button>
     </div>
   </div>
   <div class="buttons">
@@ -240,214 +243,101 @@
 
     <script>
         // Инициализируем таблицу jExcel
-var data = [
-    ['Заголовок 1', 'Заголовок 2', 'Заголовок 3', 'Заголовок 4', 'Заголовок 5'],
-    ['', '', '', '', '']
-];
-var spreadsheet = jexcel(document.getElementById('spreadsheet'), {
-    data: data,
-    columns: [{
-        title: 'T',
-        width: 150
-    }, {
-        title: 'Cp',
-        width: 150
-    }, {
-        title: 'H',
-        width: 150
-    }, {
-        title: 'S',
-        width: 150
-    }, {
-        title: 'G',
-        width: 150
-    }],
-    allowInsertColumn: false, // Запрещаем добавление колонок
-    allowManualInsertRow: true // Разрешаем ручное добавление строк
-});
-// Функция для экспорта данных в консоль
-function exportToConsole() {
-    var tableData = spreadsheet.getData();
-    console.log('Данные из таблицы:');
-    console.table(tableData);
-}
 
-function exportColumnsToServer() {
-    var column1Data = [];
-    var column2Data = [];
-    // Получаем данные из таблицы
-    var tableData = spreadsheet.getData();
-    // Извлекаем данные из первых двух колонок
-    for (var i = 0; i < tableData.length; i++) {
-        column1Data.push(tableData[i][0]); // Первая колонка
-        column2Data.push(tableData[i][1]); // Вторая колонка
-    }
-    // Формируем объект для отправки на сервер
-    var dataToSend = {
-        column1: column1Data,
-        column2: column2Data
-    };
-    // Отправляем данные на сервер с помощью fetch
-    fetch('functionСalculation/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    }).then(data => {
-        console.log('Ответ сервера:', data);
-        // Обновляем таблицу с полученными данными
-        updateColumnsWithData(data);
-    }).catch(error => {
-        console.error('Произошла ошибка при отправке данных:', error);
-    });
-}
-// Функция для обновления таблицы с полученными данными
-function updateColumnsWithData(data) {
-    var column3Data = data.column3;
-    var column4Data = data.column4;
-    var column5Data = data.column5;
-    // Проверяем, что данные из сервера имеют такую же длину, как и текущие данные таблицы
-    if (column3Data.length === spreadsheet.rows.length && column4Data.length === spreadsheet.rows.length && column5Data.length === spreadsheet.rows.length) {
-        // Записываем данные в таблицу
-        for (var i = 0; i < column3Data.length; i++) {
-            spreadsheet.setValueFromCoords(2, i, column3Data[i]); // Колонка 3
-            spreadsheet.setValueFromCoords(3, i, column4Data[i]); // Колонка 4
-            spreadsheet.setValueFromCoords(4, i, column5Data[i]); // Колонка 5
-        }
-        console.log('Таблица успешно обновлена.');
-    } else {
-        console.error('Ошибка: размеры полученных данных не соответствуют таблице.');
-    }
-}
+        // var data //У меня это не сработало! Из-за этого у меня генерировалась вторая таблица
+        //     ['Заголовок 1', 'Заголовок 2', 'Заголовок 3', 'Заголовок 4', 'Заголовок 5'],
+        //     ['', '', '', '', '']  
+        // ];
 
-function exportTableToServer() {
-    // Получаем данные из всех колонок таблицы
-    var tableData = spreadsheet.getData();
-    // Разделяем данные по колонкам
-    var column1Data = [];
-    var column2Data = [];
-    var column3Data = [];
-    var column4Data = [];
-    var column5Data = [];
-    for (var i = 0; i < tableData.length; i++) {
-        column1Data.push(tableData[i][0]); // Колонка 1
-        column2Data.push(tableData[i][1]); // Колонка 2
-        column3Data.push(tableData[i][2]); // Колонка 3
-        column4Data.push(tableData[i][3]); // Колонка 4
-        column5Data.push(tableData[i][4]); // Колонка 5
-    }
-    // Формируем объект для отправки на сервер
-    var dataToSend = {
-        column1: column1Data,
-        column2: column2Data,
-        column3: column3Data,
-        column4: column4Data,
-        column5: column5Data,
-        a: document.getElementById('a').value,
-        x: document.getElementById('x').value
-    };
-    // Отправляем данные на сервер с помощью fetch
-    fetch('Extrapolation/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    }).then(data => {
-        console.log('Ответ сервера:', data);
-        // Обновляем таблицу с полученными данными
-        updateTableWithData(data);
-    }).catch(error => {
-        console.error('Произошла ошибка при отправке данных:', error);
-    });
-}
-// Функция для обновления таблицы с полученными данными
-function updateTableWithData(data) {
-    var column1Data = data.column1;
-    var column2Data = data.column2;
-    var column3Data = data.column3;
-    var column4Data = data.column4;
-    var column5Data = data.column5;
-    document.getElementById('error_percentage').value = data.Error;
-    // Проверяем, что данные из сервера имеют достаточно большой размер
-    if (column1Data.length === column2Data.length && column2Data.length === column3Data.length && column3Data.length === column4Data.length && column4Data.length === column5Data.length) {
-        // Определяем текущее количество строк в таблице
-        var rowCount = spreadsheet.rows.length;
-        // Удаляем все строки, кроме заголовка
-        for (var i = rowCount - 1; i > 0; i--) {
-            spreadsheet.deleteRow(i);
-        }
-        // Вставляем новые строки с обновленными данными
-        for (var j = 0; j < column1Data.length; j++) {
-            spreadsheet.insertRow([column1Data[j], column2Data[j], column3Data[j], column4Data[j], column5Data[j]]);
-        }
-        console.log('Таблица успешно обновлена.');
-    } else {
-        console.error('Ошибка: размеры полученных данных не соответствуют ожидаемым.');
-    }
-}
+        var spreadsheet = jexcel(document.getElementById('spreadsheet'), {
+            data:[ ['', '', '', '', ''],//Вот это не генерирует вторую таблицу
+            ['', '', '', '', '']],
+            columns: [
+                { title:'T', width: 150 },
+                { title:'Cp', width: 150 },
+                { title:'H', width: 150 },
+                { title:'S', width: 150 },
+                { title:'G', width: 150 }
+            ],
 
-function calculateExtrapolation() {
-    // Получаем данные из всех колонок таблицы
-    var tableData = spreadsheet.getData();
-    // Разделяем данные по колонкам
-    var column1Data = [];
-    var column2Data = [];
-    var column3Data = [];
-    var column4Data = [];
-    var column5Data = [];
-    for (var i = 0; i < tableData.length; i++) {
-        column1Data.push(tableData[i][0]); // Колонка 1
-        column2Data.push(tableData[i][1]); // Колонка 2
-        column3Data.push(tableData[i][2]); // Колонка 3
-        column4Data.push(tableData[i][3]); // Колонка 4
-        column5Data.push(tableData[i][4]); // Колонка 5
-    }
-    // Формируем объект для отправки на сервер
-    var dataToSend = {
-        column1: column1Data,
-        column2: column2Data,
-        column3: column3Data,
-        column4: column4Data,
-        column5: column5Data,
-        a: document.getElementById('a').value,
-        x: document.getElementById('x').value
-    };
-    // Отправляем данные на сервер с помощью fetch
-    fetch('ExtrapolationError/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-    }).then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    }).then(data => {
-        console.log('Ответ сервера:', data);
-        // Обновляем таблицу с полученными данными
-        updateError(data);
-    }).catch(error => {
-        console.error('Произошла ошибка при отправке данных:', error);
-    });
-}
+            allowInsertColumn: false, // Запрещаем добавление колонок
+            allowManualInsertRow: true // Разрешаем ручное добавление строк
+        });
 
-function updateError(data) {
-    document.getElementById('error_percentage').value = data.Error;
-}
+        // Функция для экспорта данных в консоль
+        function exportToConsole() {
+            var tableData = spreadsheet.getData();
+            console.log('Данные из таблицы:');
+            console.table(tableData);
+        }
+   function exportColumnsToServer() {
+            var column1Data = [];
+            var column2Data = [];
+
+            // Получаем данные из таблицы
+            var tableData = spreadsheet.getData();
+
+            // Извлекаем данные из первых двух колонок
+            for (var i = 0; i < tableData.length; i++) {
+                column1Data.push(tableData[i][0]); // Первая колонка
+                column2Data.push(tableData[i][1]); // Вторая колонка
+            }
+
+            // Формируем объект для отправки на сервер
+            var dataToSend = {
+                column1: column1Data,
+                column2: column2Data
+            };
+
+            // Отправляем данные на сервер с помощью fetch
+            fetch('functionСalculation/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSend)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Ответ сервера:', data);
+                // Обновляем таблицу с полученными данными
+                updateTableWithData(data);
+            })
+            .catch(error => {
+                console.error('Произошла ошибка при отправке данных:', error);
+            });
+        }
+
+        // Функция для обновления таблицы с полученными данными
+        function updateTableWithData(data) {
+            var column3Data = data.column3;
+            var column4Data = data.column4;
+            var column5Data = data.column5;
+
+            // Проверяем, что данные из сервера имеют такую же длину, как и текущие данные таблицы
+            if (column3Data.length === spreadsheet.rows.length &&
+                column4Data.length === spreadsheet.rows.length  &&
+                column5Data.length === spreadsheet.rows.length ) {
+
+                // Записываем данные в таблицу
+                for (var i = 0; i < column3Data.length; i++) {
+                    spreadsheet.setValueFromCoords(2, i , column3Data[i]); // Колонка 3
+                    spreadsheet.setValueFromCoords(3, i , column4Data[i]); // Колонка 4
+                    spreadsheet.setValueFromCoords(4, i , column5Data[i]); // Колонка 5
+                }
+
+
+
+                console.log('Таблица успешно обновлена.');
+            } else {
+                console.error('Ошибка: размеры полученных данных не соответствуют таблице.');
+            }
+        }
     </script>
 
 {% endblock %}
